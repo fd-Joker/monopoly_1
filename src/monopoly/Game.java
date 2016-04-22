@@ -29,6 +29,7 @@ public class Game {
         for (Player.Player_id id : Player.Player_id.values()) {
             Cell curCell = map.getCell(0, 0);
             Player p = new Player(id, curCell);
+            players.add(p);
             curCell.addThing(p);
         }
         curPlayer = Player.Player_id.Player1;
@@ -44,7 +45,29 @@ public class Game {
                 instruction = getInstruction();
                 game.menu.set_menu(instruction);
             } while (!game.menu.isExit());
+            Player p = game.fetchPlayer(game.getCurPlayer());
+            p.walk();
+            game.switch_player();
+        }
+    }
 
+    /**
+     * switch the current player to the next player
+     */
+    public void switch_player() {
+        switch (curPlayer) {
+            case Player1:
+                curPlayer = Player.Player_id.Player2;
+                break;
+            case Player2:
+                curPlayer = Player.Player_id.Player3;
+                break;
+            case Player3:
+                curPlayer = Player.Player_id.Player4;
+                break;
+            case Player4:
+                curPlayer = Player.Player_id.Player1;
+                break;
         }
     }
 
@@ -74,9 +97,12 @@ public class Game {
         Map map = new Map();
         BufferedReader reader = new BufferedReader(new FileReader("map.txt"));
         String buf;
+        int cell_index = 0;
         while ((buf = reader.readLine()) != null) {
             String[] tokens = buf.split("\t");
             Cell curCell = map.getCell(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+            curCell.setIndex(cell_index);
+            cell_index++;
             Type type = Type.parseType(tokens[2]);
             switch (type) {
                 case House:curCell.addThing(new House(curCell));break;

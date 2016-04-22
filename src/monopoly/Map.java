@@ -38,6 +38,16 @@ public class Map {
         return this.toTexture(false, Player.Player_id.Player1);
     }
 
+    public Cell getCellPriorTo(Cell cell) {
+        return cells.stream().filter(item->item.getIndex() == ((cell.getIndex()+1)%cells.size())).
+                findFirst().orElse(null);
+    }
+
+    public Cell getCellInferiorTo(Cell cell) {
+        return cells.stream().filter(item->item.getIndex() == ((cell.getIndex()+cells.size()-1)%cells.size())).
+                findFirst().orElse(null);
+    }
+
     /**
      * get the cell located at (x, y)
      * if there is no cell at (x, y), create one

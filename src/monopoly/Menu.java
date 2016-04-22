@@ -16,7 +16,8 @@ public class Menu {
         P_CELL_INFO,
         P_PLAYER_CAP,
         P_DICE, EXIT,
-        SURRENDER
+        SURRENDER,
+        ERR_INST
     }
 
     private MenuState curState;
@@ -50,6 +51,13 @@ public class Menu {
                 System.out.println("Dice number: " + game.fetchPlayer(game.getCurPlayer()).throw_dice());
                 curState = MenuState.EXIT;
                 break;
+            case ERR_INST:
+                System.out.println("Instruction error! Start again.");
+                curState = MenuState.S_ORI_MENU;
+            default:
+                System.out.print(menu_level0);
+                curState = MenuState.S_ORI_MENU;
+                break;
         }
     }
 
@@ -74,10 +82,16 @@ public class Menu {
                         curState = MenuState.P_DICE;
                         break;
                     case "7":curState = MenuState.SURRENDER;break;
+                    default:
+                        curState = MenuState.ERR_INST;break;
                 }
                 break;
             case EXIT:
                 exit = true;
+                curState = MenuState.P_ORI_MENU;
+                break;
+            default:
+                curState = MenuState.P_ORI_MENU;
                 break;
         }
     }

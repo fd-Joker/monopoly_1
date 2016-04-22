@@ -26,6 +26,16 @@ public class Player extends Thing {
         dice = new Dice();
     }
 
+    public void walk() {
+        int steps = dice.getCur_number();
+        while (steps > 0) {
+            steps--;
+            this.cell.removeThing(this);
+            this.cell = this.cell.getCellAt(Cell.Direction.forward);
+            this.cell.addThing(this);
+        }
+    }
+
     /**
      * return the value of player in texture
      * @return

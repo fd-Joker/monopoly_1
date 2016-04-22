@@ -12,7 +12,7 @@ public class Dice {
     }
 
     public int throwIt() {
-        if (control_number != -1) {
+        if (control_number == -1) {
             cur_number = (int) (Math.random() * 6) + 1;
             return cur_number;
         }
