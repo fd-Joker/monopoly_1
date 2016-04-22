@@ -19,6 +19,7 @@ public class Cell {
     private Map map;
 
     private Collection<Thing> things = new ArrayList<Thing>();
+    private Triggerable spot;
 
     public Cell(Map map, int x, int y) {
         this.x = x;
@@ -55,8 +56,16 @@ public class Cell {
         return index;
     }
 
+    public Triggerable getSpot() {
+        return spot;
+    }
+
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public void setSpot(Triggerable spot) {
+        this.spot = spot;
     }
 
     public void addThing(Thing thing) {
@@ -78,13 +87,20 @@ public class Cell {
      */
     public String toTexture(boolean withPlayers, Player.Player_id id) {
         if (!withPlayers)
-            return things.stream().map(item -> item.toTexture()).findFirst().orElse(" ");
+            return things.stream().filter(item->item.equals(spot)).map(item -> item.toTexture()).
+                    findFirst().orElse(" ");
         else {
-            return things.stream().filter(item -> (item instanceof Player && ((Player) item).getId() == id)).
-                    map(item -> item.toTexture()).findFirst().orElse(
-                    things.stream().filter(item -> (item instanceof Player)).
-                            map(item -> item.toTexture()).findFirst().orElse(toTexture())
-            );
+            // cell contains current player
+            String r = things.stream().filter(item -> (item instanceof Player) && ((Player) item).getId() == id).
+                    map(item->item.toTexture()).findFirst().orElse(null);
+            // cell contains other players
+            if (r == null)
+                r = things.stream().filter(item -> item instanceof Player).
+                        map(item->item.toTexture()).findFirst().orElse(null);
+            // cell does not contain any players
+            if (r == null)
+                r = things.stream().map(item -> item.toTexture()).findFirst().orElse(" ");
+            return r;
         }
     }
 

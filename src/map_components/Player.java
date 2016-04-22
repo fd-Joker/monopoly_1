@@ -1,6 +1,7 @@
 package map_components;
 
 import monopoly.Dice;
+import monopoly.Game;
 
 /**
  * Created by Joker on 4/6/16.
@@ -26,14 +27,16 @@ public class Player extends Thing {
         dice = new Dice();
     }
 
-    public void walk() {
+    public void walk(Game game) {
         int steps = dice.getCur_number();
         while (steps > 0) {
             steps--;
             this.cell.removeThing(this);
             this.cell = this.cell.getCellAt(Cell.Direction.forward);
             this.cell.addThing(this);
+            this.cell.getSpot().pass(game);
         }
+        this.cell.getSpot().enter(game);
     }
 
     /**

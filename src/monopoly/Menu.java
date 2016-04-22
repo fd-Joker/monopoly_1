@@ -40,7 +40,7 @@ public class Menu {
                 curState = MenuState.S_ORI_MENU;
                 break;
             case P_CUR_MAP:
-                System.out.println(game.getMap().toTexture(true, game.getCurPlayer()));
+                System.out.print(game.getMap().toTexture(true, game.getCurPlayer()));
                 curState = MenuState.P_ORI_MENU;
                 break;
             case P_ORI_MAP:
@@ -94,6 +94,11 @@ public class Menu {
                 curState = MenuState.P_ORI_MENU;
                 break;
         }
+    }
+
+    public void reset() {
+        this.exit = false;
+        this.curState = MenuState.P_ORI_MENU;
     }
 
     public boolean isExit() {

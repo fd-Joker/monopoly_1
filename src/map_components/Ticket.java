@@ -17,7 +17,12 @@ public class Ticket extends Thing implements Triggerable {
     }
 
     @Override
-    public String trigger(Game game) {
+    public String pass(Game game) {
+        return null;
+    }
+
+    @Override
+    public String enter(Game game) {
         return null;
     }
 }

@@ -40,13 +40,16 @@ public class Game {
 
         while (!game.isEnd()) {
             String instruction;
+            game.menu.reset();
             do {
                 game.menu.prepare_menu(game);
                 instruction = getInstruction();
                 game.menu.set_menu(instruction);
             } while (!game.menu.isExit());
             Player p = game.fetchPlayer(game.getCurPlayer());
-            p.walk();
+            p.walk(game);
+            System.out.print(game.map.toTexture(true, game.curPlayer));
+            instruction = getInstruction();
             game.switch_player();
         }
     }
@@ -105,14 +108,46 @@ public class Game {
             cell_index++;
             Type type = Type.parseType(tokens[2]);
             switch (type) {
-                case House:curCell.addThing(new House(curCell));break;
-                case Propshop:curCell.addThing(new Propshop(curCell));break;
-                case Bank:curCell.addThing(new Bank(curCell));break;
-                case News:curCell.addThing(new News(curCell));break;
-                case Card:curCell.addThing(new Card(curCell));break;
-                case Ticket:curCell.addThing(new Ticket(curCell));break;
-                case Empty:curCell.addThing(new Empty(curCell));break;
-                case Lottery:curCell.addThing(new Lottery(curCell));break;
+                case House:
+                    House h = new House(curCell);
+                    curCell.setSpot(h);
+                    curCell.addThing(h);
+                    break;
+                case Propshop:
+                    Propshop p = new Propshop(curCell);
+                    curCell.setSpot(p);
+                    curCell.addThing(p);
+                    break;
+                case Bank:
+                    Bank b = new Bank(curCell);
+                    curCell.setSpot(b);
+                    curCell.addThing(b);
+                    break;
+                case News:
+                    News n = new News(curCell);
+                    curCell.setSpot(n);
+                    curCell.addThing(n);
+                    break;
+                case Card:
+                    Card c = new Card(curCell);
+                    curCell.setSpot(c);
+                    curCell.addThing(c);
+                    break;
+                case Ticket:
+                    Ticket t = new Ticket(curCell);
+                    curCell.setSpot(t);
+                    curCell.addThing(t);
+                    break;
+                case Empty:
+                    Empty e = new Empty(curCell);
+                    curCell.setSpot(e);
+                    curCell.addThing(e);
+                    break;
+                case Lottery:
+                    Lottery l = new Lottery(curCell);
+                    curCell.setSpot(l);
+                    curCell.addThing(l);
+                    break;
             }
         }
         return map;
