@@ -6,17 +6,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * Created by Joker on 4/22/16.
  */
 public class Game {
+    private static final long START_TIME = 0L;
+    private static final long ONE_DAY_IN_MS = 86400000L;
+
     private Map map;
     private Menu menu;
     private Collection<Player> players;
     private Player.Player_id curPlayer;
+
+    // current round information
+    private GregorianCalendar calendar;
 
     /**
      * initialize the game information
@@ -33,6 +38,9 @@ public class Game {
             curCell.addThing(p);
         }
         curPlayer = Player.Player_id.Player1;
+        // initialize round information
+        calendar = new GregorianCalendar();
+        calendar.setTime(new Date(START_TIME));
     }
 
     public static void main(String[] args) throws IOException {
@@ -40,39 +48,72 @@ public class Game {
 
         while (!game.isEnd()) {
             String instruction;
-            game.menu.reset();
-            // menu loop
-            do {
-                game.menu.prepare_menu(game);
-                instruction = getInstruction();
-                game.menu.set_menu(instruction);
-            } while (!game.menu.isExit());
-            // fetch current player
-            Player p = game.fetchPlayer(game.getCurPlayer());
-            // player walks, dice throw in menu loop
-            p.walk(game);
-            // print current map
-            System.out.print(game.map.toTexture(true, game.curPlayer));
-            // confirm
-            getInstruction();
-            // switch to next player
-            game.switch_player();
+            for (Player player : game.players) {
+                game.curPlayer = player.getId();
+                game.menu.reset();
+                // print round information
+                game.print_basic_info();
+                // menu loop
+                do {
+                    game.menu.prepare_menu(game);
+                    instruction = getInstruction();
+                    game.menu.set_menu(instruction);
+                } while (!game.menu.isExit());
+                // player walks, dice throw in menu loop
+                player.walk(game);
+                // print current map
+                System.out.print(game.map.toTexture(true, game.curPlayer));
+                // confirm
+                getInstruction();
+            }
+            game.tomorrow();
+        }
+    }
+
+    public Collection<Player> getHouseMost() {
+        int max = -1;
+        Collection<Player> p = new ArrayList<>();
+        for (Player player : players) {
+            if (player.getCapital().totalEstate() >= max) {
+                max = player.getCapital().totalEstate();
+                p.add(player);
+            }
+        }
+        return p;
+    }
+
+    public Collection<Player> getHouseLeast() {
+        int min = Integer.MAX_VALUE;
+        Collection<Player> p = new ArrayList<>();
+        for (Player player : players) {
+            if (player.getCapital().totalEstate() <= min) {
+                min = player.getCapital().totalEstate();
+                p.add(player);
+            }
+        }
+        return p;
+    }
+
+    /**
+     * switch to tomorrow
+     */
+    private void tomorrow() throws IOException {
+        //FIXME: debugging
+        calendar.add(Calendar.DAY_OF_MONTH, 31);
+        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
+            Lottery.lottery(this);
         }
     }
 
     /**
-     * switch the current player to the next player
+     * print date information and current player information
      */
-    public void switch_player() {
-        final Player.Player_id[] order = Player.Player_id.values();
-        int curIndex;
-        for (curIndex = 0; curIndex < order.length; curIndex++)
-            if (order[curIndex] == curPlayer)
-                break;
-        curIndex = (curIndex+1)%order.length;
-        while (fetchPlayer(order[curIndex]).isBankrupted())
-            curIndex = (curIndex+1)%order.length;
-        curPlayer = order[curIndex];
+    private void print_basic_info() {
+        // date
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("今天是" + format.format(calendar.getTime()));
+        // current player information
+        System.out.println("现在是\"" + curPlayer + "\"的操作时间,您的前进方向是" + fetchPlayer(curPlayer).getDirection());
     }
 
     public boolean isEnd() {
@@ -87,6 +128,23 @@ public class Game {
     public static String getInstruction() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         return reader.readLine();
+    }
+
+    /**
+     * parse the string s into a positive integer
+     * @param s
+     * @return return -1 if s can not be parsed
+     */
+    public static int parsePosInt(String s) {
+        int len = s.length();
+        if (len == 0)
+            return -1;
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            if (c < '0' || c > '9')
+                return -1;
+        }
+        return Integer.parseInt(s);
     }
 
     /**

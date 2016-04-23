@@ -1,9 +1,12 @@
 package monopoly;
 
+import card_items.CardType;
 import map_components.Cell;
 import map_components.Thing;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Joker on 4/6/16.
@@ -17,7 +20,11 @@ public class Player extends Thing {
 
     private Capital capital;
 
+    private Collection<CardType> cards;
+
     private boolean bankrupted;
+
+    private Cell.Direction direction;
 
     /**
      * every single player owns a dice
@@ -31,8 +38,10 @@ public class Player extends Thing {
         dice = new Dice();
         // initialize capital
         this.capital = new Capital(this);
+        this.cards = new ArrayList<>();
         // bankrupt flag
         this.bankrupted = false;
+        this.direction = Cell.Direction.clockwise;
     }
 
     public void walk(Game game) throws IOException {
@@ -40,7 +49,7 @@ public class Player extends Thing {
         while (steps > 0) {
             steps--;
             this.cell.removeThing(this);
-            this.cell = this.cell.getCellAt(Cell.Direction.forward);
+            this.cell = this.cell.getCellAt(direction);
             this.cell.addThing(this);
             this.cell.getSpot().pass(game);
         }
@@ -76,11 +85,37 @@ public class Player extends Thing {
         return capital;
     }
 
+    public String listCard() {
+        String result = "";
+        for (CardType type : CardType.values()) {
+            long count = cards.stream().filter(item->item==type).count();
+            if (count > 0)
+                result += (type + ": " + count + "\t");
+        }
+        return result;
+    }
+
     public boolean isBankrupted() {
         return bankrupted;
     }
 
+    public Cell.Direction getDirection() {
+        return direction;
+    }
+
+    public void buyCard(CardType item, int cost) {
+        capital.consumeTicket(cost);
+        cards.add(item);
+    }
+
     public void setBankrupt() {
         this.bankrupted = true;
+    }
+
+    public void reverseDirection() {
+        if (direction == Cell.Direction.clockwise)
+            direction = Cell.Direction.counter_clockwise;
+        else
+            direction = Cell.Direction.clockwise;
     }
 }

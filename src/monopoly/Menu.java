@@ -89,6 +89,8 @@ public class Menu {
                         curState = MenuState.P_DICE;
                         break;
                     case "7":curState = MenuState.SURRENDER;break;
+                    case "8":
+                        break;
                     default:
                         curState = MenuState.ERR_INST;break;
                 }
@@ -124,5 +126,6 @@ public class Menu {
             "5 - 查看玩家的资产信息\n" +
             "6 - 想看的都看了,心满意足地扔骰子\n" +
             "7 - 不玩了!认输!\n" +
+            "8 - 进入股市系统\n" +
             "请选择: ";
 }

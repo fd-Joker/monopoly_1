@@ -27,8 +27,16 @@ public class Capital {
         this(player, DEFAULT_TICKET, DEFAULT_CASH, DEFAULT_DEPOSIT);
     }
 
+    public void consumeTicket(int amount) {
+        this.ticket -= amount;
+    }
+
+    public void receiveTicket(int amount) {
+        this.ticket += amount;
+    }
+
     public boolean saveMoney(int money) {
-        if (money > 0 && money < this.cash) {
+        if (money > 0 && money <= this.cash) {
             this.cash -= money;
             this.deposit += money;
             return true;
@@ -37,7 +45,7 @@ public class Capital {
     }
 
     public boolean withdrawMoney(int money) {
-        if (money > 0 && money < this.deposit) {
+        if (money > 0 && money <= this.deposit) {
             this.cash += money;
             this.deposit -= money;
             return true;
@@ -73,11 +81,25 @@ public class Capital {
         }
     }
 
+    public int totalEstate() {
+        return estates.size();
+    }
+
+    /**
+     * sell the estate
+     * no error checking
+     * @param toBeSold
+     */
     public void sellEstate(Estate toBeSold) {
         estates.remove(toBeSold);
         cash += toBeSold.price();
     }
 
+    /**
+     * update the house level
+     * @param estate
+     * @return false when level is full, otherwise return true
+     */
     public boolean updateHouse(Estate estate) {
         if (!estate.levelUp())
             return false;
@@ -97,6 +119,10 @@ public class Capital {
         this.cash -= estate.price();
         estates.add(estate);
         estate.setOwner(this.player.getId());
+    }
+
+    public void addTicket(int amount) {
+        this.ticket += amount;
     }
 
     public int getTicket() {

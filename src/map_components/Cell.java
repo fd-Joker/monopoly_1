@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 public class Cell {
     public enum Direction {
-        forward, backward
+        clockwise, counter_clockwise
     }
 
     private int x;
@@ -30,7 +30,7 @@ public class Cell {
 
     public Cell getCellAt(Direction direction) {
         switch (direction) {
-            case backward:
+            case counter_clockwise:
                 return map.getCellInferiorTo(this);
             default:
                 return map.getCellPriorTo(this);

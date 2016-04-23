@@ -13,8 +13,8 @@ public class Dice {
 
     public int throwIt() {
         if (control_number == -1) {
-            // FIXME: debuging
-            cur_number = 1; /*(int) (Math.random() * 6) + 1;*/
+            // FIXME: debugging
+            cur_number = 41; /*(int) (Math.random() * 6) + 1;*/
             return cur_number;
         }
         else {
