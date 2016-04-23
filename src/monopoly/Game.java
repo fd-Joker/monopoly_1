@@ -41,15 +41,21 @@ public class Game {
         while (!game.isEnd()) {
             String instruction;
             game.menu.reset();
+            // menu loop
             do {
                 game.menu.prepare_menu(game);
                 instruction = getInstruction();
                 game.menu.set_menu(instruction);
             } while (!game.menu.isExit());
+            // fetch current player
             Player p = game.fetchPlayer(game.getCurPlayer());
+            // player walks, dice throw in menu loop
             p.walk(game);
+            // print current map
             System.out.print(game.map.toTexture(true, game.curPlayer));
-            instruction = getInstruction();
+            // confirm
+            getInstruction();
+            // switch to next player
             game.switch_player();
         }
     }
@@ -103,10 +109,13 @@ public class Game {
         int cell_index = 0;
         while ((buf = reader.readLine()) != null) {
             String[] tokens = buf.split("\t");
+            // get cell(x, y) if null create one
             Cell curCell = map.getCell(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
             curCell.setIndex(cell_index);
+            // record the cell index
             cell_index++;
             Type type = Type.parseType(tokens[2]);
+            // add spot to cell
             switch (type) {
                 case House:
                     House h = new House(curCell);
