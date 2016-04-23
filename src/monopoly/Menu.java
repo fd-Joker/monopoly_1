@@ -8,6 +8,7 @@ public class Menu {
      * state information for menu control
      */
     public enum MenuState {
+        // menu states for origin game menu
         S_ORI_MENU, P_ORI_MENU,
         P_CUR_MAP,
         P_ORI_MAP,
@@ -17,7 +18,11 @@ public class Menu {
         P_PLAYER_CAP,
         P_DICE, EXIT,
         SURRENDER,
-        ERR_INST
+        ERR_INST,
+
+        // menu states for entering House
+        H_P_WELCOME,
+
     }
 
     private MenuState curState;
@@ -53,7 +58,9 @@ public class Menu {
                 break;
             case ERR_INST:
                 System.out.println("Instruction error! Start again.");
-                curState = MenuState.S_ORI_MENU;
+                curState = MenuState.P_ORI_MENU;
+                break;
+
             default:
                 System.out.print(menu_level0);
                 curState = MenuState.S_ORI_MENU;

@@ -64,20 +64,15 @@ public class Game {
      * switch the current player to the next player
      */
     public void switch_player() {
-        switch (curPlayer) {
-            case Player1:
-                curPlayer = Player.Player_id.Player2;
+        final Player.Player_id[] order = Player.Player_id.values();
+        int curIndex;
+        for (curIndex = 0; curIndex < order.length; curIndex++)
+            if (order[curIndex] == curPlayer)
                 break;
-            case Player2:
-                curPlayer = Player.Player_id.Player3;
-                break;
-            case Player3:
-                curPlayer = Player.Player_id.Player4;
-                break;
-            case Player4:
-                curPlayer = Player.Player_id.Player1;
-                break;
-        }
+        curIndex = (curIndex+1)%order.length;
+        while (fetchPlayer(order[curIndex]).isBankrupted())
+            curIndex = (curIndex+1)%order.length;
+        curPlayer = order[curIndex];
     }
 
     public boolean isEnd() {

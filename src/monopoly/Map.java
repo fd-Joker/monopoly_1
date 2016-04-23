@@ -1,7 +1,6 @@
 package monopoly;
 
 import map_components.Cell;
-import map_components.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;

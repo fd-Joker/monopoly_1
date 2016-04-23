@@ -1,7 +1,9 @@
-package map_components;
+package monopoly;
 
-import monopoly.Dice;
-import monopoly.Game;
+import map_components.Cell;
+import map_components.Thing;
+
+import java.io.IOException;
 
 /**
  * Created by Joker on 4/6/16.
@@ -12,8 +14,10 @@ public class Player extends Thing {
     }
 
     private Player_id id;
-    private String name;
-    private int cash;
+
+    private Capital capital;
+
+    private boolean bankrupted;
 
     /**
      * every single player owns a dice
@@ -25,9 +29,13 @@ public class Player extends Thing {
         super(cell);
         this.id = id;
         dice = new Dice();
+        // initialize capital
+        this.capital = new Capital(this);
+        // bankrupt flag
+        this.bankrupted = false;
     }
 
-    public void walk(Game game) {
+    public void walk(Game game) throws IOException {
         int steps = dice.getCur_number();
         while (steps > 0) {
             steps--;
@@ -62,5 +70,17 @@ public class Player extends Thing {
 
     public Player_id getId() {
         return id;
+    }
+
+    public Capital getCapital() {
+        return capital;
+    }
+
+    public boolean isBankrupted() {
+        return bankrupted;
+    }
+
+    public void setBankrupt() {
+        this.bankrupted = true;
     }
 }
