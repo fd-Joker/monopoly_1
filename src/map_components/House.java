@@ -53,10 +53,13 @@ public class House extends Thing implements Triggerable {
                                 "\nSorry, your cash is not enough.");
                     }
                 } else {
+                    // you enter other people`s house
                     System.out.println(estate.getOwner() + "`s House!\nNow you should pay tolls.");
-                    p.getCapital().payToll(game.fetchPlayer(this.estate.getOwner()), estate.toll());
-                    System.out.println("You have paid: " + estate.toll() +
+                    String r = p.getCapital().payToll(game.fetchPlayer(this.estate.getOwner()), estate.toll());
+                    System.out.println((p.isBankrupted() ? "You can`t afford the toll." : "You have paid: " + estate.toll()) +
+                            (r == null ? "" : r) +
                             "\nYour cash now is: " + p.getCapital().getCash() +
+                            "\nYour deposit now is: " + p.getCapital().getDeposit() +
                             "\n" + estate.getOwner() + "`s cash now is:" + game.fetchPlayer(estate.getOwner()).getCapital().getCash());
                     Game.getInstruction();
                 }

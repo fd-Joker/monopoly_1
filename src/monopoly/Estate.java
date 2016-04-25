@@ -60,4 +60,12 @@ public class Estate {
     public Player.Player_id getOwner() {
         return owner;
     }
+
+    public int getX() {
+        return house.getX();
+    }
+
+    public int getY() {
+        return house.getY();
+    }
 }

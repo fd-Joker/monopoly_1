@@ -77,6 +77,11 @@ public class Lottery extends Thing implements Triggerable {
     public static void lottery(Game game) throws IOException {
         //FIXME: debugging
         int magic_number = 0;/*(int) (Math.random()*NUMBER_RANGE);*/
+
+        // no one buy the lottery, just skip
+        if (total_reward_amount == 0)
+            return;
+
         if (number_availability[magic_number]) {
             System.out.println("No one win the reward this month.");
         } else {

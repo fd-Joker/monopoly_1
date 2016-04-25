@@ -6,9 +6,17 @@ package map_components;
 public abstract class Thing {
     protected Cell cell;
 
+    public abstract String toTexture();
+
     public Thing(Cell cell) {
         this.cell = cell;
     }
 
-    public abstract String toTexture();
+    public int getX() {
+        return cell.getX();
+    }
+
+    public int getY() {
+        return cell.getY();
+    }
 }

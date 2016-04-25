@@ -32,6 +32,18 @@ public class Player extends Thing {
      */
     private Dice dice;
 
+    public Player(Capital capital, Player_id id, Cell cell) {
+        super(cell);
+        this.id = id;
+        dice = new Dice();
+        // initialize capital
+        this.capital = capital;
+        this.cards = new ArrayList<>();
+        // bankrupt flag
+        this.bankrupted = false;
+        this.direction = Cell.Direction.clockwise;
+    }
+
     public Player(Player_id id, Cell cell) {
         super(cell);
         this.id = id;
@@ -109,6 +121,7 @@ public class Player extends Thing {
     }
 
     public void setBankrupt() {
+        this.capital.clearAll();
         this.bankrupted = true;
     }
 

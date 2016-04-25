@@ -14,10 +14,13 @@ import java.util.*;
 public class Game {
     private static final long START_TIME = 0L;
     private static final long ONE_DAY_IN_MS = 86400000L;
+    private int lasting_days = 100;
 
     private Map map;
     private Menu menu;
+    // store players information who are still in the game
     private Collection<Player> players;
+    // store current player id
     private Player.Player_id curPlayer;
 
     // current round information
@@ -37,6 +40,17 @@ public class Game {
             players.add(p);
             curCell.addThing(p);
         }
+        // FIXME: debugging
+        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
+        p2.getCapital().withdrawMoney(10000);
+        p2.getCapital().addCash(-10000);
+        this.curPlayer = Player.Player_id.Player2;
+        map.getCell(0, 3).getSpot().enter(this);
+
+        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+        p3.getCapital().withdrawMoney(10000);
+        p3.getCapital().addCash(-20000);
+        // ..........
         curPlayer = Player.Player_id.Player1;
         // initialize round information
         calendar = new GregorianCalendar();
@@ -59,15 +73,46 @@ public class Game {
                     instruction = getInstruction();
                     game.menu.set_menu(instruction);
                 } while (!game.menu.isExit());
-                // player walks, dice throw in menu loop
-                player.walk(game);
-                // print current map
-                System.out.print(game.map.toTexture(true, game.curPlayer));
-                // confirm
-                getInstruction();
+                // menu.skip_rest() is to judge if the player give up the game
+                if (!game.menu.skip_rest()) {
+                    // player walks, dice throw in menu loop
+                    player.walk(game);
+                    // print current map
+                    System.out.print(game.map.toTexture(true, game.curPlayer));
+                    // confirm
+                    getInstruction();
+                }
             }
+            // remove bankrupted players
+            Collection<Player> r_list = new ArrayList<>();
+            for (Player player : game.players)
+                if (player.isBankrupted()) {
+                    System.out.println(player.getId() + " sorry, you have bankrupted.");
+                    r_list.add(player);
+                }
+            game.players.removeAll(r_list);
+            // switch to tomorrow
             game.tomorrow();
         }
+
+        // print winner information
+        System.out.println("Congratulations! " + game.curPlayer + " has won the game!");
+    }
+
+    public Player.Player_id winner_decider(Game game) {
+        switch (game.players.size()) {
+            case 1:
+                return game.players.stream().findFirst().get().getId();
+            case 2:
+            case 3:
+            case 4:
+                // TODO 选出资产最多的
+                break;
+            default:
+                break;
+        }
+        // FIXME: not finished
+        return null;
     }
 
     public Collection<Player> getHouseMost() {
@@ -99,7 +144,9 @@ public class Game {
      */
     private void tomorrow() throws IOException {
         //FIXME: debugging
-        calendar.add(Calendar.DAY_OF_MONTH, 31);
+        int day_passed = 101;
+        calendar.add(Calendar.DAY_OF_MONTH, day_passed);
+        lasting_days -= day_passed;
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
             Lottery.lottery(this);
         }
@@ -117,7 +164,7 @@ public class Game {
     }
 
     public boolean isEnd() {
-        return  false;
+        return  this.players.size() <= 1 || this.lasting_days <= 0;
     }
 
     /**

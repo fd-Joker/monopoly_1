@@ -57,7 +57,14 @@ public class Capital {
         cash += money;
     }
 
-    public void payToll(Player creditor, int money) {
+    /**
+     * pay the toll
+     * @param creditor pay to the creditor
+     * @param money amount of money to pay
+     * @return null if house is not sold, otherwise prompt which house is sold
+     */
+    public String payToll(Player creditor, int money) {
+        String r = null;
         if (cash >= money) {
             cash -= money;
             creditor.getCapital().addCash(money);
@@ -66,23 +73,37 @@ public class Capital {
             deposit = deposit + cash - money;
             creditor.getCapital().addCash(money);
         } else {
+            r = "";
             int payment = cash + deposit;
             while (payment < money) {
                 Estate toBeSold = estates.stream().findAny().orElse(null);
                 if (toBeSold == null) {
+                    creditor.getCapital().addCash(payment);
                     player.setBankrupt();
-                    break;
-                } else
+                    return r;
+                } else {
                     sellEstate(toBeSold);
+                    r += "House at (" + toBeSold.getX() + ", " + toBeSold.getY() + ") " +
+                            "is sold at price: " + toBeSold.price() + ".\n";
+                }
                 payment = cash + deposit;
             }
             cash = payment - money;
             creditor.getCapital().addCash(payment > money ? money : payment);
         }
+        return r;
     }
 
     public int totalEstate() {
         return estates.size();
+    }
+
+    public int totalEstateValue() {
+        int sum = 0;
+        for (Estate estate : estates) {
+            sum += estate.price();
+        }
+        return sum;
     }
 
     /**
@@ -135,5 +156,14 @@ public class Capital {
 
     public int getDeposit() {
         return deposit;
+    }
+
+    public int total() {
+        return cash + deposit + totalEstateValue();
+    }
+
+    public void clearAll() {
+        this.cash = 0;
+        this.deposit = 0;
     }
 }

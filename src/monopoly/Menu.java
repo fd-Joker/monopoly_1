@@ -27,6 +27,7 @@ public class Menu {
 
     private MenuState curState;
     private boolean exit = false;
+    private boolean skip = false;
 
     public Menu() {
         curState = MenuState.P_ORI_MENU;
@@ -60,7 +61,12 @@ public class Menu {
                 System.out.println("Instruction error! Start again.");
                 curState = MenuState.P_ORI_MENU;
                 break;
-
+            case SURRENDER:
+                skip = true;
+                System.out.println("Now you bankrupted!");
+                game.fetchPlayer(game.getCurPlayer()).setBankrupt();
+                curState = MenuState.EXIT;
+                break;
             default:
                 System.out.print(menu_level0);
                 curState = MenuState.S_ORI_MENU;
@@ -107,11 +113,16 @@ public class Menu {
 
     public void reset() {
         this.exit = false;
+        this.skip = false;
         this.curState = MenuState.P_ORI_MENU;
     }
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean skip_rest() {
+        return skip;
     }
 
     /**

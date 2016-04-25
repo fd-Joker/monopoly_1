@@ -49,6 +49,7 @@ public class Propshop extends Thing implements Triggerable {
                 if ((i+1)%3 == 0)
                     System.out.println();
             }
+            System.out.println();
             System.out.println("Your have " + player.getCapital().getTicket() + " tickets.");
             int index;
             do {
