@@ -96,33 +96,49 @@ public class Game {
         }
 
         // print winner information
-        System.out.println("Congratulations! " + game.curPlayer + " has won the game!");
+        Collection<Player.Player_id> winner = game.winner_decider();
+        for (Player.Player_id id : winner)
+            System.out.println("Congratulations! " + id + " has won the game!");
     }
 
-    public Player.Player_id winner_decider(Game game) {
-        switch (game.players.size()) {
+    public Collection<Player.Player_id> winner_decider() {
+        Collection<Player.Player_id> list;
+        switch (this.players.size()) {
             case 1:
-                return game.players.stream().findFirst().get().getId();
+                list = new ArrayList<>();
+                list.add(this.players.stream().findFirst().get().getId());
+                return list;
             case 2:
             case 3:
             case 4:
-                // TODO 选出资产最多的
-                break;
+                int max = 0;
+                list = new ArrayList<>();
+                for (Player player : this.players) {
+                    if (player.isBankrupted())
+                        continue;
+                    if (player.getCapital().total() > max) {
+                        max = player.getCapital().total();
+                        list.removeAll(list);
+                        list.add(player.getId());
+                    } else if (player.getCapital().total() == max)
+                        list.add(player.getId());
+                }
+                return list;
             default:
-                break;
+                return null;
         }
-        // FIXME: not finished
-        return null;
     }
 
     public Collection<Player> getHouseMost() {
         int max = -1;
         Collection<Player> p = new ArrayList<>();
         for (Player player : players) {
-            if (player.getCapital().totalEstate() >= max) {
+            if (player.getCapital().totalEstate() > max) {
                 max = player.getCapital().totalEstate();
+                p.removeAll(p);
                 p.add(player);
-            }
+            } else if (player.getCapital().totalEstate() == max)
+                p.add(player);
         }
         return p;
     }
@@ -131,10 +147,12 @@ public class Game {
         int min = Integer.MAX_VALUE;
         Collection<Player> p = new ArrayList<>();
         for (Player player : players) {
-            if (player.getCapital().totalEstate() <= min) {
+            if (player.getCapital().totalEstate() < min) {
                 min = player.getCapital().totalEstate();
+                p.removeAll(p);
                 p.add(player);
-            }
+            } else if (player.getCapital().totalEstate() == min)
+                p.add(player);
         }
         return p;
     }
