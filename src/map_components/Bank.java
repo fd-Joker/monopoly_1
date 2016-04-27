@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by Joker on 4/22/16.
  */
-public class Bank extends Thing implements Triggerable {
+public class Bank extends Spot {
     public enum BankEventState {
         SERVICE,
         SAVE_MONEY,
@@ -34,7 +34,8 @@ public class Bank extends Thing implements Triggerable {
     }
 
     @Override
-    public String pass(Game game) throws IOException {
+    public boolean pass(Game game) throws IOException {
+        boolean isContinue = super.pass(game);
         System.out.println("Welcome to Bank.");
         Player player = game.fetchPlayer(game.getCurPlayer());
         String instruction = "";
@@ -96,7 +97,7 @@ public class Bank extends Thing implements Triggerable {
             }
 
         }
-        return null;
+        return isContinue;
     }
 
     @Override

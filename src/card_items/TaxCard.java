@@ -8,6 +8,7 @@ import monopoly.Game;
 public class TaxCard extends CardItem {
     @Override
     public String function(Game game) {
+
         return null;
     }
 }

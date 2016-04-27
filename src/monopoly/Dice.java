@@ -14,7 +14,7 @@ public class Dice {
     public int throwIt() {
         if (control_number == -1) {
             // FIXME: debugging
-            cur_number = 1; /*(int) (Math.random() * 6) + 1;*/
+            cur_number = (int) (Math.random() * 6) + 1;
             return cur_number;
         }
         else {
@@ -22,6 +22,10 @@ public class Dice {
             resetControl_number();
             return cur_number;
         }
+    }
+
+    public boolean isControlled() {
+        return control_number != -1;
     }
 
     public void setControl_number(int control_number) {

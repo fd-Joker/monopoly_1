@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by Joker on 4/22/16.
  */
-public class Propshop extends Thing implements Triggerable {
+public class Propshop extends Spot {
 
     public Propshop(Cell cell, String name) {
         super(cell);
@@ -30,8 +30,9 @@ public class Propshop extends Thing implements Triggerable {
     }
 
     @Override
-    public String pass(Game game) {
-        return null;
+    public boolean pass(Game game) throws IOException {
+        boolean isContinue = super.pass(game);
+        return isContinue;
     }
 
     @Override

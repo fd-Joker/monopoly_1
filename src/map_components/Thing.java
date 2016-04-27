@@ -22,11 +22,15 @@ public abstract class Thing {
         return cell.getY();
     }
 
-    public Thing getSpot() {
+    public Spot getSpot() {
         return cell.getSpot();
     }
 
-    public Thing getSpot(Cell.Direction direction) {
+    public Spot getSpot(Cell.Direction direction) {
         return cell.getCellAt(direction).getSpot();
+    }
+
+    public int getCellIndex() {
+        return cell.getIndex();
     }
 }

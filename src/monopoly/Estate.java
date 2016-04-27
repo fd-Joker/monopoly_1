@@ -50,7 +50,10 @@ public class Estate {
     }
 
     public void setOwner(Player.Player_id id) {
-        this.state = EstateState.owned;
+        if (id == null)
+            this.state = EstateState.unowned;
+        else
+            this.state = EstateState.owned;
         this.owner = id;
     }
 

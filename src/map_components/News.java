@@ -4,12 +4,13 @@ import card_items.CardType;
 import monopoly.Game;
 import monopoly.Player;
 
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Created by Joker on 4/22/16.
  */
-public class News extends Thing implements Triggerable {
+public class News extends Spot {
     private static final int NUMBER_NEWS_TYPE = 5;
 
     public News(Cell cell, String name) {
@@ -30,8 +31,9 @@ public class News extends Thing implements Triggerable {
     }
 
     @Override
-    public String pass(Game game) {
-        return null;
+    public boolean pass(Game game) throws IOException {
+        boolean isContinue = super.pass(game);
+        return isContinue;
     }
 
     @Override
@@ -81,6 +83,8 @@ public class News extends Thing implements Triggerable {
                 System.out.println("每个人得到一张卡片");
                 for (Player.Player_id id : Player.Player_id.values()) {
                     Player p = game.fetchPlayer(id);
+                    if (p == null)
+                        continue;
                     CardType[] all = CardType.values();
                     int get = (int) (Math.random()*all.length);
                     p.buyCard(all[get], 0);

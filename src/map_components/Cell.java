@@ -31,7 +31,7 @@ public class Cell {
     private Map map;
 
     private Collection<Thing> things = new ArrayList<Thing>();
-    private Thing spot;
+    private Spot spot;
 
     public Cell(Map map, int x, int y) {
         this.x = x;
@@ -68,7 +68,7 @@ public class Cell {
         return index;
     }
 
-    public Thing getSpot() {
+    public Spot getSpot() {
         return spot;
     }
 
@@ -76,7 +76,7 @@ public class Cell {
         this.index = index;
     }
 
-    public void setSpot(Thing spot) {
+    public void setSpot(Spot spot) {
         this.spot = spot;
     }
 

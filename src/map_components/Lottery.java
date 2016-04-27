@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by Joker on 4/22/16.
  */
-public class Lottery extends Thing implements Triggerable {
+public class Lottery extends Spot {
     private static final int PRICE_OF_A_NUMBER = 1000;
     private static final int NUMBER_RANGE = 20;
     private static int total_reward_amount;
@@ -34,8 +34,9 @@ public class Lottery extends Thing implements Triggerable {
     }
 
     @Override
-    public String pass(Game game) {
-        return null;
+    public boolean pass(Game game) throws IOException {
+        boolean isContinue = super.pass(game);
+        return isContinue;
     }
 
     @Override

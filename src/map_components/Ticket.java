@@ -3,10 +3,12 @@ package map_components;
 import monopoly.Game;
 import monopoly.Player;
 
+import java.io.IOException;
+
 /**
  * Created by Joker on 4/22/16.
  */
-public class Ticket extends Thing implements Triggerable {
+public class Ticket extends Spot {
     private static final int TICKET_RANGE = 100;
 
     public Ticket(Cell cell, String name) {
@@ -27,8 +29,9 @@ public class Ticket extends Thing implements Triggerable {
     }
 
     @Override
-    public String pass(Game game) {
-        return null;
+    public boolean pass(Game game) throws IOException {
+        boolean isContinue = super.pass(game);
+        return isContinue;
     }
 
     @Override

@@ -161,11 +161,13 @@ public class Capital {
     public void clearAll() {
         this.cash = 0;
         this.deposit = 0;
+        this.estates.stream().forEach(estate -> estate.setOwner(null));
+        // TODO 清空资产信息
     }
 
     public String info() {
         String r = "";
-        r += ticket + "\t" + cash + "\t" + deposit + "\t" + totalEstateValue() + "\t" + total() + "\n";
+        r += ticket + "\t" + String.format("%.2f", cash) + "\t" + String.format("%.2f", deposit) + "\t" + totalEstateValue() + "\t" + String.format("%.2f", total()) + "\n";
         return r;
     }
 }

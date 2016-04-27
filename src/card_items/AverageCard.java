@@ -14,12 +14,16 @@ public class AverageCard extends CardItem {
         Player.Player_id[] id_values = Player.Player_id.values();
         for (int i = 0; i < total_players; i++) {
             Player p = game.fetchPlayer(id_values[i]);
-            cash_avg += p.getCapital().getCash();
+            if (p != null)
+                cash_avg += p.getCapital().getCash();
         }
         cash_avg /= total_players;
         for (int i = 0; i < total_players; i++) {
             Player p = game.fetchPlayer(id_values[i]);
-            p.getCapital().addCash(cash_avg-p.getCapital().getCash());
+            if (p != null) {
+                p.getCapital().addCash(cash_avg - p.getCapital().getCash());
+                System.out.println(p.getId() + "`s cash is: " + cash_avg);
+            }
         }
         return null;
     }

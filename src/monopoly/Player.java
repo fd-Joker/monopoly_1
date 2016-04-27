@@ -3,7 +3,6 @@ package monopoly;
 import card_items.CardType;
 import map_components.Cell;
 import map_components.Thing;
-import map_components.Triggerable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,14 +63,17 @@ public class Player extends Thing {
 
     public void walk(Game game) throws IOException {
         int steps = dice.getCur_number();
-        while (steps > 0) {
+        boolean c = true;
+        while (steps > 0 && c) {
             steps--;
             this.cell.removeThing(this);
             this.cell = this.cell.getCellAt(direction);
             this.cell.addThing(this);
-            ((Triggerable) this.cell.getSpot()).pass(game);
+            c = this.cell.getSpot().pass(game);
         }
-        ((Triggerable) this.cell.getSpot()).enter(game);
+        if (!c)
+            System.out.println("Oops! You have run into a barricade.");
+        this.cell.getSpot().enter(game);
     }
 
     /**
@@ -95,12 +97,22 @@ public class Player extends Thing {
     public String info() {
         String r = "";
         r += id + "\t";
+        if (this.bankrupted)
+            return r + "bankrupted\n";
         r += capital.info();
         return r;
     }
 
     public int throw_dice() {
         return dice.throwIt();
+    }
+
+    public boolean isDiceControlled() {
+        return dice.isControlled();
+    }
+
+    public void setDiceNumber(int number) {
+        this.dice.setControl_number(number);
     }
 
     public Player_id getId() {
@@ -111,17 +123,22 @@ public class Player extends Thing {
         return capital;
     }
 
-    public String listCard() {
-        String result = "";
+    public long[] listCard() {
+        boolean exist = false;
+        long[] result = new long[CardType.values().length];
         int index = 0;
         for (CardType type : CardType.values()) {
             long count = cards.stream().filter(item->item==type).count();
-            if (count > 0)
-                result += (index + " - " + type + ": " + count + "\t");
+            if (count > 0) {
+                result[index] = count;
+                exist = true;
+            }
             index++;
         }
-        result += "\n";
-        return result;
+        if (exist)
+            return result;
+        else
+            return null;
     }
 
     public boolean isBankrupted() {
@@ -137,9 +154,15 @@ public class Player extends Thing {
         cards.add(item);
     }
 
+    public void removeCard(CardType item) {
+        CardType type = cards.stream().filter(c->c == item).findFirst().get();
+        cards.remove(type);
+    }
+
     public void setBankrupt() {
         this.capital.clearAll();
         this.bankrupted = true;
+        this.cell.removeThing(this);
     }
 
     public void reverseDirection() {
