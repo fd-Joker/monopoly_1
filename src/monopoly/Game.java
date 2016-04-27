@@ -13,8 +13,10 @@ import java.util.*;
  */
 public class Game {
     private static final long START_TIME = 0L;
-    private static final long ONE_DAY_IN_MS = 86400000L;
     private int lasting_days = 100;
+
+    // total number of players
+    private int total_players;
 
     private Map map;
     private Menu menu;
@@ -34,23 +36,29 @@ public class Game {
         map = build_map(0);
         menu = new Menu();
         players = new ArrayList<Player>();
-        for (Player.Player_id id : Player.Player_id.values()) {
+
+        // prepare the game
+        this.prepare();
+
+        Player.Player_id[] id_values = Player.Player_id.values();
+        for (int i = 0; i < total_players; i++) {
+            Player.Player_id id = id_values[i];
             Cell curCell = map.getCell(0, 0);
             Player p = new Player(id, curCell);
             players.add(p);
             curCell.addThing(p);
         }
         // FIXME: debugging
-        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
-        p2.getCapital().withdrawMoney(10000);
-        p2.getCapital().addCash(-10000);
-        this.curPlayer = Player.Player_id.Player2;
-        map.getCell(0, 3).getSpot().enter(this);
-
-        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
-        p3.getCapital().withdrawMoney(10000);
-        p3.getCapital().addCash(-20000);
+//        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
+//        p2.getCapital().withdrawMoney(10000);
+//        p2.getCapital().addCash(-10000);
+//        this.curPlayer = Player.Player_id.Player2;
+//        map.getCell(0, 3).getSpot().enter(this);
+//        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+//        p3.getCapital().withdrawMoney(10000);
+//        p3.getCapital().addCash(-20000);
         // ..........
+
         curPlayer = Player.Player_id.Player1;
         // initialize round information
         calendar = new GregorianCalendar();
@@ -101,6 +109,23 @@ public class Game {
             System.out.println("Congratulations! " + id + " has won the game!");
     }
 
+    public void print_player_capital() {
+        Player.Player_id[] id_values = Player.Player_id.values();
+        System.out.print("ID\tTicket\tCash\tDeposit\tEstate\tCapital\n");
+        for (int i = 0; i < total_players; i++) {
+            System.out.print(fetchPlayer(id_values[i]).info());
+        }
+    }
+
+    public void prepare() throws IOException {
+        int n;
+        do {
+            System.out.print("Input number of players: ");
+            n = parsePosInt(getInstruction());
+        } while (n < 2 || n > 4);
+        this.total_players = n;
+    }
+
     public Collection<Player.Player_id> winner_decider() {
         Collection<Player.Player_id> list;
         switch (this.players.size()) {
@@ -111,7 +136,7 @@ public class Game {
             case 2:
             case 3:
             case 4:
-                int max = 0;
+                double max = 0;
                 list = new ArrayList<>();
                 for (Player player : this.players) {
                     if (player.isBankrupted())
@@ -162,7 +187,7 @@ public class Game {
      */
     private void tomorrow() throws IOException {
         //FIXME: debugging
-        int day_passed = 101;
+        int day_passed = 1;
         calendar.add(Calendar.DAY_OF_MONTH, day_passed);
         lasting_days -= day_passed;
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
@@ -233,45 +258,46 @@ public class Game {
             // record the cell index
             cell_index++;
             Type type = Type.parseType(tokens[2]);
+            String name = tokens[3];
             // add spot to cell
             switch (type) {
                 case House:
-                    House h = new House(curCell);
+                    House h = new House(curCell, name);
                     curCell.setSpot(h);
                     curCell.addThing(h);
                     break;
                 case Propshop:
-                    Propshop p = new Propshop(curCell);
+                    Propshop p = new Propshop(curCell, name);
                     curCell.setSpot(p);
                     curCell.addThing(p);
                     break;
                 case Bank:
-                    Bank b = new Bank(curCell);
+                    Bank b = new Bank(curCell, name);
                     curCell.setSpot(b);
                     curCell.addThing(b);
                     break;
                 case News:
-                    News n = new News(curCell);
+                    News n = new News(curCell, name);
                     curCell.setSpot(n);
                     curCell.addThing(n);
                     break;
                 case Card:
-                    Card c = new Card(curCell);
+                    Card c = new Card(curCell, name);
                     curCell.setSpot(c);
                     curCell.addThing(c);
                     break;
                 case Ticket:
-                    Ticket t = new Ticket(curCell);
+                    Ticket t = new Ticket(curCell, name);
                     curCell.setSpot(t);
                     curCell.addThing(t);
                     break;
                 case Empty:
-                    Empty e = new Empty(curCell);
+                    Empty e = new Empty(curCell, name);
                     curCell.setSpot(e);
                     curCell.addThing(e);
                     break;
                 case Lottery:
-                    Lottery l = new Lottery(curCell);
+                    Lottery l = new Lottery(curCell, name);
                     curCell.setSpot(l);
                     curCell.addThing(l);
                     break;
@@ -285,8 +311,8 @@ public class Game {
         return map;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public int getTotal_players() {
+        return total_players;
     }
 
     public Player.Player_id getCurPlayer() {

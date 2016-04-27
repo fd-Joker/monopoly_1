@@ -11,13 +11,21 @@ import java.io.IOException;
  */
 public class Card extends Thing implements Triggerable {
 
-    public Card(Cell cell) {
+    public Card(Cell cell, String name) {
         super(cell);
+        this.name = name;
     }
 
     @Override
     public String toTexture() {
         return "C";
+    }
+
+    @Override
+    public String info() {
+        String r = "";
+        r += "Type: Card\nName: " + this.name + "\n";
+        return r;
     }
 
     @Override

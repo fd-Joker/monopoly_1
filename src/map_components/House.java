@@ -12,14 +12,25 @@ import java.io.IOException;
 public class House extends Thing implements Triggerable {
     private Estate estate;
 
-    public House(Cell cell) {
+    public House(Cell cell, String name) {
         super(cell);
         this.estate = new Estate(this);
+        this.name = name;
     }
 
     @Override
     public String toTexture() {
         return "◎";
+    }
+
+    @Override
+    public String info() {
+        String r = "";
+        r += "Type: House\n Name: " + this.name +
+                "\nInitial Price: " + this.estate.basic_price() +
+                "\nLevel: " +  this.estate.getLevel() +
+                "\nOwner: " + this.estate.getOwner() + "\n";
+        return r;
     }
 
     @Override

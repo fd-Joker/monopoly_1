@@ -33,6 +33,14 @@ public class Estate {
         return price() / 3;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public int basic_price() {
+        return basic_price;
+    }
+
     public int price() {
         return basic_price * level;
     }

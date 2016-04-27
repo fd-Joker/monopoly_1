@@ -1,5 +1,8 @@
 package monopoly;
 
+import map_components.Cell;
+import map_components.Thing;
+
 /**
  * Created by Joker on 4/22/16.
  */
@@ -12,9 +15,9 @@ public class Menu {
         S_ORI_MENU, P_ORI_MENU,
         P_CUR_MAP,
         P_ORI_MAP,
-        U_PROP,
+        P_PROP, U_PROP,
         P_WARNING10,
-        P_CELL_INFO,
+        P_CELL_REQUEST, P_CELL_INFO,
         P_PLAYER_CAP,
         P_DICE, EXIT,
         SURRENDER,
@@ -28,6 +31,7 @@ public class Menu {
     private MenuState curState;
     private boolean exit = false;
     private boolean skip = false;
+    private int cell_interval = 0;
 
     public Menu() {
         curState = MenuState.P_ORI_MENU;
@@ -40,6 +44,7 @@ public class Menu {
      * @param game store the information needed
      */
     public void prepare_menu(Game game) {
+        Player p = game.fetchPlayer(game.getCurPlayer());
         switch (curState) {
             case P_ORI_MENU:
                 System.out.print(menu_level0);
@@ -52,6 +57,36 @@ public class Menu {
             case P_ORI_MAP:
                 System.out.println(game.getMap().toTexture());
                 curState = MenuState.P_ORI_MENU;
+                break;
+            case P_PROP:
+                // TODO
+                System.out.print(p.listCard());
+                System.out.println("Type index to choose:");
+                break;
+            case P_WARNING10:
+                break;
+            case P_CELL_REQUEST:
+                System.out.print("请输入您想查询的地点与您相差的步数(后方用负数,x退出): ");
+                curState = MenuState.P_CELL_INFO;
+                break;
+            case P_CELL_INFO:
+                // TODO
+                Thing spot = p.getSpot();
+                Cell.Direction direction = p.getDirection();
+                if (cell_interval < 0) {
+                    cell_interval = -cell_interval;
+                    direction = direction.reverse();
+                }
+                while (cell_interval > 0) {
+                    spot = spot.getSpot(direction);
+                    cell_interval--;
+                }
+                System.out.print(spot.info());
+                curState = MenuState.P_ORI_MENU;
+                break;
+            case P_PLAYER_CAP:
+                game.print_player_capital();
+                curState = MenuState.P_ORI_MAP;
                 break;
             case P_DICE:
                 System.out.println("Dice number: " + game.fetchPlayer(game.getCurPlayer()).throw_dice());
@@ -86,9 +121,11 @@ public class Menu {
                     case "0":curState = MenuState.P_CUR_MAP;break;
                     case "1":curState = MenuState.P_ORI_MAP;break;
                     case "2":// use prop
+                        curState = MenuState.P_PROP;
                         break;
                     case "3":curState = MenuState.P_WARNING10;break;
                     case "4":// see detailed information of a particular cell
+                        curState = MenuState.P_CELL_REQUEST;
                         break;
                     case "5":curState = MenuState.P_PLAYER_CAP;break;
                     case "6":// throw dice
@@ -100,6 +137,13 @@ public class Menu {
                     default:
                         curState = MenuState.ERR_INST;break;
                 }
+                break;
+            case P_CELL_INFO:
+                if (!instruction.contains("-"))
+                    cell_interval = Game.parsePosInt(instruction);
+                else
+                    cell_interval = -Game.parsePosInt(instruction.substring(1));
+                curState = MenuState.P_CELL_INFO;
                 break;
             case EXIT:
                 exit = true;

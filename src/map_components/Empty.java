@@ -7,13 +7,21 @@ import monopoly.Game;
  */
 public class Empty extends Thing implements Triggerable {
 
-    public Empty(Cell cell) {
+    public Empty(Cell cell, String name) {
         super(cell);
+        this.name = name;
     }
 
     @Override
     public String toTexture() {
         return "E";
+    }
+
+    @Override
+    public String info() {
+        String r = "";
+        r += "Type: Empty\nName: " + this.name + "\n";
+        return r;
     }
 
     @Override

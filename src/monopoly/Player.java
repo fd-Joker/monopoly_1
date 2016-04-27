@@ -3,6 +3,7 @@ package monopoly;
 import card_items.CardType;
 import map_components.Cell;
 import map_components.Thing;
+import map_components.Triggerable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,6 +57,11 @@ public class Player extends Thing {
         this.direction = Cell.Direction.clockwise;
     }
 
+    public String getCellInfoAway(int steps) {
+//        Cell.Direction direction = steps > 0 ? this.direction :
+        return null;
+    }
+
     public void walk(Game game) throws IOException {
         int steps = dice.getCur_number();
         while (steps > 0) {
@@ -63,9 +69,9 @@ public class Player extends Thing {
             this.cell.removeThing(this);
             this.cell = this.cell.getCellAt(direction);
             this.cell.addThing(this);
-            this.cell.getSpot().pass(game);
+            ((Triggerable) this.cell.getSpot()).pass(game);
         }
-        this.cell.getSpot().enter(game);
+        ((Triggerable) this.cell.getSpot()).enter(game);
     }
 
     /**
@@ -85,6 +91,14 @@ public class Player extends Thing {
         }
     }
 
+    @Override
+    public String info() {
+        String r = "";
+        r += id + "\t";
+        r += capital.info();
+        return r;
+    }
+
     public int throw_dice() {
         return dice.throwIt();
     }
@@ -99,11 +113,14 @@ public class Player extends Thing {
 
     public String listCard() {
         String result = "";
+        int index = 0;
         for (CardType type : CardType.values()) {
             long count = cards.stream().filter(item->item==type).count();
             if (count > 0)
-                result += (type + ": " + count + "\t");
+                result += (index + " - " + type + ": " + count + "\t");
+            index++;
         }
+        result += "\n";
         return result;
     }
 

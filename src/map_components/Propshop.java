@@ -12,13 +12,21 @@ import java.io.IOException;
  */
 public class Propshop extends Thing implements Triggerable {
 
-    public Propshop(Cell cell) {
+    public Propshop(Cell cell, String name) {
         super(cell);
+        this.name = name;
     }
 
     @Override
     public String toTexture() {
         return "P";
+    }
+
+    @Override
+    public String info() {
+        String r = "";
+        r += "Type: Prop Shop\nName: " + this.name + "\n";
+        return r;
     }
 
     @Override

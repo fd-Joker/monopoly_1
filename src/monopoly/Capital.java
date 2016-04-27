@@ -11,8 +11,8 @@ public class Capital {
 
     private Player player;
     private int ticket;
-    private int cash;
-    private int deposit;
+    private double cash;
+    private double deposit;
     private Collection<Estate> estates;
 
     public Capital(Player player, int ticket, int cash, int deposit) {
@@ -35,7 +35,7 @@ public class Capital {
         this.ticket += amount;
     }
 
-    public boolean saveMoney(int money) {
+    public boolean saveMoney(double money) {
         if (money > 0 && money <= this.cash) {
             this.cash -= money;
             this.deposit += money;
@@ -44,7 +44,7 @@ public class Capital {
         return false;
     }
 
-    public boolean withdrawMoney(int money) {
+    public boolean withdrawMoney(double money) {
         if (money > 0 && money <= this.deposit) {
             this.cash += money;
             this.deposit -= money;
@@ -53,7 +53,7 @@ public class Capital {
         return false;
     }
 
-    public void addCash(int money) {
+    public void addCash(double money) {
         cash += money;
     }
 
@@ -74,7 +74,7 @@ public class Capital {
             creditor.getCapital().addCash(money);
         } else {
             r = "";
-            int payment = cash + deposit;
+            double payment = cash + deposit;
             while (payment < money) {
                 Estate toBeSold = estates.stream().findAny().orElse(null);
                 if (toBeSold == null) {
@@ -142,28 +142,30 @@ public class Capital {
         estate.setOwner(this.player.getId());
     }
 
-    public void addTicket(int amount) {
-        this.ticket += amount;
-    }
-
     public int getTicket() {
         return ticket;
     }
 
-    public int getCash() {
+    public double getCash() {
         return cash;
     }
 
-    public int getDeposit() {
+    public double getDeposit() {
         return deposit;
     }
 
-    public int total() {
+    public double total() {
         return cash + deposit + totalEstateValue();
     }
 
     public void clearAll() {
         this.cash = 0;
         this.deposit = 0;
+    }
+
+    public String info() {
+        String r = "";
+        r += ticket + "\t" + cash + "\t" + deposit + "\t" + totalEstateValue() + "\t" + total() + "\n";
+        return r;
     }
 }

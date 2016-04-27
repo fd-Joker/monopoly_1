@@ -15,14 +15,22 @@ public class Lottery extends Thing implements Triggerable {
     private static boolean[] number_availability;
     private static Player.Player_id[] number_owner;
 
-    public Lottery(Cell cell) {
+    public Lottery(Cell cell, String name) {
         super(cell);
         reset();
+        this.name = name;
     }
 
     @Override
     public String toTexture() {
         return "L";
+    }
+
+    @Override
+    public String info() {
+        String r = "";
+        r += "Type: Lottery\nName: " + this.name + "\n";
+        return r;
     }
 
     @Override

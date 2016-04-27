@@ -11,7 +11,18 @@ import java.util.Collection;
  */
 public class Cell {
     public enum Direction {
-        clockwise, counter_clockwise
+        clockwise, counter_clockwise;
+
+        public Direction reverse() {
+            switch (this) {
+                case clockwise:
+                    return counter_clockwise;
+                case counter_clockwise:
+                    return clockwise;
+                default:
+                    return clockwise;
+            }
+        }
     }
 
     private int x;
@@ -20,7 +31,7 @@ public class Cell {
     private Map map;
 
     private Collection<Thing> things = new ArrayList<Thing>();
-    private Triggerable spot;
+    private Thing spot;
 
     public Cell(Map map, int x, int y) {
         this.x = x;
@@ -57,7 +68,7 @@ public class Cell {
         return index;
     }
 
-    public Triggerable getSpot() {
+    public Thing getSpot() {
         return spot;
     }
 
@@ -65,7 +76,7 @@ public class Cell {
         this.index = index;
     }
 
-    public void setSpot(Triggerable spot) {
+    public void setSpot(Thing spot) {
         this.spot = spot;
     }
 

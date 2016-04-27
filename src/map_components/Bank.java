@@ -16,13 +16,21 @@ public class Bank extends Thing implements Triggerable {
         QUIT
     }
 
-    public Bank(Cell cell) {
+    public Bank(Cell cell, String name) {
         super(cell);
+        this.name = name;
     }
 
     @Override
     public String toTexture() {
         return "B";
+    }
+
+    @Override
+    public String info() {
+        String r = "";
+        r += "Type: Bank\nName: " + this.name + "\n";
+        return r;
     }
 
     @Override
