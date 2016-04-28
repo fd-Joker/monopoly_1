@@ -94,10 +94,12 @@ public class Lottery extends Spot {
         if (number_availability[magic_number]) {
             System.out.println("No one win the reward this month.");
         } else {
-            System.out.println("Congratulations! " + number_owner[magic_number] + " wins the reward " + total_reward_amount);
             Player winner = game.fetchPlayer(number_owner[magic_number]);
-            winner.getCapital().addCash(total_reward_amount);
-            reset();
+            if (winner != null) {
+                winner.getCapital().addCash(total_reward_amount);
+                System.out.println("Congratulations! " + number_owner[magic_number] + " wins the reward " + total_reward_amount);
+                reset();
+            }
         }
         Game.getInstruction();
     }

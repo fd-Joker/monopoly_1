@@ -26,6 +26,9 @@ public class Game {
     // store current player id
     private Player.Player_id curPlayer;
 
+    // stock market
+    private StockMarket stockMarket;
+
     // current round information
     private GregorianCalendar calendar;
 
@@ -62,12 +65,14 @@ public class Game {
             p2.buyCard(type, 0);
         p2.buyCard(CardType.ControlDice, 0);
         p2.buyCard(CardType.ControlDice, 0);
-        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
-        p3.getCapital().withdrawMoney(10000);
-        p3.getCapital().addCash(-20000);
+//        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+//        p3.getCapital().withdrawMoney(10000);
+//        p3.getCapital().addCash(-20000);
         // ..........
 
         curPlayer = Player.Player_id.Player1;
+        // initialize stock market
+        this.stockMarket = new StockMarket();
         // initialize round information
         calendar = new GregorianCalendar();
         calendar.setTime(new Date(START_TIME));
@@ -121,7 +126,9 @@ public class Game {
         Player.Player_id[] id_values = Player.Player_id.values();
         System.out.print("ID\tTicket\tCash\tDeposit\tEstate\tCapital\n");
         for (int i = 0; i < total_players; i++) {
-            System.out.print(fetchPlayer(id_values[i]).info());
+            Player p = fetchPlayer(id_values[i]);
+            if (p != null)
+                System.out.print(p.info());
         }
     }
 
@@ -196,6 +203,8 @@ public class Game {
     private void tomorrow() throws IOException {
         //FIXME: debugging
         int day_passed = 1;
+        for (int i = 0; i < day_passed; i++)
+            stockMarket.openMarket();
         calendar.add(Calendar.DAY_OF_MONTH, day_passed);
         lasting_days -= day_passed;
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
@@ -329,5 +338,9 @@ public class Game {
 
     public Player fetchPlayer(Player.Player_id id) {
         return players.stream().filter(item->item.getId() == id).findFirst().orElse(null);
+    }
+
+    public StockMarket getStockMarket() {
+        return stockMarket;
     }
 }

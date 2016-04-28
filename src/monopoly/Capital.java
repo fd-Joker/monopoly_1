@@ -14,17 +14,82 @@ public class Capital {
     private double cash;
     private double deposit;
     private Collection<Estate> estates;
+    private Collection<Stock> stocks;
 
     public Capital(Player player, int ticket, int cash, int deposit) {
         this.player = player;
         this.ticket = ticket;
         this.cash = cash;
         this.deposit = deposit;
-        this.estates = new ArrayList<Estate>();
+        this.estates = new ArrayList<>();
+        this.stocks = new ArrayList<>();
     }
 
     public Capital(Player player) {
         this(player, DEFAULT_TICKET, DEFAULT_CASH, DEFAULT_DEPOSIT);
+    }
+
+    /**
+     * buy the stock
+     * whether the money is enough to buy is not checked
+     * @param game
+     * @param type
+     * @param shares
+     */
+    public void buyStock(Game game, StockMarket.StockType type, int shares) {
+        if (shares == 0)
+            return;
+        Stock stock = this.stocks.stream().filter(item->item.getType() == type).findFirst().orElse(null);
+        if (stock == null) {
+            stock = new Stock(type, shares);
+            stocks.add(stock);
+        } else
+            stock.buy(shares);
+        double money = game.getStockMarket().getTodayPriceOf(type) * shares;
+        deposit -= money;
+        if (deposit < 0) {
+            cash += deposit;
+            deposit = 0;
+        }
+    }
+
+    /**
+     * sell the stock
+     * with error checking
+     * @param game
+     * @param type
+     * @param shares
+     * @return
+     */
+    public boolean sellStock(Game game, StockMarket.StockType type, int shares) {
+        Stock stock = this.stocks.stream().filter(item->item.getType() == type).findFirst().orElse(null);
+        if (stock == null || stock.getShares() < shares)
+            return false;
+        double money = game.getStockMarket().getTodayPriceOf(type) * shares;
+        deposit += money;
+        stock.sell(shares);
+        if (stock.isEmpty())
+            stocks.remove(stock);
+        return true;
+    }
+
+    public int getSharesOf(StockMarket.StockType type) {
+        Stock s = stocks.stream().filter(item->item.getType() == type).findFirst().orElse(null);
+        if (s == null)
+            return 0;
+        else
+            return s.getShares();
+    }
+
+    public Stock[] stockOwnershipInfo() {
+        Stock[] copy = new Stock[stocks.size()];
+        int i = 0;
+        for (Stock stock : stocks) {
+            Stock stock1 = new Stock(stock.getType(), stock.getShares());
+            copy[i] = stock1;
+            i++;
+        }
+        return copy;
     }
 
     public void consumeTicket(int amount) {
@@ -147,10 +212,14 @@ public class Capital {
     }
 
     public double getCash() {
+        cash *= 100;
+        cash = ((int) cash) / 100.0;
         return cash;
     }
 
     public double getDeposit() {
+        deposit *= 100;
+        deposit = ((int) deposit) / 100.0;
         return deposit;
     }
 

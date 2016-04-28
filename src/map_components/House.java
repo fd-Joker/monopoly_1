@@ -67,7 +67,9 @@ public class House extends Spot {
                 } else {
                     // you enter other people`s house
                     System.out.println(estate.getOwner() + "`s House!\nNow you should pay tolls.");
-                    String r = p.getCapital().payToll(game.fetchPlayer(this.estate.getOwner()), estate.toll());
+                    // because estate.state is owned, creditor should not be null
+                    Player creditor = game.fetchPlayer(this.estate.getOwner());
+                    String r = p.getCapital().payToll(creditor, estate.toll());
                     System.out.println((p.isBankrupted() ? "You can`t afford the toll." : "You have paid: " + estate.toll()) +
                             (r == null ? "" : r) +
                             "\nYour cash now is: " + p.getCapital().getCash() +

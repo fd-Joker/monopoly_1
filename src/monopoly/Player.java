@@ -56,11 +56,6 @@ public class Player extends Thing {
         this.direction = Cell.Direction.clockwise;
     }
 
-    public String getCellInfoAway(int steps) {
-//        Cell.Direction direction = steps > 0 ? this.direction :
-        return null;
-    }
-
     public void walk(Game game) throws IOException {
         int steps = dice.getCur_number();
         boolean c = true;
@@ -105,10 +100,6 @@ public class Player extends Thing {
 
     public int throw_dice() {
         return dice.throwIt();
-    }
-
-    public boolean isDiceControlled() {
-        return dice.isControlled();
     }
 
     public void setDiceNumber(int number) {

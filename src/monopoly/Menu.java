@@ -25,6 +25,7 @@ public class Menu {
         P_PLAYER_CAP,
         P_DICE, EXIT,
         SURRENDER,
+        ENTER_STOCK_MARKET,
         ERR_INST,
 
         // menu states for entering House
@@ -149,6 +150,10 @@ public class Menu {
                 game.fetchPlayer(game.getCurPlayer()).setBankrupt();
                 curState = MenuState.EXIT;
                 break;
+            case ENTER_STOCK_MARKET:
+                game.getStockMarket().enter(game);
+                curState = MenuState.P_ORI_MENU;
+                break;
             default:
                 System.out.print(menu_level0);
                 curState = MenuState.S_ORI_MENU;
@@ -180,6 +185,7 @@ public class Menu {
                         break;
                     case "7":curState = MenuState.SURRENDER;break;
                     case "8":
+                        curState = MenuState.ENTER_STOCK_MARKET;
                         break;
                     default:
                         curState = MenuState.ERR_INST;break;

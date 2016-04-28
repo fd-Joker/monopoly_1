@@ -63,6 +63,8 @@ public class News extends Spot {
                 System.out.println("银行加发储金红利每个人得到存款10%");
                 for (Player.Player_id id : Player.Player_id.values()) {
                     Player p = game.fetchPlayer(id);
+                    if (p == null)
+                        continue;
                     double dividend = p.getCapital().getDeposit() / 10;
                     System.out.println(p.getId() + " get " + dividend);
                     p.getCapital().addCash(dividend);
@@ -73,6 +75,8 @@ public class News extends Spot {
                 System.out.println("所有人缴纳财产税10%");
                 for (Player.Player_id id : Player.Player_id.values()) {
                     Player p = game.fetchPlayer(id);
+                    if (p == null)
+                        continue;
                     double dividend = p.getCapital().getDeposit() / 10;
                     System.out.println(p.getId() + " loses " + dividend);
                     p.getCapital().withdrawMoney(dividend);
