@@ -1,7 +1,7 @@
 package card_items;
 
 import monopoly.Game;
-import monopoly.StockMarket;
+import map_components.StockMarket;
 
 import java.io.IOException;
 

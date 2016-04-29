@@ -29,8 +29,12 @@ public class Estate {
         this(house, (int) (Math.random()*50+50)*100);
     }
 
-    public int toll() {
-        return price() / 3;
+    public double toll() {
+        return price() / 3 + this.house.getBlockIncrement(this.owner);
+    }
+
+    public boolean isOwnedBy(Player.Player_id owner) {
+        return (this.state == EstateState.owned) && this.owner == owner;
     }
 
     public int getLevel() {

@@ -5,17 +5,24 @@ import monopoly.Game;
 import monopoly.Player;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Created by Joker on 4/22/16.
  */
 public class House extends Spot {
+    private static final double BLOCK_INCREMENT_RATE = 0.2;
+    public enum Block {
+        FirstBlock, SecondBlock, ThirdBlock, ForthBlock, FifthBlock, SixBlock, SeventhBlock, EighthBlock, NinthBlock;
+    }
     private Estate estate;
+    private Block block;
 
-    public House(Cell cell, String name) {
+    public House(Cell cell, String name, Block block) {
         super(cell);
         this.estate = new Estate(this);
         this.name = name;
+        this.block = block;
     }
 
     @Override
@@ -27,6 +34,7 @@ public class House extends Spot {
     public String info() {
         String r = "";
         r += "Type: House\n Name: " + this.name +
+                "\nBlock: " + this.block +
                 "\nInitial Price: " + this.estate.basic_price() +
                 "\nLevel: " +  this.estate.getLevel() +
                 "\nOwner: " + this.estate.getOwner() + "\n";
@@ -106,5 +114,22 @@ public class House extends Spot {
 
     public Estate getEstate() {
         return estate;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
+    public double getBlockIncrement(Player.Player_id owner) {
+        Collection<Cell> c = cell.getMap().getCellFrom(this.block);
+        double increment = 0;
+        for (Cell cell : c) {
+            if (!(cell.getSpot() instanceof House))
+                continue;
+            House house = (House) cell.getSpot();
+            if (house.getEstate().isOwnedBy(owner))
+                increment += house.getEstate().price() * BLOCK_INCREMENT_RATE;
+        }
+        return increment;
     }
 }

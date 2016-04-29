@@ -1,9 +1,11 @@
 package monopoly;
 
 import map_components.Cell;
+import map_components.House;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Created by Joker on 4/6/16.
@@ -11,6 +13,11 @@ import java.util.Collection;
 public class Map {
     private int max_x, max_y;
     private Collection<Cell> cells = new ArrayList<Cell>();
+
+    public Collection<Cell> getCellFrom(House.Block block) {
+        return cells.stream().filter(item->(item.getSpot() instanceof House && ((House) item.getSpot()).getBlock() == block))
+                .collect(Collectors.toList());
+    }
 
     /**
      * convert the digitalized map to string map

@@ -58,17 +58,18 @@ public class Game {
         p1.buyCard(CardType.ControlDice, 0);
         Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
         p2.getCapital().withdrawMoney(10000);
-        p2.getCapital().addCash(-10000);
+        p2.getCapital().addCash(10000);
         this.curPlayer = Player.Player_id.Player2;
         map.getCell(0, 3).getSpot().enter(this);
+        map.getCell(0, 2).getSpot().enter(this);
         for (CardType type : CardType.values())
             p2.buyCard(type, 0);
         p2.buyCard(CardType.ControlDice, 0);
         p2.buyCard(CardType.ControlDice, 0);
-        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
-        p3.getCapital().withdrawMoney(10000);
-        p3.getCapital().addCash(-20000);
-        p3.setBankrupt();
+//        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+//        p3.getCapital().withdrawMoney(10000);
+//        p3.getCapital().addCash(-20000);
+//        p3.setBankrupt();
         // ..........
 
         curPlayer = Player.Player_id.Player1;
@@ -268,6 +269,10 @@ public class Game {
         BufferedReader reader = new BufferedReader(new FileReader("map.txt"));
         String buf;
         int cell_index = 0;
+        Type type = Type.House;
+        // count block information
+        House.Block[] blocks = House.Block.values();
+        int block_index = 0;
         while ((buf = reader.readLine()) != null) {
             String[] tokens = buf.split("\t");
             // get cell(x, y) if null create one
@@ -275,12 +280,15 @@ public class Game {
             curCell.setIndex(cell_index);
             // record the cell index
             cell_index++;
-            Type type = Type.parseType(tokens[2]);
+            Type old_type = type;
+            type = Type.parseType(tokens[2]);
+            if (type == Type.House && type != old_type)
+                block_index++;
             String name = tokens[3];
             // add spot to cell
             switch (type) {
                 case House:
-                    House h = new House(curCell, name);
+                    House h = new House(curCell, name, blocks[block_index]);
                     curCell.setSpot(h);
                     curCell.addThing(h);
                     break;

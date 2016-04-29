@@ -1,5 +1,7 @@
 package monopoly;
 
+import map_components.StockMarket;
+
 /**
  * Created by Joker on 4/28/16.
  */

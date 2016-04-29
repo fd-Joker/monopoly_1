@@ -48,6 +48,10 @@ public class Cell {
         }
     }
 
+    public Map getMap() {
+        return map;
+    }
+
     public void setX(int x) {
         this.x = x;
     }

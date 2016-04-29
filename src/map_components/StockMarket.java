@@ -1,6 +1,9 @@
-package monopoly;
+package map_components;
 
 import map_components.Spot;
+import monopoly.Game;
+import monopoly.Player;
+import monopoly.Stock;
 
 import java.io.IOException;
 import java.util.ArrayList;

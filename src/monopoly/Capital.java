@@ -1,5 +1,7 @@
 package monopoly;
 
+import map_components.StockMarket;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -128,7 +130,7 @@ public class Capital {
      * @param money amount of money to pay
      * @return null if house is not sold, otherwise prompt which house is sold
      */
-    public String payToll(Player creditor, int money) {
+    public String payToll(Player creditor, double money) {
         String r = null;
         if (cash >= money) {
             cash -= money;
