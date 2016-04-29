@@ -65,9 +65,10 @@ public class Game {
             p2.buyCard(type, 0);
         p2.buyCard(CardType.ControlDice, 0);
         p2.buyCard(CardType.ControlDice, 0);
-//        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
-//        p3.getCapital().withdrawMoney(10000);
-//        p3.getCapital().addCash(-20000);
+        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+        p3.getCapital().withdrawMoney(10000);
+        p3.getCapital().addCash(-20000);
+        p3.setBankrupt();
         // ..........
 
         curPlayer = Player.Player_id.Player1;
