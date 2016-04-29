@@ -204,7 +204,7 @@ public class Game {
      */
     private void tomorrow() throws IOException {
         //FIXME: debugging
-        int day_passed = 1;
+        int day_passed = 30;
         for (int i = 0; i < day_passed; i++)
             stockMarket.openMarket();
         calendar.add(Calendar.DAY_OF_MONTH, day_passed);
@@ -212,6 +212,11 @@ public class Game {
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
             Lottery.lottery(this);
         }
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
+            getDividend();
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
     }
 
     /**
@@ -351,5 +356,18 @@ public class Game {
 
     public StockMarket getStockMarket() {
         return stockMarket;
+    }
+
+
+    public void getDividend() {
+        for (Player.Player_id id : Player.Player_id.values()) {
+            Player p = fetchPlayer(id);
+            if (p == null)
+                continue;
+            double dividend = p.getCapital().getDeposit() / 10;
+            System.out.println(p.getId() + " get " + dividend);
+            p.getCapital().addCash(dividend);
+            p.getCapital().saveMoney(dividend);
+        }
     }
 }
