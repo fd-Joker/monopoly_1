@@ -39,7 +39,7 @@ public class News extends Spot {
     @Override
     public String enter(Game game) {
         //FIXME: debugging
-        int what_news = 4;/*(int) (Math.random()*NUMBER_NEWS_TYPE);*/
+        int what_news = (int) (Math.random()*NUMBER_NEWS_TYPE);
         Collection<Player> p_list;
         int reward;
         switch (what_news) {

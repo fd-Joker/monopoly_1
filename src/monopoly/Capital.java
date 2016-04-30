@@ -233,7 +233,7 @@ public class Capital {
         this.cash = 0;
         this.deposit = 0;
         this.estates.stream().forEach(estate -> estate.setOwner(null));
-        // TODO 清空资产信息
+        // DONE 清空资产信息
     }
 
     public String info() {

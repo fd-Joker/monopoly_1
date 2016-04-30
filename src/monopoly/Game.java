@@ -1,6 +1,5 @@
 package monopoly;
 
-import card_items.CardType;
 import map_components.*;
 
 import java.io.BufferedReader;
@@ -53,19 +52,19 @@ public class Game {
             curCell.addThing(p);
         }
         // FIXME: debugging
-        Player p1 = players.stream().filter(item->item.getId() == Player.Player_id.Player1).findFirst().get();
-        p1.buyCard(CardType.Barricade, 0);
-        p1.buyCard(CardType.ControlDice, 0);
-        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
-        p2.getCapital().withdrawMoney(10000);
-        p2.getCapital().addCash(10000);
-        this.curPlayer = Player.Player_id.Player2;
-        map.getCell(0, 3).getSpot().enter(this);
-        map.getCell(0, 2).getSpot().enter(this);
-        for (CardType type : CardType.values())
-            p2.buyCard(type, 0);
-        p2.buyCard(CardType.ControlDice, 0);
-        p2.buyCard(CardType.ControlDice, 0);
+//        Player p1 = players.stream().filter(item->item.getId() == Player.Player_id.Player1).findFirst().get();
+//        p1.buyCard(CardType.Barricade, 0);
+//        p1.buyCard(CardType.ControlDice, 0);
+//        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
+//        p2.getCapital().withdrawMoney(10000);
+//        p2.getCapital().addCash(10000);
+//        this.curPlayer = Player.Player_id.Player2;
+//        map.getCell(0, 3).getSpot().enter(this);
+//        map.getCell(0, 2).getSpot().enter(this);
+//        for (CardType type : CardType.values())
+//            p2.buyCard(type, 0);
+//        p2.buyCard(CardType.ControlDice, 0);
+//        p2.buyCard(CardType.ControlDice, 0);
 //        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
 //        p3.getCapital().withdrawMoney(10000);
 //        p3.getCapital().addCash(-20000);
@@ -204,7 +203,7 @@ public class Game {
      */
     private void tomorrow() throws IOException {
         //FIXME: debugging
-        int day_passed = 30;
+        int day_passed = 1;
         for (int i = 0; i < day_passed; i++)
             stockMarket.openMarket();
         calendar.add(Calendar.DAY_OF_MONTH, day_passed);

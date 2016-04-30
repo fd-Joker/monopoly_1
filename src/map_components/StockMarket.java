@@ -1,6 +1,5 @@
 package map_components;
 
-import map_components.Spot;
 import monopoly.Game;
 import monopoly.Player;
 import monopoly.Stock;
@@ -109,7 +108,6 @@ public class StockMarket extends Spot {
                     shares = Game.parsePosInt(Game.getInstruction());
                 } while (shares < 0 || shares > max_shares);
                 curPlayer.getCapital().buyStock(game, stockTypes[index], shares);
-                // TODO hint
             } else if ("0".equals(instruction)) { // sell
                 Stock[] copy = curPlayer.getCapital().stockOwnershipInfo();
                 if (copy.length == 0) {
