@@ -80,16 +80,16 @@ public class StockMarket extends Spot {
     @Override
     public String enter(Game game) throws IOException {
         Player curPlayer = game.fetchPlayer(game.getCurPlayer());
-        System.out.println("Welcome to NYSE!");
+        Game.printToTerminal("Welcome to NYSE!\n");
         int index;
         String instruction;
         do {
-            System.out.print("What do you want to do?(0-sell;1-buy;x-quit): ");
+            Game.printToTerminal("What do you want to do?(0-sell;1-buy;x-quit): ");
             instruction = Game.getInstruction();
             if ("1".equals(instruction)) { // buy
                 printTodayStock();
                 do {
-                    System.out.println("Please type index to choose(x-quit): ");
+                    Game.printToTerminal("Please type index to choose(x-quit): \n");
                     instruction = Game.getInstruction();
                     index = Game.parsePosInt(instruction);
                 } while (!"x".equals(instruction) && (index < 0 || index >= todayPrice.length));
@@ -97,32 +97,32 @@ public class StockMarket extends Spot {
                     return null;
                 int max_shares = countMaxBuy(curPlayer, stockTypes[index]);
                 if (max_shares == 0) {
-                    System.out.println("Your money is not enough to buy.");
+                    Game.printToTerminal("Your money is not enough to buy.\n");
                     continue;
                 }
                 int shares = 0;
                 do {
                     if (shares > max_shares)
-                        System.out.println("You can not buy that much. Max: " + max_shares);
-                    System.out.println("How much you want to buy?");
+                        Game.printToTerminal("You can not buy that much. Max: " + max_shares + "\n");
+                    Game.printToTerminal("How much you want to buy?\n");
                     shares = Game.parsePosInt(Game.getInstruction());
                 } while (shares < 0 || shares > max_shares);
                 curPlayer.getCapital().buyStock(game, stockTypes[index], shares);
             } else if ("0".equals(instruction)) { // sell
                 Stock[] copy = curPlayer.getCapital().stockOwnershipInfo();
                 if (copy.length == 0) {
-                    System.out.println("There is nothing for sell.");
+                    Game.printToTerminal("There is nothing for sell.\n");
                     continue;
                 }
                 for (int i = 0; i < copy.length; i++) {
                     Stock stock = copy[i];
-                    System.out.println(i + " - " + stock.getType() + "\t +" +
+                    Game.printToTerminal(i + " - " + stock.getType() + "\t +" +
                             String.format("%.2f", todayPrice[indexOf(stock.getType())]) + "\t" + String.format("%.2f", yesterdayPrice[indexOf(stock.getType())]) + "\t" +
                             String.format("%+.2f%%", todayRate[indexOf(stock.getType())]*100) + "\t" +
-                            stock.getShares() + "");
+                            stock.getShares() + "\n\n");
                 }
                 do {
-                    System.out.println("Please type index to choose(x-quit): ");
+                    Game.printToTerminal("Please type index to choose(x-quit): \n");
                     instruction = Game.getInstruction();
                     index = Game.parsePosInt(instruction);
                 } while (!"x".equals(instruction) && (index < 0 || index >= copy.length));
@@ -134,8 +134,8 @@ public class StockMarket extends Spot {
                 int shares = 0;
                 do {
                     if (shares > max_shares)
-                        System.out.println("You don`t have that much. Max: " + max_shares);
-                    System.out.println("How much you want to sell?");
+                        Game.printToTerminal("You don`t have that much. Max: " + max_shares + "\n");
+                    Game.printToTerminal("How much you want to sell?\n");
                     shares = Game.parsePosInt(Game.getInstruction());
                 } while (shares < 0 || shares > max_shares);
                 curPlayer.getCapital().sellStock(game, copy[index].getType(), shares);
@@ -164,9 +164,9 @@ public class StockMarket extends Spot {
 
     public void printTodayStock() {
         for (int i = 0; i < todayPrice.length; i++)
-            System.out.println(i + " - " + stockTypes[i] + "\t" +
+            Game.printToTerminal(i + " - " + stockTypes[i] + "\t" +
                     String.format("%.2f", todayPrice[i]) + "\t" + String.format("%.2f", yesterdayPrice[i]) + "\t" +
-                    String.format("%+.2f%%", todayRate[i]*100));
+                    String.format("%+.2f%%", todayRate[i]*100) + "\n");
     }
 
     private void resetRedBlack() {

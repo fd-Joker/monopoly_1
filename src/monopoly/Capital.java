@@ -18,7 +18,7 @@ public class Capital {
     private Collection<Estate> estates;
     private Collection<Stock> stocks;
 
-    public Capital(Player player, int ticket, int cash, int deposit) {
+    public Capital(Player player, int ticket, double cash, double deposit) {
         this.player = player;
         this.ticket = ticket;
         this.cash = cash;

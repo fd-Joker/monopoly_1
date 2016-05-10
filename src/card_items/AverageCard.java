@@ -22,7 +22,7 @@ public class AverageCard extends CardItem {
             Player p = game.fetchPlayer(id_values[i]);
             if (p != null) {
                 p.getCapital().addCash(cash_avg - p.getCapital().getCash());
-                System.out.println(p.getId() + "`s cash is: " + cash_avg);
+                Game.printToTerminal(p.getId() + "`s cash is: " + cash_avg + "\n");
             }
         }
         return null;

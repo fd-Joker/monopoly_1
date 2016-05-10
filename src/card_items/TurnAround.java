@@ -13,7 +13,7 @@ public class TurnAround extends CardItem {
     public String function(Game game) throws IOException {
         Player curPlayer = game.fetchPlayer(game.getCurPlayer());
         int currentIndex = curPlayer.getCellIndex();
-        System.out.println("Please choose a target: ");
+        Game.printToTerminal("Please choose a target: ");
         int i = 0;
         Player[] targets = new Player[game.getTotal_players()];
         for (Player.Player_id id : Player.Player_id.values()) {
@@ -24,15 +24,15 @@ public class TurnAround extends CardItem {
             }
         }
         for (int j = 0; j < i; j++) {
-            System.out.println(j + " - " + targets[j].getId());
+            Game.printToTerminal(j + " - " + targets[j].getId() + "\n");
         }
         int index;
         do {
-            System.out.print("Type a number to choose: ");
+            Game.printToTerminal("Type a number to choose: ");
             index = Game.parsePosInt(Game.getInstruction());
         } while (index <= 0 || index >= i);
         targets[index].reverseDirection();
-        System.out.println(targets[index].getId() + " has turned around.");
+        Game.printToTerminal(targets[index].getId() + " has turned around.\n");
         return null;
     }
 }

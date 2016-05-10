@@ -43,25 +43,25 @@ public class Lottery extends Spot {
     public String enter(Game game) throws IOException {
         Player player = game.fetchPlayer(game.getCurPlayer());
         if (player.getCapital().getCash() < 1000) {
-            System.out.println("You cash is: " + player.getCapital().getCash() +
-                    "\nYou don`t have enough cash for lottery.");
+            Game.printToTerminal("You cash is: " + player.getCapital().getCash() +
+                    "\nYou don`t have enough cash for lottery.\n");
             return null;
         }
-        System.out.println("Welcome to Lottery." +
+        Game.printToTerminal("Welcome to Lottery." +
                 "\nNow total reward is: " + total_reward_amount +
                 "\nYou should pay 1000 for a number." +
                 "\nAvailable number is listed below: ");
         for (int i = 0; i < number_availability.length; i++) {
             if (number_availability[i])
-                System.out.print(i + "\t\t");
+                Game.printToTerminal(i + "\t\t");
             else
-                System.out.print(number_owner[i] + "\t");
+                Game.printToTerminal(number_owner[i] + "\t");
             if ((i+1) % 5 == 0)
-                System.out.println();
+                Game.printToTerminal("\n");
         }
         int number;
         do {
-            System.out.print("Tell me your choice: ");
+            Game.printToTerminal("Tell me your choice: ");
             number = Game.parsePosInt(Game.getInstruction());
         } while (number < 0 || number >= NUMBER_RANGE || !number_availability[number]);
         // buy the number
@@ -70,7 +70,7 @@ public class Lottery extends Spot {
         number_availability[number] = false;
         number_owner[number] = player.getId();
         // print hint
-        System.out.println("Your cash is: " + player.getCapital().getCash());
+        Game.printToTerminal("Your cash is: " + player.getCapital().getCash() + "\n");
         Game.getInstruction();
         return null;
     }
@@ -92,12 +92,12 @@ public class Lottery extends Spot {
             return;
 
         if (number_availability[magic_number]) {
-            System.out.println("No one win the reward this month.");
+            Game.printToTerminal("No one win the reward this month.\n");
         } else {
             Player winner = game.fetchPlayer(number_owner[magic_number]);
             if (winner != null) {
                 winner.getCapital().addCash(total_reward_amount);
-                System.out.println("Congratulations! " + number_owner[magic_number] + " wins the reward " + total_reward_amount);
+                Game.printToTerminal("Congratulations! " + number_owner[magic_number] + " wins the reward " + total_reward_amount + "\n");
                 reset();
             }
         }

@@ -54,15 +54,15 @@ public class Menu {
         Cell.Direction direction = cur_player.getDirection();
         switch (curState) {
             case P_ORI_MENU:
-                System.out.print(menu_level0);
+                Game.printToTerminal(menu_level0);
                 curState = MenuState.S_ORI_MENU;
                 break;
             case P_CUR_MAP:
-                System.out.print(game.getMap().toTexture(true, game.getCurPlayer()));
+                Game.printToTerminal(game.getMap().toTexture(true, game.getCurPlayer()));
                 curState = MenuState.P_ORI_MENU;
                 break;
             case P_ORI_MAP:
-                System.out.println(game.getMap().toTexture());
+                Game.printToTerminal(game.getMap().toTexture() + "\n");
                 curState = MenuState.P_ORI_MENU;
                 break;
             case P_PROP:
@@ -70,21 +70,21 @@ public class Menu {
                 CardType[] types = CardType.values();
                 long[] count = cur_player.listCard();
                 if (count == null) {
-                    System.out.println("Sorry, you have no prop.");
+                    Game.printToTerminal("Sorry, you have no prop.\n");
                     curState = MenuState.P_ORI_MENU;
                     break;
                 }
-                System.out.println("Your props are listed below: ");
+                Game.printToTerminal("Your props are listed below: \n");
                 for (int i = 0; i < count.length; i++) {
                     if (count[i] > 0)
-                        System.out.print(i + " - " + types[i] + ": " + count[i] + "\t");
+                        Game.printToTerminal(i + " - " + types[i] + ": " + count[i] + "\t");
                     if ((i+1) % 3 == 0)
-                        System.out.println();
+                        Game.printToTerminal("\n");
                 }
                 int index = 0;
                 String instruction;
                 do {
-                    System.out.println("Type index to choose(x-quit): ");
+                    Game.printToTerminal("Type index to choose(x-quit): \n");
                     instruction = Game.getInstruction();
                     index = Game.parsePosInt(instruction);
                 } while (!"x".equals(instruction) && (index < 0 || index >= types.length || count[index] == 0));
@@ -94,7 +94,7 @@ public class Menu {
                         entity.function(game);
                         cur_player.removeCard(types[index]);
                     } else
-                        System.out.println("Null pointer error!");
+                        Game.printToTerminal("Null pointer error!\n");
                     curState = MenuState.P_PROP;
                 } else
                     curState = MenuState.P_ORI_MENU;
@@ -104,15 +104,15 @@ public class Menu {
                 for (int i = 0; i < 10; i++) {
                     spot = spot.getSpot(direction);
                     if (spot.hasBarricade()) {
-                        System.out.println("There is a barricade " + (i + 1) + " steps away.");
+                        Game.printToTerminal("There is a barricade " + (i + 1) + " steps away.\n");
                         flag = false;
                     }
                 }
                 if (flag)
-                    System.out.println("It is safe!");
+                    Game.printToTerminal("It is safe!\n");
                 break;
             case P_CELL_REQUEST:
-                System.out.print("请输入您想查询的地点与您相差的步数(后方用负数,x退出): ");
+                Game.printToTerminal("请输入您想查询的地点与您相差的步数(后方用负数,x退出): ");
                 curState = MenuState.P_CELL_INFO;
                 break;
             case P_CELL_INFO:
@@ -124,7 +124,7 @@ public class Menu {
                     spot = spot.getSpot(direction);
                     cell_interval--;
                 }
-                System.out.print(spot.info());
+                Game.printToTerminal(spot.info());
                 curState = MenuState.P_ORI_MENU;
                 break;
             case P_PLAYER_CAP:
@@ -134,18 +134,18 @@ public class Menu {
             case P_DICE:
                 int dice = game.fetchPlayer(game.getCurPlayer()).throw_dice();
                 if (dice == 0)
-                    System.out.println("You should stay where you are in this round.");
+                    Game.printToTerminal("You should stay where you are in this round.\n");
                 else
-                    System.out.println("Dice number: " + dice);
+                    Game.printToTerminal("Dice number: " + dice + "\n");
                 curState = MenuState.EXIT;
                 break;
             case ERR_INST:
-                System.out.println("Instruction error! Start again.");
+                Game.printToTerminal("Instruction error! Start again.\n");
                 curState = MenuState.P_ORI_MENU;
                 break;
             case SURRENDER:
                 skip = true;
-                System.out.println("Now you bankrupted!");
+                Game.printToTerminal("Now you bankrupted!\n");
                 game.fetchPlayer(game.getCurPlayer()).setBankrupt();
                 curState = MenuState.EXIT;
                 break;
@@ -154,7 +154,7 @@ public class Menu {
                 curState = MenuState.P_ORI_MENU;
                 break;
             default:
-                System.out.print(menu_level0);
+                Game.printToTerminal(menu_level0);
                 curState = MenuState.S_ORI_MENU;
                 break;
         }
@@ -194,6 +194,10 @@ public class Menu {
                 curState = MenuState.P_PROP;
                 break;
             case P_CELL_INFO:
+                if (instruction.equals("x")) {
+                    curState = MenuState.P_ORI_MENU;
+                    break;
+                }
                 if (!instruction.contains("-")) {
                     cell_interval = Game.parsePosInt(instruction);
                     if (cell_interval < 0) {

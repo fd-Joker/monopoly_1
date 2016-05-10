@@ -38,7 +38,7 @@ public class Ticket extends Spot {
     public String enter(Game game) {
         Player p = game.fetchPlayer(game.getCurPlayer());
         int amount = (int) (Math.random()*TICKET_RANGE);
-        System.out.println(p.getId() + " get " + amount + " tickets.");
+        Game.printToTerminal(p.getId() + " get " + amount + " tickets.\n");
         p.getCapital().receiveTicket(amount);
         return null;
     }

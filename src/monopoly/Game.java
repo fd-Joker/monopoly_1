@@ -1,5 +1,6 @@
 package monopoly;
 
+import card_items.CardType;
 import map_components.*;
 
 import java.io.BufferedReader;
@@ -12,7 +13,7 @@ import java.util.*;
  * Created by Joker on 4/22/16.
  */
 public class Game {
-    private static final long START_TIME = 0L;
+    private static final long START_TIME = 86400000L*25;
     private int lasting_days = 100;
 
     // total number of players
@@ -20,6 +21,8 @@ public class Game {
 
     private Map map;
     private Menu menu;
+    // initial capital for each player
+    private Capital initialCapital;
     // store players information who are still in the game
     private Collection<Player> players;
     // store current player id
@@ -47,28 +50,28 @@ public class Game {
         for (int i = 0; i < total_players; i++) {
             Player.Player_id id = id_values[i];
             Cell curCell = map.getCell(0, 0);
-            Player p = new Player(id, curCell);
+            Player p = new Player(initialCapital, id, curCell);
             players.add(p);
             curCell.addThing(p);
         }
         // FIXME: debugging
-//        Player p1 = players.stream().filter(item->item.getId() == Player.Player_id.Player1).findFirst().get();
-//        p1.buyCard(CardType.Barricade, 0);
-//        p1.buyCard(CardType.ControlDice, 0);
-//        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
-//        p2.getCapital().withdrawMoney(10000);
-//        p2.getCapital().addCash(10000);
-//        this.curPlayer = Player.Player_id.Player2;
-//        map.getCell(0, 3).getSpot().enter(this);
-//        map.getCell(0, 2).getSpot().enter(this);
-//        for (CardType type : CardType.values())
-//            p2.buyCard(type, 0);
-//        p2.buyCard(CardType.ControlDice, 0);
-//        p2.buyCard(CardType.ControlDice, 0);
-//        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
-//        p3.getCapital().withdrawMoney(10000);
-//        p3.getCapital().addCash(-20000);
-//        p3.setBankrupt();
+        Player p1 = players.stream().filter(item->item.getId() == Player.Player_id.Player1).findFirst().get();
+        p1.buyCard(CardType.Barricade, 0);
+        p1.buyCard(CardType.ControlDice, 0);
+        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
+        p2.getCapital().withdrawMoney(10000);
+        p2.getCapital().addCash(10000);
+        this.curPlayer = Player.Player_id.Player2;
+        map.getCell(0, 3).getSpot().enter(this);
+        map.getCell(0, 2).getSpot().enter(this);
+        for (CardType type : CardType.values())
+            p2.buyCard(type, 0);
+        p2.buyCard(CardType.ControlDice, 0);
+        p2.buyCard(CardType.ControlDice, 0);
+        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+        p3.getCapital().withdrawMoney(10000);
+        p3.getCapital().addCash(-20000);
+        p3.setBankrupt();
         // ..........
 
         curPlayer = Player.Player_id.Player1;
@@ -100,7 +103,7 @@ public class Game {
                     // player walks, dice throw in menu loop
                     player.walk(game);
                     // print current map
-                    System.out.print(game.map.toTexture(true, game.curPlayer));
+                    printToTerminal(game.map.toTexture(true, game.curPlayer));
                     // confirm
                     getInstruction();
                 }
@@ -109,7 +112,7 @@ public class Game {
             Collection<Player> r_list = new ArrayList<>();
             for (Player player : game.players)
                 if (player.isBankrupted()) {
-                    System.out.println(player.getId() + " sorry, you have bankrupted.");
+                    printToTerminal(player.getId() + " sorry, you have bankrupted.\n");
                     r_list.add(player);
                 }
             game.players.removeAll(r_list);
@@ -120,26 +123,35 @@ public class Game {
         // print winner information
         Collection<Player.Player_id> winner = game.winner_decider();
         for (Player.Player_id id : winner)
-            System.out.println("Congratulations! " + id + " has won the game!");
+            printToTerminal("Congratulations! " + id + " has won the game!\n");
     }
 
     public void print_player_capital() {
         Player.Player_id[] id_values = Player.Player_id.values();
-        System.out.print("ID\tTicket\tCash\tDeposit\tEstate\tCapital\n");
+        printToTerminal("ID\tTicket\tCash\tDeposit\tEstate\tCapital\n");
         for (int i = 0; i < total_players; i++) {
             Player p = fetchPlayer(id_values[i]);
             if (p != null)
-                System.out.print(p.info());
+                printToTerminal(p.info());
         }
     }
 
     public void prepare() throws IOException {
-        int n;
+        int n, money, ticket;
         do {
-            System.out.print("Input number of players: ");
+            printToTerminal("Input number of players: ");
             n = parsePosInt(getInstruction());
         } while (n < 2 || n > 4);
         this.total_players = n;
+        do {
+            printToTerminal("Input initial cash and deposit: ");
+            money = parsePosInt(getInstruction());
+        } while (money <= 0);
+        do {
+            printToTerminal("Input initial ticket: ");
+            ticket = parsePosInt(getInstruction());
+        } while (ticket < 0);
+        this.initialCapital = new Capital(null, ticket, money, money);
     }
 
     public Collection<Player.Player_id> winner_decider() {
@@ -224,9 +236,9 @@ public class Game {
     private void print_basic_info() {
         // date
         java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("今天是" + format.format(calendar.getTime()));
+        printToTerminal("今天是" + format.format(calendar.getTime()) + "\n");
         // current player information
-        System.out.println("现在是\"" + curPlayer + "\"的操作时间,您的前进方向是" + fetchPlayer(curPlayer).getDirection());
+        printToTerminal("现在是\"" + curPlayer + "\"的操作时间,您的前进方向是" + fetchPlayer(curPlayer).getDirection() + "\n");
     }
 
     public boolean isEnd() {
@@ -241,6 +253,10 @@ public class Game {
     public static String getInstruction() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         return reader.readLine();
+    }
+
+    public static void printToTerminal(String msg) {
+        System.out.print(msg);
     }
 
     /**
@@ -364,7 +380,7 @@ public class Game {
             if (p == null)
                 continue;
             double dividend = p.getCapital().getDeposit() / 10;
-            System.out.println(p.getId() + " get " + dividend);
+            printToTerminal(p.getId() + " get " + dividend + "\n");
             p.getCapital().addCash(dividend);
             p.getCapital().saveMoney(dividend);
         }

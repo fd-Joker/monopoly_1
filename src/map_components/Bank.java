@@ -36,7 +36,7 @@ public class Bank extends Spot {
     @Override
     public boolean pass(Game game) throws IOException {
         boolean isContinue = super.pass(game);
-        System.out.println("Welcome to Bank.");
+        Game.printToTerminal("Welcome to Bank.\n");
         Player player = game.fetchPlayer(game.getCurPlayer());
         String instruction = "";
         BankEventState state = BankEventState.SERVICE;
@@ -44,7 +44,7 @@ public class Bank extends Spot {
         while (state != BankEventState.QUIT) {
             switch (state) {
                 case SERVICE:
-                    System.out.println("Your current cash is " + player.getCapital().getCash() +
+                    Game.printToTerminal("Your current cash is " + player.getCapital().getCash() +
                             "\nYour current deposit is " + player.getCapital().getDeposit() +
                             "\nPlease choose service(0-save;1-withdraw;x-quit): ");
                     do {
@@ -63,32 +63,32 @@ public class Bank extends Spot {
                     }
                     break;
                 case SAVE_MONEY:
-                    System.out.print("The amount of money you want to save: ");
+                    Game.printToTerminal("The amount of money you want to save: ");
                     amount = Game.parsePosInt(Game.getInstruction());
                     if (amount >= 0) {
                         if (!player.getCapital().saveMoney(amount)) {
-                            System.out.println("Your cash is:" + player.getCapital().getCash() +
-                                    "\nYou don`t have enough cash.");
+                            Game.printToTerminal("Your cash is:" + player.getCapital().getCash() +
+                                    "\nYou don`t have enough cash.\n");
                         } else {
-                            System.out.println("You have saved: " + amount);
+                            Game.printToTerminal("You have saved: " + amount + "\n");
                         }
                     } else {
-                        System.out.println("You should type a number.");
+                        Game.printToTerminal("You should type a number.\n");
                     }
                     state = BankEventState.SERVICE;
                     break;
                 case WITHDRAW_MONEY:
-                    System.out.print("The amount of money you want to withdraw: ");
+                    Game.printToTerminal("The amount of money you want to withdraw: ");
                     amount = Game.parsePosInt(Game.getInstruction());
                     if (amount >= 0) {
                         if (!player.getCapital().withdrawMoney(amount)) {
-                            System.out.println("Your deposit is: " + player.getCapital().getDeposit() +
-                                    "\nYou don`t have enough deposit.");
+                            Game.printToTerminal("Your deposit is: " + player.getCapital().getDeposit() +
+                                    "\nYou don`t have enough deposit.\n");
                         } else {
-                            System.out.println("You have withdrawn: " + amount);
+                            Game.printToTerminal("You have withdrawn: " + amount + "\n");
                         }
                     } else {
-                        System.out.println("You should type a number.");
+                        Game.printToTerminal("You should type a number.\n");
                     }
                     state = BankEventState.SERVICE;
                     break;

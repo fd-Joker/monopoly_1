@@ -14,7 +14,7 @@ public class ControlDice extends CardItem {
         Player curPlayer = game.fetchPlayer(game.getCurPlayer());
         int number;
         do {
-            System.out.println("Please choose a number from 1~6: ");
+            Game.printToTerminal("Please choose a number from 1~6: ");
             number = Game.parsePosInt(Game.getInstruction());
         } while (number <= 0 || number > 6);
         curPlayer.setDiceNumber(number);

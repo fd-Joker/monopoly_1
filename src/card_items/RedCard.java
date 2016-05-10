@@ -16,13 +16,13 @@ public class RedCard extends CardItem {
         int index;
         String instruction;
         do {
-            System.out.println("Please type index to choose(x-quit): ");
+            Game.printToTerminal("Please type index to choose(x-quit): ");
             instruction = Game.getInstruction();
             index = Game.parsePosInt(instruction);
         } while (!"x".equals(instruction) && (index < 0 || index >= stockTypes.length));
         StockMarket.StockType type = stockTypes[index];
         game.getStockMarket().addToRed(type);
-        System.out.println("Done!");
+        Game.printToTerminal("Done!\n");
         return null;
     }
 }

@@ -37,7 +37,7 @@ public class Player extends Thing {
         this.id = id;
         dice = new Dice();
         // initialize capital
-        this.capital = capital;
+        this.capital = new Capital(this, capital.getTicket(), capital.getCash(), capital.getDeposit());
         this.cards = new ArrayList<>();
         // bankrupt flag
         this.bankrupted = false;
@@ -67,7 +67,7 @@ public class Player extends Thing {
             c = this.cell.getSpot().pass(game);
         }
         if (!c)
-            System.out.println("Oops! You have run into a barricade.");
+            Game.printToTerminal("Oops! You have run into a barricade.\n");
         this.cell.getSpot().enter(game);
     }
 

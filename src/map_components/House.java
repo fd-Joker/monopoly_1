@@ -27,7 +27,16 @@ public class House extends Spot {
 
     @Override
     public String toTexture() {
-        return "◎";
+        if (this.estate.getOwner() == Player.Player_id.Player1)
+            return "1";
+        else if (this.estate.getOwner() == Player.Player_id.Player2)
+            return "2";
+        else if (this.estate.getOwner() == Player.Player_id.Player3)
+            return "3";
+        else if (this.estate.getOwner() == Player.Player_id.Player4)
+            return "4";
+        else
+            return "◎";
     }
 
     @Override
@@ -49,15 +58,15 @@ public class House extends Spot {
 
     @Override
     public String enter(Game game) throws IOException {
-        System.out.print("Welcome to ");
+        Game.printToTerminal("Welcome to ");
         Player p = game.fetchPlayer(game.getCurPlayer());
         switch (this.estate.getState()) {
             case owned:
                 if (this.estate.getOwner() == game.getCurPlayer()) {
-                    System.out.println("your House!");
+                    Game.printToTerminal("your House!\n");
                     if (p.getCapital().getCash() >= this.estate.update_cost()) {
                         // cash is enough to pay for update cost
-                        System.out.println("Update cost is: " + this.estate.update_cost() +
+                        Game.printToTerminal("Update cost is: " + this.estate.update_cost() +
                                 "\nAfter update, the remained cash is: " +
                                 (p.getCapital().getCash()-this.estate.update_cost()) +
                                 "\nWould you like to update?(0-yes;1-no): ");
@@ -65,47 +74,47 @@ public class House extends Spot {
                         // update estate
                         if (instruction.equals("") || instruction.charAt(0) == '0')
                             if (!p.getCapital().updateHouse(estate))
-                                System.out.println("House is already top level.");
+                                Game.printToTerminal("House is already top level.\n");
                     } else {
                         // cash is not enough to pay for update cost
-                        System.out.println("Update cost is: " + this.estate.update_cost() +
+                        Game.printToTerminal("Update cost is: " + this.estate.update_cost() +
                                 "\nYour cash is: " + p.getCapital().getCash() +
-                                "\nSorry, your cash is not enough.");
+                                "\nSorry, your cash is not enough.\n");
                     }
                 } else {
                     // you enter other people`s house
-                    System.out.println(estate.getOwner() + "`s House!\nNow you should pay tolls.");
+                    Game.printToTerminal(estate.getOwner() + "`s House!\nNow you should pay tolls.\n");
                     // because estate.state is owned, creditor should not be null
                     Player creditor = game.fetchPlayer(this.estate.getOwner());
                     String r = p.getCapital().payToll(creditor, estate.toll());
-                    System.out.println((p.isBankrupted() ? "You can`t afford the toll." : "You have paid: " + estate.toll()) +
+                    Game.printToTerminal((p.isBankrupted() ? "You can`t afford the toll." : "You have paid: " + estate.toll()) +
                             (r == null ? "" : r) +
                             "\nYour cash now is: " + p.getCapital().getCash() +
                             "\nYour deposit now is: " + p.getCapital().getDeposit() +
-                            "\n" + estate.getOwner() + "`s cash now is:" + game.fetchPlayer(estate.getOwner()).getCapital().getCash());
+                            "\n" + estate.getOwner() + "`s cash now is:" + game.fetchPlayer(estate.getOwner()).getCapital().getCash() + "\n");
                     Game.getInstruction();
                 }
                 break;
             case unowned:
-                System.out.println("this House!" +
-                        "\nThe price of the House is " + estate.price());
+                Game.printToTerminal("this House!" +
+                        "\nThe price of the House is " + estate.price() + "\n");
                 if (p.getCapital().getCash() >= estate.price()) {
                     // can afford to buy
-                    System.out.println("Your cash is " + p.getCapital().getCash() +
+                    Game.printToTerminal("Your cash is " + p.getCapital().getCash() +
                             "\nIf you buy the House, the remain cash is " + (p.getCapital().getCash()-estate.price()) +
                             "\nWould you like to buy?(0-yes;1-no): ");
                     String instruction = Game.getInstruction();
                     // buy estate
                     if (instruction.equals("") || instruction.charAt(0) == '0') {
                         p.getCapital().buyHouse(estate);
-                        System.out.println("House is bought successfully.\nRemained cash is: " + p.getCapital().getCash());
+                        Game.printToTerminal("House is bought successfully.\nRemained cash is: " + p.getCapital().getCash() + "\n");
                     } else
-                        System.out.println("House is not bought.");
+                        Game.printToTerminal("House is not bought.\n");
                     instruction = Game.getInstruction();
                 } else {
                     // can`t afford to buy
-                    System.out.println("Your cash is: " + p.getCapital().getCash() +
-                            "\nSorry, your cash is not enough.");
+                    Game.printToTerminal("Your cash is: " + p.getCapital().getCash() +
+                            "\nSorry, your cash is not enough.\n");
                 }
                 break;
         }

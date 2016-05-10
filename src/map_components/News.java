@@ -47,7 +47,7 @@ public class News extends Spot {
                 p_list = game.getHouseMost();
                 for (Player p : p_list) {
                     reward = (int) (Math.random() * 50 + 50) * 100;
-                    System.out.println("公开表扬第一地主" + p.getId() + "奖励" + reward);
+                    Game.printToTerminal("公开表扬第一地主" + p.getId() + "奖励" + reward + "\n");
                     p.getCapital().addCash(reward);
                 }
                 break;
@@ -55,28 +55,28 @@ public class News extends Spot {
                 p_list = game.getHouseLeast();
                 for (Player p : p_list) {
                     reward = (int) (Math.random() * 50 + 50) * 100;
-                    System.out.println("公开补助土地最少者" + p.getId() + ", " + reward);
+                    Game.printToTerminal("公开补助土地最少者" + p.getId() + ", " + reward + "\n");
                     p.getCapital().addCash(reward);
                 }
                 break;
             case 2:
-                System.out.println("银行加发储金红利每个人得到存款10%");
+                Game.printToTerminal("银行加发储金红利每个人得到存款10%\n");
                 game.getDividend();
                 break;
             case 3:
-                System.out.println("所有人缴纳财产税10%");
+                Game.printToTerminal("所有人缴纳财产税10%\n");
                 for (Player.Player_id id : Player.Player_id.values()) {
                     Player p = game.fetchPlayer(id);
                     if (p == null)
                         continue;
                     double dividend = p.getCapital().getDeposit() / 10;
-                    System.out.println(p.getId() + " loses " + dividend);
+                    Game.printToTerminal(p.getId() + " loses " + dividend + "\n");
                     p.getCapital().withdrawMoney(dividend);
                     p.getCapital().addCash(-dividend);
                 }
                 break;
             case 4:
-                System.out.println("每个人得到一张卡片");
+                Game.printToTerminal("每个人得到一张卡片\n");
                 for (Player.Player_id id : Player.Player_id.values()) {
                     Player p = game.fetchPlayer(id);
                     if (p == null)
@@ -84,7 +84,7 @@ public class News extends Spot {
                     CardType[] all = CardType.values();
                     int get = (int) (Math.random()*all.length);
                     p.buyCard(all[get], 0);
-                    System.out.println(p.getId() + " has got " + all[get]);
+                    Game.printToTerminal(p.getId() + " has got " + all[get] + "\n");
                 }
                 break;
 

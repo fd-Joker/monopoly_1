@@ -11,7 +11,7 @@ public class StopOver extends CardItem {
     public String function(Game game) {
         Player curPlayer = game.fetchPlayer(game.getCurPlayer());
         curPlayer.setDiceNumber(0);
-        System.out.println("You will stay put in this round.");
+        Game.printToTerminal("You will stay put in this round.\n");
         return null;
     }
 }

@@ -36,13 +36,13 @@ public class Card extends Spot {
 
     @Override
     public String enter(Game game) throws IOException {
-        System.out.println("Welcome to Card Gift.");
+        Game.printToTerminal("Welcome to Card Gift.\n");
         CardType[] all_card = CardType.values();
         int index = (int) (Math.random()*all_card.length);
-        System.out.println("You will get a " + all_card[index]);
+        Game.printToTerminal("You will get a " + all_card[index] + "\n");
         Player player = game.fetchPlayer(game.getCurPlayer());
         player.buyCard(all_card[index], 0);
-        System.out.println("Your current cards include: " + player.listCard());
+//        Game.printToTerminal("Your current cards include: " + player.listCard() + "\n");
         Game.getInstruction();
         return null;
     }
