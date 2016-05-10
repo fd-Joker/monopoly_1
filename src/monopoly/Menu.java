@@ -116,7 +116,6 @@ public class Menu {
                 curState = MenuState.P_CELL_INFO;
                 break;
             case P_CELL_INFO:
-                // FIXME 对于输入的错误处理
                 if (cell_interval < 0) {
                     cell_interval = -cell_interval;
                     direction = direction.reverse();
@@ -164,7 +163,7 @@ public class Menu {
     /**
      * operations needed to be done
      * after reading an instruction
-     * @param instruction
+     * @param instruction instruction typed by user
      */
     public void set_menu(String instruction) {
         switch (curState) {
@@ -195,10 +194,20 @@ public class Menu {
                 curState = MenuState.P_PROP;
                 break;
             case P_CELL_INFO:
-                if (!instruction.contains("-"))
+                if (!instruction.contains("-")) {
                     cell_interval = Game.parsePosInt(instruction);
-                else
+                    if (cell_interval < 0) {
+                        curState = MenuState.ERR_INST;
+                        break;
+                    }
+                }
+                else {
                     cell_interval = -Game.parsePosInt(instruction.substring(1));
+                    if (cell_interval > 0) {
+                        curState = MenuState.ERR_INST;
+                        break;
+                    }
+                }
                 curState = MenuState.P_CELL_INFO;
                 break;
             case EXIT:
