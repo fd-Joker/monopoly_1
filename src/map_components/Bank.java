@@ -37,6 +37,7 @@ public class Bank extends Spot {
     }
 
     class BankPanel extends JPanel {
+        // FIXME：if file not found there is no error message
         ImageIcon bg = new ImageIcon("./images/bank.jpg");
         @Override
         protected void paintComponent(Graphics g) {

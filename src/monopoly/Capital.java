@@ -83,6 +83,16 @@ public class Capital {
             return s.getShares();
     }
 
+    public double totalStockValue(Game game) {
+        double sum = 0;
+        for (Stock stock : stocks) {
+            sum += game.getStockMarket().getTodayPriceOf(stock.getType()) * stock.getShares();
+        }
+        sum *= 100;
+        sum = ((int) sum) / 100.0;
+        return sum;
+    }
+
     public Stock[] stockOwnershipInfo() {
         Stock[] copy = new Stock[stocks.size()];
         int i = 0;

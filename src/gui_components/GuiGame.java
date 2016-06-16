@@ -202,13 +202,14 @@ public class GuiGame extends JFrame {
         playerInfoPanel.add(basicInfoPanel);
 
         JPanel detailInfoPanel = new JPanel();
-        detailInfoPanel.setLayout(new GridLayout());
+        detailInfoPanel.setLayout(new GridLayout(5, 0));
         detailInfoPanel.add(new JLabel("Cash: " + cur_player.getCapital().getCash()));
         detailInfoPanel.add(new JLabel("Deposit: " + cur_player.getCapital().getDeposit()));
         // FIXME: get total stock
-        detailInfoPanel.add(new JLabel("Stock: [null]"));
+        detailInfoPanel.add(new JLabel("Stock: " + cur_player.getCapital().totalStockValue(game)));
         detailInfoPanel.add(new JLabel("Tickets: " + cur_player.getCapital().getTicket()));
         detailInfoPanel.add(new JLabel("Capital: " + cur_player.getCapital().total()));
+        playerInfoPanel.add(detailInfoPanel);
     }
 
     /**
