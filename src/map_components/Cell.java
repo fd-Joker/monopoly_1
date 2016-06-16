@@ -1,8 +1,10 @@
 package map_components;
 
+import gui_components.GuiGame;
 import monopoly.Map;
 import monopoly.Player;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -118,6 +120,17 @@ public class Cell {
                 r = things.stream().map(item -> item.toTexture()).findFirst().orElse(" ");
             return r;
         }
+    }
+
+    public JPanel toGui() {
+        JPanel block = spot.createGui();
+        block.setLayout(null);
+        block.setOpaque(false);
+        // this statement set the relative place of this map block in the Map Container
+        // FIXME: x and y are twisted in gui
+        block.setBounds(y*GuiGame.DEFAULT_BLOCK, x*GuiGame.DEFAULT_BLOCK, GuiGame.DEFAULT_BLOCK, GuiGame.DEFAULT_BLOCK);
+
+        return block;
     }
 
     public String toTexture() {

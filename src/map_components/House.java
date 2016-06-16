@@ -1,9 +1,12 @@
 package map_components;
 
+import gui_components.GuiGame;
 import monopoly.Estate;
 import monopoly.Game;
 import monopoly.Player;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -48,6 +51,20 @@ public class House extends Spot {
                 "\nLevel: " +  this.estate.getLevel() +
                 "\nOwner: " + this.estate.getOwner() + "\n";
         return r;
+    }
+
+    class HousePanel extends JPanel {
+        ImageIcon bg = new ImageIcon("./images/house.jpg");
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(bg.getImage(), 0, 0, GuiGame.DEFAULT_BLOCK, GuiGame.DEFAULT_BLOCK, this);
+        }
+    }
+
+    @Override
+    public JPanel createGui() {
+        return new HousePanel();
     }
 
     @Override

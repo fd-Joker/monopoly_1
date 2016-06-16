@@ -1,9 +1,12 @@
 package map_components;
 
 import card_items.CardType;
+import gui_components.GuiGame;
 import monopoly.Game;
 import monopoly.Player;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -26,6 +29,20 @@ public class Card extends Spot {
         String r = "";
         r += "Type: Card\nName: " + this.name + "\n";
         return r;
+    }
+
+    class CardPanel extends JPanel {
+        ImageIcon bg = new ImageIcon("./images/card.jpg");
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(bg.getImage(), 0, 0, GuiGame.DEFAULT_BLOCK, GuiGame.DEFAULT_BLOCK, this);
+        }
+    }
+
+    @Override
+    public JPanel createGui() {
+        return new CardPanel();
     }
 
     @Override

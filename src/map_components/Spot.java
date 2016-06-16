@@ -2,6 +2,7 @@ package map_components;
 
 import monopoly.Game;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -9,6 +10,8 @@ import java.io.IOException;
  */
 public abstract class Spot extends Thing implements Triggerable {
     private boolean isBarricade;
+
+    public abstract JPanel createGui();
 
     public Spot(Cell cell) {
         super(cell);

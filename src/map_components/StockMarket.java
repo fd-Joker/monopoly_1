@@ -4,6 +4,7 @@ import monopoly.Game;
 import monopoly.Player;
 import monopoly.Stock;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +15,15 @@ import java.util.Collection;
 public class StockMarket extends Spot {
     private static final double INITIAL_MIN_PRICE = 20;
     private static final double INITIAL_PRICE_RANGE = 100;
+
+    /**
+     * this spot is not shown on the map, so the return value is null
+     * @return
+     */
+    @Override
+    public JPanel createGui() {
+        return null;
+    }
 
     public enum StockType {
         AREX, LGCY, ORIG, EVEP, DWA, QIWI, FLXN, HLG, BWLD, CROX

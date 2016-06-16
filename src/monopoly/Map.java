@@ -3,8 +3,10 @@ package monopoly;
 import map_components.Cell;
 import map_components.House;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 /**
@@ -42,6 +44,19 @@ public class Map {
 
     public String toTexture() {
         return this.toTexture(false, Player.Player_id.Player1);
+    }
+
+    /**
+     * convert the digitalized map to gui map
+     * @return the Container that has the map drawn on it
+     */
+    public Collection<JPanel> toGui() {
+        Collection<JPanel> map = new HashSet<>();
+        for (Cell item : cells) {
+            JPanel block = item.toGui();
+            map.add(block);
+        }
+        return map;
     }
 
     public Cell getCellPriorTo(Cell cell) {
