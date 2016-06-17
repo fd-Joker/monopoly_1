@@ -4,6 +4,7 @@ import card_items.CardType;
 import map_components.Cell;
 import map_components.Thing;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,13 +27,15 @@ public class Player extends Thing {
 
     private Cell.Direction direction;
 
+    private PlayerHead head;
+
     /**
      * every single player owns a dice
      * the result of a single throw is stored in dice
      */
     private Dice dice;
 
-    public Player(Capital capital, Player_id id, Cell cell) {
+    public Player(Capital capital, Player_id id, Cell cell, PlayerHead.PlayerHeadType headIndex) {
         super(cell);
         this.id = id;
         dice = new Dice();
@@ -42,6 +45,8 @@ public class Player extends Thing {
         // bankrupt flag
         this.bankrupted = false;
         this.direction = Cell.Direction.clockwise;
+        if (headIndex != null)
+            this.head = new PlayerHead(headIndex);
     }
 
     public Player(Player_id id, Cell cell) {
@@ -138,6 +143,10 @@ public class Player extends Thing {
 
     public Cell.Direction getDirection() {
         return direction;
+    }
+
+    public ImageIcon getHead() {
+        return head.getHeadImage();
     }
 
     public void buyCard(CardType item, int cost) {

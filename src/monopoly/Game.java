@@ -1,5 +1,6 @@
 package monopoly;
 
+import gui_components.NewGameInitializeData;
 import map_components.*;
 
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ import java.util.*;
  * Created by Joker on 4/22/16.
  */
 public class Game {
+    public static final int DEFAULT_PLAYERS_UPLIMIT = 4;
     private static final long START_TIME = 86400000L*25;
     private int lasting_days = 100;
 
@@ -38,11 +40,29 @@ public class Game {
      * @param game
      */
     private void staticInitialization(Game game) {
+        players = new ArrayList<>();
         menu = new Menu();
         curPlayer = Player.Player_id.Player1;
         game.stockMarket = new StockMarket();
         game.calendar = new GregorianCalendar();
         calendar.setTime(new Date(START_TIME));
+    }
+
+    public void guiInitialization(NewGameInitializeData data) {
+        try {
+            map = build_map(data.mapIndex);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Player.Player_id[] id_values = Player.Player_id.values();
+        for (int i = 0; i < data.numberOfPlayers; i++) {
+            Player.Player_id id = id_values[i];
+            Cell curCell = map.getCell(0, 0);
+            Capital capital = new Capital(null, data.ticket, data.cash, data.deposit);
+            Player p = new Player(capital, id, curCell, data.playerHeads[i]);
+            players.add(p);
+            curCell.addThing(p);
+        }
     }
 
     /**
@@ -51,7 +71,7 @@ public class Game {
      */
     public Game() throws IOException {
         map = build_map(0);
-        players = new ArrayList<Player>();
+        staticInitialization(this);
 
         // prepare the game
         this.prepare();
@@ -60,7 +80,7 @@ public class Game {
         for (int i = 0; i < total_players; i++) {
             Player.Player_id id = id_values[i];
             Cell curCell = map.getCell(0, 0);
-            Player p = new Player(initialCapital, id, curCell);
+            Player p = new Player(initialCapital, id, curCell, null);
             players.add(p);
             curCell.addThing(p);
         }
@@ -83,8 +103,6 @@ public class Game {
 //        p3.getCapital().addCash(-20000);
 //        p3.setBankrupt();
         // ..........
-
-        staticInitialization(this);
     }
 
     /**
@@ -92,7 +110,7 @@ public class Game {
      * @param gui a parameter to indicate the overload version of gui initialization
      * @throws IOException
      */
-    public Game(int gui) throws IOException {
+    public Game(int gui) {
         staticInitialization(this);
     }
 

@@ -1,6 +1,7 @@
 package gui_components;
 
 import monopoly.Game;
+import monopoly.PlayerHead;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -13,37 +14,43 @@ import java.io.IOException;
  * Created by Joker on 6/17/16.
  */
 public class NewGameFrame extends JFrame {
-    private static final int DEFAULT_W = 200, DEFAULT_H = 600;
+    private static final int DEFAULT_W = 300, DEFAULT_H = 600;
     private static final int INITIAL_PANEL_H = 200;
     private static final int numberOfHeads = 4;
     private static final int numberOfMaps = 2;
-    private Game game;
+    /**
+     * enable other classes in the gui_components package to get the game context directly
+     */
+    Game game;
+    private GuiGame gameFrame;
 
     private JPanel initialPanel;
     private JPanel playerPanel;
     private JTextField initialCash;
     private JTextField initialTicket;
     private JComboBox<String> mapChoose;
+    private JComboBox<Integer> playerNumberBox;
 
     private JComboBox<String> playerHeadChoose[];
 
     private int numberOfPlayers = 2;
 
-    public NewGameFrame(Game game) {
-        this.game = game;
+    public NewGameFrame(GuiGame gameFrame) {
+        this.game = new Game(0);
+        this.gameFrame = gameFrame;
         // set frame default values
         setLayout(null);
         setTitle("New Game");
         setSize(DEFAULT_W, DEFAULT_H);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(true);
 
         // add listeners
         addJFrameListeners();
 
         // create playerHeadChoose
-        playerHeadChoose = new JComboBox[4];
+        playerHeadChoose = new JComboBox[Game.DEFAULT_PLAYERS_UPLIMIT];
         for (int i = 0; i < 4; i++) {
             playerHeadChoose[i] = new JComboBox<>();
             for (int j = 0; j < numberOfHeads; j++)
@@ -106,6 +113,7 @@ public class NewGameFrame extends JFrame {
 
         // add button panel
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
         JButton confirmBtn = new JButton("Confirm");
         confirmBtn.addActionListener(e -> {
             // FIXME: error testing should be created in JTextField listener
@@ -127,15 +135,33 @@ public class NewGameFrame extends JFrame {
              * 0 - Map1; 1 - Map2; and so on
              */
             int mapIndex = mapChoose.getSelectedIndex();
-            int[] playerHeads = new int[numberOfPlayers];
+            PlayerHead.PlayerHeadType[] playerHeads = new PlayerHead.PlayerHeadType[numberOfPlayers];
             for (int i = 0; i < numberOfPlayers; i++)
-                playerHeads[i] = playerHeadChoose[i].getSelectedIndex();
+                playerHeads[i] = PlayerHead.PlayerHeadType.values()[playerHeadChoose[i].getSelectedIndex()];
             NewGameInitializeData data = new NewGameInitializeData(cash, deposit, ticket, mapIndex, numberOfPlayers, playerHeads);
+            game.guiInitialization(data);
+//            System.out.println(data.toTexture());
+            this.dispose();
+            gameFrame.createNewGame(game);
         });
         buttonPanel.add(confirmBtn);
 
         JButton resetBtn = new JButton("Reset");
+        resetBtn.addActionListener(e -> {
+            initialCash.setText("10000");
+            initialTicket.setText("100");
+            mapChoose.setSelectedIndex(0);
+            playerNumberBox.setSelectedIndex(0);
+            for (int i = 0; i < Game.DEFAULT_PLAYERS_UPLIMIT; i++)
+                playerHeadChoose[i].setSelectedIndex(0);
+        });
         buttonPanel.add(resetBtn);
+
+        JButton cancelBtn = new JButton("Cancel");
+        cancelBtn.addActionListener(e -> {
+            this.dispose();
+        });
+        buttonPanel.add(cancelBtn);
         initialPanel.add(buttonPanel);
 
         return initialPanel;
@@ -150,7 +176,7 @@ public class NewGameFrame extends JFrame {
         // add player number panel
         JPanel playerNumberPanel = new JPanel();
         playerNumberPanel.add(new JLabel("#players:"));
-        JComboBox<Integer> playerNumberBox = new JComboBox<>();
+        playerNumberBox = new JComboBox<>();
         playerNumberBox.addItem(2);
         playerNumberBox.addItem(3);
         playerNumberBox.addItem(4);
@@ -200,7 +226,7 @@ public class NewGameFrame extends JFrame {
      * a test function
      */
     public static void main(String[] args) throws IOException {
-        NewGameFrame ngf = new NewGameFrame(new Game(0));
+        NewGameFrame ngf = new NewGameFrame(null);
         ngf.setVisible(true);
     }
 }
