@@ -34,12 +34,23 @@ public class Game {
     private GregorianCalendar calendar;
 
     /**
+     * initialize those attributes that are not dependent on user choices
+     * @param game
+     */
+    private void staticInitialization(Game game) {
+        menu = new Menu();
+        curPlayer = Player.Player_id.Player1;
+        game.stockMarket = new StockMarket();
+        game.calendar = new GregorianCalendar();
+        calendar.setTime(new Date(START_TIME));
+    }
+
+    /**
      * initialize the game information
      * @throws IOException
      */
     public Game() throws IOException {
         map = build_map(0);
-        menu = new Menu();
         players = new ArrayList<Player>();
 
         // prepare the game
@@ -73,12 +84,16 @@ public class Game {
 //        p3.setBankrupt();
         // ..........
 
-        curPlayer = Player.Player_id.Player1;
-        // initialize stock market
-        this.stockMarket = new StockMarket();
-        // initialize round information
-        calendar = new GregorianCalendar();
-        calendar.setTime(new Date(START_TIME));
+        staticInitialization(this);
+    }
+
+    /**
+     * initialize the game with gui
+     * @param gui a parameter to indicate the overload version of gui initialization
+     * @throws IOException
+     */
+    public Game(int gui) throws IOException {
+        staticInitialization(this);
     }
 
     public static void main(String[] args) throws IOException {

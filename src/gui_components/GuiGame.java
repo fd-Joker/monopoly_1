@@ -81,7 +81,7 @@ public class GuiGame extends JFrame {
                 // adjust map panel
                 mapPanel.setBounds(0, 0, getWidth() - INFO_PANEL_W - 10, getHeight() - 70);
                 // adjust player information panel
-                playerInfoPanel.setBounds(0, DEFAULT_GAME_INFO_H + 10, INFO_PANEL_W, getHeight() - DEFAULT_GAME_INFO_H - 70);
+                playerInfoPanel.setBounds(0, DEFAULT_GAME_INFO_H + 10, INFO_PANEL_W, getHeight() - DEFAULT_GAME_INFO_H - 85);
             }
         });
     }
@@ -158,7 +158,7 @@ public class GuiGame extends JFrame {
 
         // player information panel
         playerInfoPanel = new JPanel();
-        playerInfoPanel.setBounds(0, DEFAULT_GAME_INFO_H + 10, INFO_PANEL_W, getHeight() - DEFAULT_GAME_INFO_H - 70);
+        playerInfoPanel.setBounds(0, DEFAULT_GAME_INFO_H + 10, INFO_PANEL_W, getHeight() - DEFAULT_GAME_INFO_H - 85);
         playerInfoPanel.setBorder(new TitledBorder("Player Info"));
         playerInfoPanel.setLayout(new GridLayout(2, 0));
         updatePlayerInfo(playerInfoPanel);
