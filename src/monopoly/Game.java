@@ -1,8 +1,10 @@
 package monopoly;
 
+import gui_components.GuiGame;
 import gui_components.NewGameInitializeData;
 import map_components.*;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -155,7 +157,7 @@ public class Game {
         // print winner information
         Collection<Player.Player_id> winner = game.winner_decider();
         for (Player.Player_id id : winner)
-            printToTerminal("Congratulations! " + id + " has won the game!\n");
+            game.gameOver(null, id);
     }
 
     public void print_player_capital() {
@@ -409,11 +411,24 @@ public class Game {
         return players.stream().filter(item->item.getId() == id).findFirst().orElse(null);
     }
 
-    public void nextPlayer() {
+    /**
+     * GUI version
+     */
+    public void nextPlayer(GuiGame gameFrame) {
+        int prev_player = curPlayer.ordinal();
         int ndx = (curPlayer.ordinal() + 1) % total_players;
+        Player.Player_id[] ids = Player.Player_id.values();
+        while (fetchPlayer(ids[ndx]).isBankrupted())
+            ndx = (ndx + 1) % total_players;
+        if (ndx == prev_player)
+            gameOver(gameFrame, ids[ndx]);
         if (ndx == 0)
             tomorrow();
         curPlayer = Player.Player_id.values()[ndx];
+    }
+
+    public void gameOver(GuiGame gameFrame, Player.Player_id winner) {
+        JOptionPane.showMessageDialog(gameFrame, "Congratulations! Winner is " + winner);
     }
 
     public StockMarket getStockMarket() {

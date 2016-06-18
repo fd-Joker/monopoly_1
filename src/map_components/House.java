@@ -140,9 +140,83 @@ public class House extends Spot {
         return null;
     }
 
+    private static final int CONTROL_OWNED =               0b00001;
+    private static final int CONTROL_ISMINE =              0b00010;
+    private static final int CONTROL_CASHENOUGH =          0b00100;
+    private static final int CONTROL_LEVELNOTFULL =        0b01000;
+
+    private int getControl(Game game) {
+        int control = 0;
+        switch (this.estate.getState()) {
+            case owned:
+                control += CONTROL_OWNED;
+                if (this.estate.getOwner() == game.getCurPlayer()) {
+                    control += CONTROL_ISMINE;
+                    Player cur_player = game.fetchPlayer(game.getCurPlayer());
+                    if (cur_player.getCapital().getCash() >= this.estate.update_cost()) {
+                        control += CONTROL_CASHENOUGH;
+                        if (this.estate.getLevel() < Estate.LEVEL_UP_LIMIT)
+                            control += CONTROL_LEVELNOTFULL;
+                    }
+                }
+                break;
+            case unowned:
+                if (this.estate.price() <= game.fetchPlayer(game.getCurPlayer()).getCapital().getCash())
+                    control += CONTROL_CASHENOUGH;
+                break;
+        }
+        return control;
+    }
+
     @Override
     public String enter_gui(GuiGame gameFrame) {
-        JOptionPane.showMessageDialog(gameFrame, "Enter House!");
+        int result;
+        Game game = gameFrame.game;
+        Player p = game.fetchPlayer(game.getCurPlayer());
+        int control = getControl(game);
+        System.out.println(control);
+        switch (control) {
+            case 0: // no owner but cash not enough to buy
+                JOptionPane.showMessageDialog(gameFrame, "House Price: " + this.estate.price() +
+                        "\nYour cash is not enough to buy");
+                break;
+            case CONTROL_OWNED: // has owner but not me
+                Player creditor = game.fetchPlayer(this.estate.getOwner());
+                String r = p.getCapital().payToll(creditor, estate.toll());
+                JOptionPane.showMessageDialog(gameFrame, (p.isBankrupted() ? "You can`t afford the toll." : "You have paid: " + estate.toll()) +
+                        (r == null ? "" : r) +
+                        "\nYour cash now is: " + p.getCapital().getCash() +
+                        "\nYour deposit now is: " + p.getCapital().getDeposit() +
+                        "\n" + estate.getOwner() + "`s cash now is:" + game.fetchPlayer(estate.getOwner()).getCapital().getCash() + "\n");
+                break;
+            case CONTROL_OWNED + CONTROL_ISMINE: // has owner and is me but cash not enough to update
+                JOptionPane.showMessageDialog(gameFrame, "Update cost is: " + this.estate.update_cost() +
+                        "\nYour cash is: " + p.getCapital().getCash() +
+                        "\nSorry, your cash is not enough.\n");
+                break;
+            case CONTROL_OWNED + CONTROL_ISMINE + CONTROL_CASHENOUGH: // has owner and is me and cash enough but top level
+                JOptionPane.showMessageDialog(gameFrame, "House is already top level.");
+                break;
+            case CONTROL_OWNED + CONTROL_ISMINE + CONTROL_CASHENOUGH + CONTROL_LEVELNOTFULL: // has owner and is me and cash enough not top level
+                result = JOptionPane.showConfirmDialog(gameFrame, "Update cost is: " + this.estate.update_cost() +
+                        "\nAfter update, the remained cash is: " +
+                        (p.getCapital().getCash()-this.estate.update_cost()) +
+                        "\nWould you like to update?");
+                if (result == 0) {
+                    p.getCapital().updateHouse(estate);
+                    JOptionPane.showMessageDialog(gameFrame, "House updated! Current level: " + estate.getLevel());
+                }
+                break;
+            case CONTROL_CASHENOUGH: // no owner cash is enough to buy
+                // 0 - yes; 1 - no; 2 - cancel
+                result = JOptionPane.showConfirmDialog(gameFrame, "House Price: " + this.estate.price() +
+                        "Would you like to buy");
+                if (result == 0) {
+                    p.getCapital().buyHouse(estate);
+                    JOptionPane.showMessageDialog(gameFrame, "House bought successfully");
+                }
+                break;
+        }
         return null;
     }
 

@@ -199,7 +199,7 @@ public class GuiGame extends JFrame {
         this.setSize(getWidth()-1, getHeight()-1);
     }
 
-    private void updateGameInfo() {
+    public void updateGameInfo() {
         Date date = game.getCurrentDate();
         String s = DateFormat.getDateInstance(DateFormat.FULL).format(date);
         JLabel label = new JLabel(s);
@@ -207,7 +207,7 @@ public class GuiGame extends JFrame {
         gameInfoPanel.add(label);
     }
 
-    private void updatePlayerInfo() {
+    public void updatePlayerInfo() {
         Player cur_player = game.fetchPlayer(game.getCurPlayer());
 
         playerInfoPanel.removeAll();
@@ -256,7 +256,7 @@ public class GuiGame extends JFrame {
     public void executePlayerWalk() {
         Player p = game.fetchPlayer(game.getCurPlayer());
         p.walk_gui(this);
-        game.nextPlayer();
+        game.nextPlayer(this);
         updateMapContent();
         updatePlayerInfo();
         updateGameInfo();

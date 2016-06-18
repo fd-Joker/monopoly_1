@@ -24,7 +24,7 @@ public class Bank extends Spot {
         QUIT
     }
 
-    public Object lock = new Object();
+    public final Object lock = new Object();
 
     public Bank(Cell cell, String name) {
         super(cell);

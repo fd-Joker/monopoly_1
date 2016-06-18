@@ -112,6 +112,12 @@ public class Capital {
         this.ticket += amount;
     }
 
+    /**
+     * old TUI interface
+     * not used in GUI version
+     * @param money
+     * @return
+     */
     public boolean saveMoney(double money) {
         if (money > 0 && money <= this.cash) {
             this.cash -= money;
@@ -121,6 +127,12 @@ public class Capital {
         return false;
     }
 
+    /**
+     * old TUI interface
+     * not used in GUI version
+     * @param money
+     * @return
+     */
     public boolean withdrawMoney(double money) {
         if (money > 0 && money <= this.deposit) {
             this.cash += money;
@@ -130,8 +142,21 @@ public class Capital {
         return false;
     }
 
+    /**
+     * old TUI interface
+     * not used in GUI version
+     * @param money
+     */
     public void addCash(double money) {
         cash += money;
+    }
+
+    public void setCash(double money) {
+        cash = money;
+    }
+
+    public void setDeposit(double money) {
+        deposit = money;
     }
 
     /**

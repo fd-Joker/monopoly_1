@@ -56,13 +56,6 @@ public class Empty extends Spot {
     }
 
     @Override
-    public boolean pass_gui(GuiGame gameFrame) {
-        boolean isContinue = super.pass_gui(gameFrame);
-        gameFrame.game.fetchPlayer(gameFrame.game.getCurPlayer()).notifyAll();
-        return isContinue;
-    }
-
-    @Override
     public String enter_gui(GuiGame gameFrame) {
         return null;
     }

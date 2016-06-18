@@ -6,7 +6,7 @@ import map_components.House;
  * Created by Joker on 4/23/16.
  */
 public class Estate {
-    private static final int LEVEL_UP_LIMIT = 6;
+    public static final int LEVEL_UP_LIMIT = 6;
     public enum EstateState {
         unowned, owned
     }
