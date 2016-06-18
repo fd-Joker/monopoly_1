@@ -17,8 +17,8 @@ import java.io.IOException;
  * they just remain what they were.
  */
 public class Lottery extends Spot {
-    private static final int PRICE_OF_A_NUMBER = 1000;
-    private static final int NUMBER_RANGE = 20;
+    public static final int PRICE_OF_A_NUMBER = 1000;
+    public static final int NUMBER_RANGE = 20;
     private static int total_reward_amount;
     private static boolean[] number_availability;
     private static Player.Player_id[] number_owner;
@@ -90,10 +90,7 @@ public class Lottery extends Spot {
             number = Game.parsePosInt(Game.getInstruction());
         } while (number < 0 || number >= NUMBER_RANGE || !number_availability[number]);
         // buy the number
-        player.getCapital().addCash(-PRICE_OF_A_NUMBER);
-        total_reward_amount += PRICE_OF_A_NUMBER;
-        number_availability[number] = false;
-        number_owner[number] = player.getId();
+        buyLottery(game, number);
         // print hint
         Game.printToTerminal("Your cash is: " + player.getCapital().getCash() + "\n");
         Game.getInstruction();
@@ -131,5 +128,17 @@ public class Lottery extends Spot {
                 reset();
             }
         }
+    }
+
+    public boolean isAvailable(int number) {
+        return !(number < 0 || number >= NUMBER_RANGE) && number_availability[number];
+    }
+
+    public void buyLottery(Game game, int number) {
+        Player player = game.fetchPlayer(game.getCurPlayer());
+        player.getCapital().addCash(-PRICE_OF_A_NUMBER);
+        total_reward_amount += PRICE_OF_A_NUMBER;
+        number_availability[number] = false;
+        number_owner[number] = player.getId();
     }
 }

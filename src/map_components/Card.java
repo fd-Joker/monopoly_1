@@ -68,7 +68,13 @@ public class Card extends Spot {
 
     @Override
     public String enter_gui(GuiGame gameFrame) {
-
+        Game game = gameFrame.game;
+        CardType[] all_card = CardType.values();
+        int index = (int) (Math.random()*all_card.length);
+        Player player = game.fetchPlayer(game.getCurPlayer());
+        player.buyCard(all_card[index], 0);
+        JOptionPane.showMessageDialog(gameFrame, "Welcome to Card Gift.\nYou will get a " +
+                    all_card[index] + "\n");
         return null;
     }
 }
