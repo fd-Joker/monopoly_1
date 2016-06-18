@@ -10,6 +10,11 @@ import java.io.IOException;
 
 /**
  * Created by Joker on 4/22/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class Bank extends Spot {
     public enum BankEventState {
@@ -36,6 +41,9 @@ public class Bank extends Spot {
         return r;
     }
 
+    /**
+     * this is the block panel to be shown on the map
+     */
     class BankPanel extends JPanel {
         // FIXME：if file not found there is no error message
         ImageIcon bg = new ImageIcon("./images/bank.jpg");
@@ -120,6 +128,26 @@ public class Bank extends Spot {
 
     @Override
     public String enter(Game game) {
+        return null;
+    }
+
+    @Override
+    public boolean pass_gui(GuiGame gameFrame) {
+        boolean isContinue = super.pass_gui(gameFrame);
+        pass_gui_lock = true;
+        JFrame panel = new gui_components.BankPanel(gameFrame, this);
+        panel.setVisible(true);
+        // FIXME: can not pass compilation
+//        try {
+//            wait();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        return isContinue;
+    }
+
+    @Override
+    public String enter_gui(GuiGame gameFrame) {
         return null;
     }
 }

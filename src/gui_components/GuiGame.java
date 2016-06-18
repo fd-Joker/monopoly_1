@@ -16,12 +16,13 @@ import java.util.Date;
 
 /**
  * Created by Joker on 6/16/16.
+ *
  */
 public class GuiGame extends JFrame {
     /**
      * the current game context
      */
-    private Game game;
+    public Game game;
     /**
      * the default width and height of GuiGame frame
      */
@@ -36,6 +37,7 @@ public class GuiGame extends JFrame {
      * components that may be used by other modules
      */
     JLabel statusLabel;
+    Container body;
     Container infoPanel;
     Container mapPanel;
     JPanel gameInfoPanel;
@@ -66,7 +68,7 @@ public class GuiGame extends JFrame {
         add(toolBar, BorderLayout.SOUTH);
 
         // main body
-        Container body = createBody();
+        body = createBody();
         add(body, BorderLayout.CENTER);
     }
 
@@ -91,6 +93,7 @@ public class GuiGame extends JFrame {
         {
             JMenuItem fileNew = new JMenuItem("New Game");
             fileNew.addActionListener(e -> {
+                resetGamePanel();
                 NewGameFrame ngf = new NewGameFrame(this);
                 ngf.setVisible(true);
             });
@@ -125,6 +128,12 @@ public class GuiGame extends JFrame {
         statusLabel = new JLabel("empty status");
         toolBar.add(statusLabel);
         return toolBar;
+    }
+
+    private void resetGamePanel() {
+        this.remove(body);
+        body = createBody();
+        this.add(body, BorderLayout.CENTER);
     }
 
     private Container createBody() {
@@ -181,7 +190,14 @@ public class GuiGame extends JFrame {
     }
 
     // FIXME: create a function to update map content
-    private void updateMapContent() {}
+    public void updateMapContent() {
+        mapPanel.removeAll();
+        initializeMapContent(mapPanel);
+
+        // FIXME: how to update GUI?
+        this.setSize(getWidth()+1, getHeight()+1);
+        this.setSize(getWidth()-1, getHeight()-1);
+    }
 
     private void updateGameInfo(JPanel gameInfoPanel) {
         Date date = game.getCurrentDate();
@@ -207,7 +223,7 @@ public class GuiGame extends JFrame {
 
         // update dice panel
         JPanel dicePanel = new JPanel();
-        JButton diceBtn = new DiceComponent(DiceComponent.DiceNumber.dice1);
+        JButton diceBtn = new DiceComponent(this, DiceComponent.DiceNumber.dice1);
         diceBtn.setBorder(null);
         dicePanel.add(diceBtn);
         playerInfoPanel.add(dicePanel);
@@ -232,6 +248,13 @@ public class GuiGame extends JFrame {
         // FIXME: how to refresh JFrame?
         this.setSize(DEFAULT_W+1, DEFAULT_H+1);
         this.setSize(DEFAULT_W, DEFAULT_H);
+    }
+
+    public void executePlayerWalk() throws InterruptedException {
+        Player p = game.fetchPlayer(game.getCurPlayer());
+        p.walk_gui(this);
+        updateMapContent();
+        game.nextPlayer();
     }
 
     /**

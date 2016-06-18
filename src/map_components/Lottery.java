@@ -10,6 +10,11 @@ import java.io.IOException;
 
 /**
  * Created by Joker on 4/22/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class Lottery extends Spot {
     private static final int PRICE_OF_A_NUMBER = 1000;
@@ -17,6 +22,12 @@ public class Lottery extends Spot {
     private static int total_reward_amount;
     private static boolean[] number_availability;
     private static Player.Player_id[] number_owner;
+
+    /**
+     * GUI version
+     * corresponding panel
+     */
+    JFrame panel;
 
     public Lottery(Cell cell, String name) {
         super(cell);
@@ -36,6 +47,9 @@ public class Lottery extends Spot {
         return r;
     }
 
+    /**
+     * this is the block panel to be shown on the map
+     */
     class LotteryPanel extends JPanel {
         ImageIcon bg = new ImageIcon("./images/lottery.jpg");
         @Override
@@ -48,12 +62,6 @@ public class Lottery extends Spot {
     @Override
     public JPanel createGui() {
         return new LotteryPanel();
-    }
-
-    @Override
-    public boolean pass(Game game) throws IOException {
-        boolean isContinue = super.pass(game);
-        return isContinue;
     }
 
     @Override
@@ -89,6 +97,11 @@ public class Lottery extends Spot {
         // print hint
         Game.printToTerminal("Your cash is: " + player.getCapital().getCash() + "\n");
         Game.getInstruction();
+        return null;
+    }
+
+    @Override
+    public String enter_gui(GuiGame gameFrame) {
         return null;
     }
 

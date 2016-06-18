@@ -1,6 +1,7 @@
 package monopoly;
 
 import card_items.CardType;
+import gui_components.GuiGame;
 import map_components.Cell;
 import map_components.Thing;
 
@@ -76,6 +77,22 @@ public class Player extends Thing {
         this.cell.getSpot().enter(game);
     }
 
+    public void walk_gui(GuiGame gameFrame) throws InterruptedException {
+        int steps = dice.getCur_number();
+        boolean c = true;
+        while (steps > 0 && c) {
+            steps--;
+            this.cell.removeThing(this);
+            this.cell = this.cell.getCellAt(direction);
+            this.cell.addThing(this);
+            gameFrame.updateMapContent();
+            c = this.cell.getSpot().pass_gui(gameFrame);
+        }
+        if (!c)
+            JOptionPane.showMessageDialog(gameFrame, "Oops! You have run into a barricade.");
+        this.cell.getSpot().enter_gui(gameFrame);
+    }
+
     /**
      * return the value of player in texture
      * @return
@@ -147,6 +164,10 @@ public class Player extends Thing {
 
     public ImageIcon getHead() {
         return head.getHeadImage();
+    }
+
+    public ImageIcon getHeadSmall() {
+        return head.getHeadSmallImage();
     }
 
     public void buyCard(CardType item, int cost) {

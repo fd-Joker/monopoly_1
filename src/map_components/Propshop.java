@@ -12,8 +12,18 @@ import java.io.IOException;
 
 /**
  * Created by Joker on 4/22/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class Propshop extends Spot {
+    /**
+     * GUI version
+     * corresponding panel
+     */
+    JFrame panel;
 
     public Propshop(Cell cell, String name) {
         super(cell);
@@ -32,6 +42,9 @@ public class Propshop extends Spot {
         return r;
     }
 
+    /**
+     * this is the block panel to be shown on the map
+     */
     class PropshopPanel extends JPanel {
         ImageIcon bg = new ImageIcon("./images/propshop.jpg");
         @Override
@@ -44,12 +57,6 @@ public class Propshop extends Spot {
     @Override
     public JPanel createGui() {
         return new PropshopPanel();
-    }
-
-    @Override
-    public boolean pass(Game game) throws IOException {
-        boolean isContinue = super.pass(game);
-        return isContinue;
     }
 
     @Override
@@ -88,6 +95,11 @@ public class Propshop extends Spot {
             while (index < 0 || index >= all.length || !exist[index] || player.getCapital().getTicket() < price[index]);
             player.buyCard(all[index], price[index]);
         } while (true);
+        return null;
+    }
+
+    @Override
+    public String enter_gui(GuiGame gameFrame) {
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package map_components;
 
+import gui_components.GuiGame;
 import monopoly.Game;
 
 import java.io.IOException;
@@ -16,4 +17,7 @@ public interface Triggerable {
      */
     boolean pass(Game game) throws IOException;
     String enter(Game game) throws IOException;
+
+    boolean pass_gui(GuiGame gameFrame);
+    String enter_gui(GuiGame gameFrame);
 }

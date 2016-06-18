@@ -5,10 +5,14 @@ import monopoly.Game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * Created by Joker on 4/22/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class Empty extends Spot {
 
@@ -29,6 +33,9 @@ public class Empty extends Spot {
         return r;
     }
 
+    /**
+     * this is the block panel to be shown on the map
+     */
     class EmptyPanel extends JPanel {
         ImageIcon bg = new ImageIcon("./images/empty.jpg");
         @Override
@@ -44,13 +51,12 @@ public class Empty extends Spot {
     }
 
     @Override
-    public boolean pass(Game game) throws IOException {
-        boolean isContinue = super.pass(game);
-        return isContinue;
+    public String enter(Game game) {
+        return null;
     }
 
     @Override
-    public String enter(Game game) {
+    public String enter_gui(GuiGame gameFrame) {
         return null;
     }
 }

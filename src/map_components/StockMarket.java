@@ -1,5 +1,6 @@
 package map_components;
 
+import gui_components.GuiGame;
 import monopoly.Game;
 import monopoly.Player;
 import monopoly.Stock;
@@ -11,10 +12,21 @@ import java.util.Collection;
 
 /**
  * Created by Joker on 4/28/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class StockMarket extends Spot {
     private static final double INITIAL_MIN_PRICE = 20;
     private static final double INITIAL_PRICE_RANGE = 100;
+
+    /**
+     * GUI version
+     * corresponding panel
+     */
+    JFrame panel;
 
     /**
      * this spot is not shown on the map, so the return value is null
@@ -152,6 +164,11 @@ public class StockMarket extends Spot {
             } else // type x
                 return null;
         } while (true);
+    }
+
+    @Override
+    public String enter_gui(GuiGame gameFrame) {
+        return null;
     }
 
     public int countMaxBuy(Player player, StockType type) {

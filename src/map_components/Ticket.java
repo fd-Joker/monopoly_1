@@ -6,10 +6,14 @@ import monopoly.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * Created by Joker on 4/22/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class Ticket extends Spot {
     private static final int TICKET_RANGE = 100;
@@ -31,6 +35,9 @@ public class Ticket extends Spot {
         return r;
     }
 
+    /**
+     * this is the block panel to be shown on the map
+     */
     class TicketPanel extends JPanel {
         ImageIcon bg = new ImageIcon("./images/ticket.jpg");
         @Override
@@ -46,17 +53,16 @@ public class Ticket extends Spot {
     }
 
     @Override
-    public boolean pass(Game game) throws IOException {
-        boolean isContinue = super.pass(game);
-        return isContinue;
-    }
-
-    @Override
     public String enter(Game game) {
         Player p = game.fetchPlayer(game.getCurPlayer());
         int amount = (int) (Math.random()*TICKET_RANGE);
         Game.printToTerminal(p.getId() + " get " + amount + " tickets.\n");
         p.getCapital().receiveTicket(amount);
+        return null;
+    }
+
+    @Override
+    public String enter_gui(GuiGame gameFrame) {
         return null;
     }
 }

@@ -55,6 +55,7 @@ public class Game {
             e.printStackTrace();
         }
         Player.Player_id[] id_values = Player.Player_id.values();
+        total_players = data.numberOfPlayers;
         for (int i = 0; i < data.numberOfPlayers; i++) {
             Player.Player_id id = id_values[i];
             Cell curCell = map.getCell(0, 0);
@@ -142,11 +143,10 @@ public class Game {
             }
             // remove bankrupted players
             Collection<Player> r_list = new ArrayList<>();
-            for (Player player : game.players)
-                if (player.isBankrupted()) {
-                    printToTerminal(player.getId() + " sorry, you have bankrupted.\n");
-                    r_list.add(player);
-                }
+            game.players.stream().filter(player -> player.isBankrupted()).forEach(player -> {
+                printToTerminal(player.getId() + " sorry, you have bankrupted.\n");
+                r_list.add(player);
+            });
             game.players.removeAll(r_list);
             // switch to tomorrow
             game.tomorrow();
@@ -407,6 +407,11 @@ public class Game {
 
     public Player fetchPlayer(Player.Player_id id) {
         return players.stream().filter(item->item.getId() == id).findFirst().orElse(null);
+    }
+
+    public void nextPlayer() {
+        int ndx = (curPlayer.ordinal() + 1) % total_players;
+        curPlayer = Player.Player_id.values()[ndx];
     }
 
     public StockMarket getStockMarket() {

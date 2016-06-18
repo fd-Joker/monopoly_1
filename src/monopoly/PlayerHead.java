@@ -12,11 +12,15 @@ public class PlayerHead {
 
     public static final int totalNumberOfHeads = 4;
     public static final ImageIcon[] playerHeadList;
+    public static final ImageIcon[] playerHeadListSmall;
 
     static {
         playerHeadList = new ImageIcon[totalNumberOfHeads];
         for (int i = 0; i < totalNumberOfHeads; i++)
             playerHeadList[i] = new ImageIcon("./images/head" + (i+1) + "_normal.jpg");
+        playerHeadListSmall = new ImageIcon[totalNumberOfHeads];
+        for (int i = 0; i < totalNumberOfHeads; i++)
+            playerHeadListSmall[i] = new ImageIcon("./images/head" + (i+1) + "_small.jpg");
     }
 
     private PlayerHeadType headIndex;
@@ -27,5 +31,9 @@ public class PlayerHead {
 
     public ImageIcon getHeadImage() {
         return playerHeadList[headIndex.ordinal()];
+    }
+
+    public ImageIcon getHeadSmallImage() {
+        return playerHeadListSmall[headIndex.ordinal()];
     }
 }

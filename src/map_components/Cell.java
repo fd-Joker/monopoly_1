@@ -130,6 +130,14 @@ public class Cell {
         // FIXME: x and y are twisted in gui
         block.setBounds(y*GuiGame.DEFAULT_BLOCK, x*GuiGame.DEFAULT_BLOCK, GuiGame.DEFAULT_BLOCK, GuiGame.DEFAULT_BLOCK);
 
+        things.stream().filter(item->item instanceof Player).forEach(item->{
+            JLabel holder = new JLabel(((Player) item).getHeadSmall());
+            int player_index = ((Player) item).getId().ordinal();
+            int x = (player_index / 2) * 20;
+            int y = (player_index % 2) * 20;
+            holder.setBounds(x, y, 20, 20);
+            block.add(holder);
+        });
         return block;
     }
 

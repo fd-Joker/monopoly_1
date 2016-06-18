@@ -7,11 +7,15 @@ import monopoly.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Created by Joker on 4/22/16.
+ *
+ * This class is originally developed to implement TUI game. However,
+ * in the GUI version the old codes can not be reused.
+ * In order not to destroy the TUI version, currently the TUI code is not reconfigured and
+ * they just remain what they were.
  */
 public class News extends Spot {
     private static final int NUMBER_NEWS_TYPE = 5;
@@ -33,6 +37,9 @@ public class News extends Spot {
         return r;
     }
 
+    /**
+     * this is the block panel to be shown on the map
+     */
     class NewsPanel extends JPanel {
         ImageIcon bg = new ImageIcon("./images/news.jpg");
         @Override
@@ -45,12 +52,6 @@ public class News extends Spot {
     @Override
     public JPanel createGui() {
         return new NewsPanel();
-    }
-
-    @Override
-    public boolean pass(Game game) throws IOException {
-        boolean isContinue = super.pass(game);
-        return isContinue;
     }
 
     @Override
@@ -106,6 +107,11 @@ public class News extends Spot {
                 break;
 
         }
+        return null;
+    }
+
+    @Override
+    public String enter_gui(GuiGame gameFrame) {
         return null;
     }
 }

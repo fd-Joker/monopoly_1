@@ -1,5 +1,7 @@
 package gui_components;
 
+import monopoly.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,9 +25,26 @@ public class DiceComponent extends JButton {
     }
 
     private DiceNumber number;
+    private GuiGame gameFrame;
 
-    public DiceComponent(DiceNumber number) {
+    public DiceComponent(GuiGame gameFrame, DiceNumber number) {
         super(diceNumberImage[number.ordinal()]);
         this.number = number;
+        this.gameFrame = gameFrame;
+        addActionListener(e -> {
+            Game game = gameFrame.game;
+            int dice = game.fetchPlayer(game.getCurPlayer()).throw_dice();
+            if (dice == 0)
+                JOptionPane.showMessageDialog(this, "You should stay where you are in this round.");
+            else {
+                System.out.println("dice: " + dice);
+                this.setIcon(diceNumberImage[dice-1]);
+            }
+            try {
+                gameFrame.executePlayerWalk();
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 }
