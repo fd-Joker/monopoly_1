@@ -265,6 +265,26 @@ public class Game {
     }
 
     /**
+     * gui version of tomorrow
+     */
+    private void tomorrow_gui(GuiGame gameFrame) {
+        //FIXME: debugging
+        int day_passed = 1;
+        for (int i = 0; i < day_passed; i++)
+            stockMarket.openMarket();
+        calendar.add(Calendar.DAY_OF_MONTH, day_passed);
+        lasting_days -= day_passed;
+        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
+            Lottery.lottery_gui(gameFrame);
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
+            getDividend_gui(gameFrame);
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+    }
+
+    /**
      * print date information and current player information
      */
     private void print_basic_info() {
@@ -423,7 +443,7 @@ public class Game {
         if (ndx == prev_player)
             gameOver(gameFrame, ids[ndx]);
         if (ndx == 0)
-            tomorrow();
+            tomorrow_gui(gameFrame);
         curPlayer = Player.Player_id.values()[ndx];
     }
 
@@ -443,6 +463,21 @@ public class Game {
                 continue;
             double dividend = p.getCapital().getDeposit() / 10;
             printToTerminal(p.getId() + " get " + dividend + "\n");
+            p.getCapital().addCash(dividend);
+            p.getCapital().saveMoney(dividend);
+        }
+    }
+
+    /**
+     * gui version
+     */
+    public void getDividend_gui(GuiGame gameFrame) {
+        for (Player.Player_id id : Player.Player_id.values()) {
+            Player p = fetchPlayer(id);
+            if (p == null)
+                continue;
+            double dividend = p.getCapital().getDeposit() / 10;
+            JOptionPane.showMessageDialog(gameFrame, "Bank Release Dividend at the end of month.\n" + p.getId() + " get " + dividend + "\n");
             p.getCapital().addCash(dividend);
             p.getCapital().saveMoney(dividend);
         }

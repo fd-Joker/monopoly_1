@@ -20,10 +20,14 @@ import java.io.IOException;
  */
 public class Propshop extends Spot {
     /**
-     * GUI version
-     * corresponding panel
+     * this array is used by the item initialize function to randomly assign items
      */
-    JFrame panel;
+    private boolean[] exist;
+    /**
+     * this array is used by the item initialize function ot randomly assign prices
+     */
+    private int[] price;
+    private int totalNumberOfItemToSell;
 
     public Propshop(Cell cell, String name) {
         super(cell);
@@ -63,15 +67,9 @@ public class Propshop extends Spot {
     public String enter(Game game) throws IOException {
         Player player = game.fetchPlayer(game.getCurPlayer());
         Game.printToTerminal("Welcome to Prop Shop.\n");
+        // initialize Shop
+        initializeShop();
         CardType[] all = CardType.values();
-        // initialize exist
-        boolean[] exist = new boolean[all.length];
-        for (int i = 0; i < exist.length; i++)
-            exist[i] = ((int) (Math.random()*2)) == 1;
-        // initialize price
-        int[] price = new int[all.length];
-        for (int i = 0; i < price.length; i++)
-            price[i] = CardItem.getPrice();
         String instruction;
         out:
         do {
@@ -98,8 +96,46 @@ public class Propshop extends Spot {
         return null;
     }
 
+    // FIXME: debug...
+    @Override
+    public boolean pass_gui(GuiGame gameFrame) {
+        boolean b = super.pass_gui(gameFrame);
+        enter_gui(gameFrame);
+        return b;
+    }
+
     @Override
     public String enter_gui(GuiGame gameFrame) {
+        gui_components.PropshopPanel panel = new gui_components.PropshopPanel(gameFrame, this);
+        panel.setVisible(true);
         return null;
+    }
+
+    public void initializeShop() {
+        CardType[] all = CardType.values();
+        totalNumberOfItemToSell = 0;
+        // initialize exist
+        exist = new boolean[all.length];
+        for (int i = 0; i < exist.length; i++) {
+            exist[i] = ((int) (Math.random() * 2)) == 1;
+            if (exist[i])
+                totalNumberOfItemToSell++;
+        }
+        // initialize price
+        price = new int[all.length];
+        for (int i = 0; i < price.length; i++)
+            price[i] = CardItem.getPrice();
+    }
+
+    public boolean isExist(CardType type) {
+        return exist[type.ordinal()];
+    }
+
+    public int getPrice(CardType type) {
+        return price[type.ordinal()];
+    }
+
+    public int getTotalNumberOfItemToSell() {
+        return totalNumberOfItemToSell;
     }
 }

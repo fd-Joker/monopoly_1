@@ -97,8 +97,23 @@ public class Lottery extends Spot {
         return null;
     }
 
+    // FIXME: debug...
+    @Override
+    public boolean pass_gui(GuiGame gameFrame) {
+        boolean b = super.pass_gui(gameFrame);
+        enter_gui(gameFrame);
+        return b;
+    }
+
     @Override
     public String enter_gui(GuiGame gameFrame) {
+        Player p = gameFrame.game.fetchPlayer(gameFrame.game.getCurPlayer());
+        if (p.getCapital().getCash() < PRICE_OF_A_NUMBER)
+            JOptionPane.showMessageDialog(gameFrame, "Your cash is not enough to buy a number!");
+        else {
+            gui_components.LotteryPanel panel = new gui_components.LotteryPanel(gameFrame, this);
+            panel.setVisible(true);
+        }
         return null;
     }
 
@@ -125,6 +140,26 @@ public class Lottery extends Spot {
             if (winner != null) {
                 winner.getCapital().addCash(total_reward_amount);
                 Game.printToTerminal("Congratulations! " + number_owner[magic_number] + " wins the reward " + total_reward_amount + "\n");
+                reset();
+            }
+        }
+    }
+
+    public static void lottery_gui(GuiGame gameFrame) {
+        //FIXME: debugging
+        int magic_number = (int) (Math.random()*NUMBER_RANGE);
+
+        // no one buy the lottery, just skip
+        if (total_reward_amount == 0)
+            return;
+
+        if (number_availability[magic_number]) {
+            JOptionPane.showMessageDialog(gameFrame, "No one win the reward this month.\n");
+        } else {
+            Player winner = gameFrame.game.fetchPlayer(number_owner[magic_number]);
+            if (winner != null) {
+                winner.getCapital().addCash(total_reward_amount);
+                JOptionPane.showMessageDialog(gameFrame, "Congratulations! " + number_owner[magic_number] + " wins the reward " + total_reward_amount + "\n");
                 reset();
             }
         }

@@ -129,8 +129,14 @@ public class BankPanel extends JFrame {
         Player cur_player = parent.game.fetchPlayer(parent.game.getCurPlayer());
         JButton confirmBtn = new JButton("Confirm");
         confirmBtn.addActionListener(e -> {
-            double new_cash = Double.parseDouble(cashField.getText());
-            double new_deposit = Double.parseDouble(depositField.getText());
+            double new_cash = 0;
+            try {
+                new_cash = Double.parseDouble(cashField.getText());
+            } catch (NumberFormatException exception) {
+                exception.printStackTrace();
+                new_cash = 0;
+            }
+            double new_deposit = slider.getMaximum() / 100.0 - new_cash;
             cur_player.getCapital().setCash(new_cash);
             cur_player.getCapital().setDeposit(new_deposit);
             parent.updatePlayerInfo();
@@ -142,6 +148,7 @@ public class BankPanel extends JFrame {
         buttonPanel.add(resetBtn);
 
         JButton cancelBtn = new JButton("Cancel");
+        cancelBtn.addActionListener(e -> this.dispose());
         buttonPanel.add(cancelBtn);
         return buttonPanel;
     }

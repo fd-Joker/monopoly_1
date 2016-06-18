@@ -4,8 +4,6 @@ import map_components.Lottery;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Joker on 6/18/16.
@@ -48,6 +46,7 @@ public class LotteryPanel extends JFrame {
         yourChoice = new JTextField();
         yourChoice.setEditable(false);
         headPanel.add(new JLabel("Your choice: "));
+        headPanel.add(yourChoice);
         return headPanel;
     }
 
@@ -59,11 +58,11 @@ public class LotteryPanel extends JFrame {
             JButton numberBtn = new JButton(i+"");
             if (lottery == null || !lottery.isAvailable(i))
                 numberBtn.setEnabled(false);
-            numberBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    yourChoice.setText(numberBtn.getText());
-                }
+            numberBtn.addActionListener(e -> {
+                yourChoice.setText(numberBtn.getText());
+                // FIXME: how to refresh JFrame?
+                this.setSize(getWidth() + 1, getHeight() + 1);
+                this.setSize(getWidth() - 1, getHeight() - 1);
             });
             numberSlot.add(numberBtn);
             numberPanel.add(numberSlot);

@@ -112,6 +112,61 @@ public class News extends Spot {
 
     @Override
     public String enter_gui(GuiGame gameFrame) {
+        int what_news = (int) (Math.random()*NUMBER_NEWS_TYPE);
+        doNews(gameFrame, what_news);
         return null;
+    }
+
+    private void doNews(GuiGame gameFrame, int what_news) {
+        Game game = gameFrame.game;
+        Collection<Player> p_list;
+        int reward;
+        switch (what_news) {
+            case 0:
+                p_list = game.getHouseMost();
+                for (Player p : p_list) {
+                    reward = (int) (Math.random() * 50 + 50) * 100;
+                    JOptionPane.showMessageDialog(gameFrame, "公开表扬第一地主" + p.getId() + "奖励" + reward + "\n");
+                    p.getCapital().addCash(reward);
+                }
+                break;
+            case 1:
+                p_list = game.getHouseLeast();
+                for (Player p : p_list) {
+                    reward = (int) (Math.random() * 50 + 50) * 100;
+                    JOptionPane.showMessageDialog(gameFrame, "公开补助土地最少者" + p.getId() + ", " + reward + "\n");
+                    p.getCapital().addCash(reward);
+                }
+                break;
+            case 2:
+                Game.printToTerminal("银行加发储金红利每个人得到存款10%\n");
+                game.getDividend();
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(gameFrame, "所有人缴纳财产税10%\n");
+                for (Player.Player_id id : Player.Player_id.values()) {
+                    Player p = game.fetchPlayer(id);
+                    if (p == null)
+                        continue;
+                    double dividend = p.getCapital().getDeposit() / 10;
+                    JOptionPane.showMessageDialog(gameFrame, p.getId() + " loses " + dividend + "\n");
+                    p.getCapital().withdrawMoney(dividend);
+                    p.getCapital().addCash(-dividend);
+                }
+                break;
+            case 4:
+                JOptionPane.showMessageDialog(gameFrame, "每个人得到一张卡片\n");
+                for (Player.Player_id id : Player.Player_id.values()) {
+                    Player p = game.fetchPlayer(id);
+                    if (p == null)
+                        continue;
+                    CardType[] all = CardType.values();
+                    int get = (int) (Math.random()*all.length);
+                    p.buyCard(all[get], 0);
+                    JOptionPane.showMessageDialog(gameFrame, p.getId() + " has got " + all[get] + "\n");
+                }
+                break;
+
+        }
     }
 }
