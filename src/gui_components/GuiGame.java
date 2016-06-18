@@ -199,15 +199,18 @@ public class GuiGame extends JFrame {
         this.setSize(getWidth()-1, getHeight()-1);
     }
 
-    private void updateGameInfo(JPanel gameInfoPanel) {
+    private void updateGameInfo() {
         Date date = game.getCurrentDate();
         String s = DateFormat.getDateInstance(DateFormat.FULL).format(date);
         JLabel label = new JLabel(s);
+        gameInfoPanel.removeAll();
         gameInfoPanel.add(label);
     }
 
-    private void updatePlayerInfo(JPanel playerInfoPanel) {
+    private void updatePlayerInfo() {
         Player cur_player = game.fetchPlayer(game.getCurPlayer());
+
+        playerInfoPanel.removeAll();
 
         // update basic information panel
         JPanel basicInfoPanel = new JPanel();
@@ -243,18 +246,20 @@ public class GuiGame extends JFrame {
     public void createNewGame(Game game) {
         this.game = game;
         initializeMapContent(mapPanel);
-        updateGameInfo(gameInfoPanel);
-        updatePlayerInfo(playerInfoPanel);
+        updateGameInfo();
+        updatePlayerInfo();
         // FIXME: how to refresh JFrame?
         this.setSize(DEFAULT_W+1, DEFAULT_H+1);
         this.setSize(DEFAULT_W, DEFAULT_H);
     }
 
-    public void executePlayerWalk() throws InterruptedException {
+    public void executePlayerWalk() {
         Player p = game.fetchPlayer(game.getCurPlayer());
         p.walk_gui(this);
-        updateMapContent();
         game.nextPlayer();
+        updateMapContent();
+        updatePlayerInfo();
+        updateGameInfo();
     }
 
     /**

@@ -24,6 +24,8 @@ public class Bank extends Spot {
         QUIT
     }
 
+    public Object lock = new Object();
+
     public Bank(Cell cell, String name) {
         super(cell);
         this.name = name;
@@ -132,17 +134,25 @@ public class Bank extends Spot {
     }
 
     @Override
-    public boolean pass_gui(GuiGame gameFrame) {
+    public synchronized boolean pass_gui(GuiGame gameFrame) {
         boolean isContinue = super.pass_gui(gameFrame);
         pass_gui_lock = true;
-        JFrame panel = new gui_components.BankPanel(gameFrame, this);
-        panel.setVisible(true);
-        // FIXME: can not pass compilation
-//        try {
-//            wait();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        Bank context = this;
+        new Thread() {
+            public void run() {
+                JFrame panel = new gui_components.BankPanel(gameFrame, context);
+                panel.setVisible(true);
+            }
+        }.start();
+//        // FIXME: can not pass compilation
+        synchronized (lock) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("pass_gui returned");
         return isContinue;
     }
 

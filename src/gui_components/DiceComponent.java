@@ -40,11 +40,11 @@ public class DiceComponent extends JButton {
                 System.out.println("dice: " + dice);
                 this.setIcon(diceNumberImage[dice-1]);
             }
-            try {
-                gameFrame.executePlayerWalk();
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
+            new Thread() {
+                public void run() {
+                    gameFrame.executePlayerWalk();
+                }
+            }.start();
         });
     }
 }

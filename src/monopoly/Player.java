@@ -77,7 +77,7 @@ public class Player extends Thing {
         this.cell.getSpot().enter(game);
     }
 
-    public void walk_gui(GuiGame gameFrame) throws InterruptedException {
+    public void walk_gui(GuiGame gameFrame) {
         int steps = dice.getCur_number();
         boolean c = true;
         while (steps > 0 && c) {

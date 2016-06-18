@@ -17,6 +17,7 @@ public class BankPanel extends JFrame {
 
     public BankPanel(GuiGame parent, Bank bank) {
         super();
+        System.out.println("enter initialization BankPanel");
         this.parent = parent;
         this.bank = bank;
         setLayout(new BorderLayout());
@@ -26,14 +27,21 @@ public class BankPanel extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(true);
 
+        // FIXME: test
+        add(new JLabel("aaa"));
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
-                // FIXME: can not pass compilation
-//                bank.notifyAll();
                 System.out.println("window closed");
+                // FIXME: can not pass compilation
+                synchronized (bank.lock) {
+                    bank.lock.notify();
+                }
             }
         });
+
+        System.out.println("Finish initialize BankPanel");
     }
 }

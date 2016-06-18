@@ -113,7 +113,7 @@ public class Lottery extends Spot {
         Lottery.number_owner = new Player.Player_id[NUMBER_RANGE];
     }
 
-    public static void lottery(Game game) throws IOException {
+    public static void lottery(Game game) {
         //FIXME: debugging
         int magic_number = (int) (Math.random()*NUMBER_RANGE);
 
@@ -131,6 +131,5 @@ public class Lottery extends Spot {
                 reset();
             }
         }
-        Game.getInstruction();
     }
 }

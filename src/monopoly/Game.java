@@ -245,7 +245,7 @@ public class Game {
     /**
      * switch to tomorrow
      */
-    private void tomorrow() throws IOException {
+    private void tomorrow() {
         //FIXME: debugging
         int day_passed = 1;
         for (int i = 0; i < day_passed; i++)
@@ -411,6 +411,8 @@ public class Game {
 
     public void nextPlayer() {
         int ndx = (curPlayer.ordinal() + 1) % total_players;
+        if (ndx == 0)
+            tomorrow();
         curPlayer = Player.Player_id.values()[ndx];
     }
 
