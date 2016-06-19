@@ -4,6 +4,8 @@ import map_components.Lottery;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Joker on 6/18/16.
@@ -27,6 +29,18 @@ public class LotteryPanel extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(true);
+
+        // add window closed listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                super.windowClosed(e);
+                // FIXME: can not pass compilation
+                synchronized (lottery.lock) {
+                    lottery.lock.notify();
+                }
+            }
+        });
 
         // add head panel
         JPanel headPanel = createHeadPanel();

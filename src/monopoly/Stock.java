@@ -7,21 +7,25 @@ import map_components.StockMarket;
  */
 public class Stock {
     private StockMarket.StockType type;
+    private double moneySpent;
     private int shares;
 
-    public Stock(StockMarket.StockType type, int shares) {
+    public Stock(StockMarket.StockType type, int shares, double moneySpent) {
         this.type = type;
+        this.moneySpent = moneySpent;
         this.shares = shares;
     }
 
-    public void buy(int increment) {
+    public void buy(int increment, double money) {
         this.shares += increment;
+        this.moneySpent += money;
     }
 
 
-    public boolean sell(int decrement) {
+    public boolean sell(int decrement, double money) {
         if (decrement > this.shares)
             return false;
+        this.moneySpent -= money;
         this.shares -= decrement;
         return true;
     }
@@ -36,5 +40,9 @@ public class Stock {
 
     public int getShares() {
         return shares;
+    }
+
+    public double getMoneySpent() {
+        return moneySpent;
     }
 }

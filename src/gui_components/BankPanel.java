@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 
 /**
  * Created by Joker on 6/18/16.
+ *
  */
 public class BankPanel extends JFrame {
     public static final int DEFAULT_W = 400, DEFAULT_H = 200;

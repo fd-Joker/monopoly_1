@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,6 +38,17 @@ public class PropshopPanel extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(true);
+
+        // add window closed listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                super.windowClosed(e);
+                synchronized (propshop.lock) {
+                    propshop.lock.notify();
+                }
+            }
+        });
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -125,10 +138,5 @@ public class PropshopPanel extends JFrame {
         });
         buttonPanel.add(cancelBtn);
         return buttonPanel;
-    }
-
-    public static void main(String[] args) {
-        PropshopPanel p = new PropshopPanel(null, null);
-        p.setVisible(true);
     }
 }

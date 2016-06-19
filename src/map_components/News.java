@@ -110,6 +110,14 @@ public class News extends Spot {
         return null;
     }
 
+    // FIXME: debug...
+    @Override
+    public boolean pass_gui(GuiGame gameFrame) {
+        boolean b = super.pass_gui(gameFrame);
+        enter_gui(gameFrame);
+        return b;
+    }
+
     @Override
     public String enter_gui(GuiGame gameFrame) {
         int what_news = (int) (Math.random()*NUMBER_NEWS_TYPE);
@@ -139,7 +147,7 @@ public class News extends Spot {
                 }
                 break;
             case 2:
-                Game.printToTerminal("银行加发储金红利每个人得到存款10%\n");
+                JOptionPane.showMessageDialog(gameFrame, "银行加发储金红利每个人得到存款10%\n");
                 game.getDividend();
                 break;
             case 3:

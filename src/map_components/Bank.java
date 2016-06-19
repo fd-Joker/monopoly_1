@@ -152,7 +152,6 @@ public class Bank extends Spot {
                 e.printStackTrace();
             }
         }
-        System.out.println("pass_gui returned");
         return isContinue;
     }
 

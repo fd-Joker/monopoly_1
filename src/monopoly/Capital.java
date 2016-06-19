@@ -7,6 +7,7 @@ import java.util.Collection;
 
 /**
  * Created by Joker on 4/23/16.
+ *
  */
 public class Capital {
     private static final int DEFAULT_TICKET = 100 , DEFAULT_CASH = 10000, DEFAULT_DEPOSIT = 10000;
@@ -42,12 +43,13 @@ public class Capital {
         if (shares == 0)
             return;
         Stock stock = this.stocks.stream().filter(item->item.getType() == type).findFirst().orElse(null);
-        if (stock == null) {
-            stock = new Stock(type, shares);
-            stocks.add(stock);
-        } else
-            stock.buy(shares);
         double money = game.getStockMarket().getTodayPriceOf(type) * shares;
+        if (stock == null) {
+            stock = new Stock(type, shares, money);
+            stocks.add(stock);
+        } else {
+            stock.buy(shares, money);
+        }
         deposit -= money;
         if (deposit < 0) {
             cash += deposit;
@@ -69,10 +71,23 @@ public class Capital {
             return false;
         double money = game.getStockMarket().getTodayPriceOf(type) * shares;
         deposit += money;
-        stock.sell(shares);
+        stock.sell(shares, money);
         if (stock.isEmpty())
             stocks.remove(stock);
         return true;
+    }
+
+    public double getAverageCostOf(StockMarket.StockType type) {
+        Stock s = stocks.stream().filter(item->item.getType() == type).findFirst().orElse(null);
+        if (s == null)
+            return 0;
+        double avg = s.getMoneySpent();
+        int totalShares = s.getShares();
+        if (totalShares == 0)
+            avg = 0;
+        else
+            avg /= totalShares;
+        return avg;
     }
 
     public int getSharesOf(StockMarket.StockType type) {
@@ -97,7 +112,7 @@ public class Capital {
         Stock[] copy = new Stock[stocks.size()];
         int i = 0;
         for (Stock stock : stocks) {
-            Stock stock1 = new Stock(stock.getType(), stock.getShares());
+            Stock stock1 = new Stock(stock.getType(), stock.getShares(), stock.getMoneySpent());
             copy[i] = stock1;
             i++;
         }
@@ -258,6 +273,14 @@ public class Capital {
         deposit *= 100;
         deposit = ((int) deposit) / 100.0;
         return deposit;
+    }
+
+    public String getEstateInfo() {
+        String r = "";
+        for (Estate estate : estates) {
+            r += "House at (" + estate.getX() + ", " + estate.getY() + "); Level: " + estate.getLevel() + "\n";
+        }
+        return r;
     }
 
     public double total() {

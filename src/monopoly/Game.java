@@ -1,5 +1,6 @@
 package monopoly;
 
+import card_items.CardType;
 import gui_components.GuiGame;
 import gui_components.NewGameInitializeData;
 import map_components.*;
@@ -66,6 +67,39 @@ public class Game {
             players.add(p);
             curCell.addThing(p);
         }
+
+        // FIXME: debugging
+        Player p1 = players.stream().filter(item->item.getId() == Player.Player_id.Player1).findFirst().get();
+        Player p2 = players.stream().filter(item->item.getId() == Player.Player_id.Player2).findFirst().get();
+        p1.buyCard(CardType.AverageCard, 0);
+        p1.buyCard(CardType.Barricade, 0);
+        p1.buyCard(CardType.BlackCard, 0);
+        p1.buyCard(CardType.ControlDice, 0);
+        p1.buyCard(CardType.RedCard, 0);
+        p1.buyCard(CardType.StopOver, 0);
+        p1.buyCard(CardType.TurnAround, 0);
+//        p2.getCapital().withdrawMoney(10000);
+//        p2.getCapital().addCash(10000);
+//        this.curPlayer = Player.Player_id.Player2;
+//        try {
+//            map.getCell(0, 3).getSpot().enter(this);
+//            map.getCell(0, 2).getSpot().enter(this);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        for (CardType type : CardType.values())
+//            p2.buyCard(type, 0);
+        p2.buyCard(CardType.AverageCard, 0);
+        p2.buyCard(CardType.Barricade, 0);
+        p2.buyCard(CardType.BlackCard, 0);
+        p2.buyCard(CardType.ControlDice, 0);
+        p2.buyCard(CardType.RedCard, 0);
+        p2.buyCard(CardType.StopOver, 0);
+        p2.buyCard(CardType.TurnAround, 0);
+//        Player p3 = players.stream().filter(item->item.getId() == Player.Player_id.Player3).findFirst().get();
+//        p3.getCapital().withdrawMoney(10000);
+//        p3.getCapital().addCash(-20000);
+//        p3.setBankrupt();
     }
 
     /**
@@ -421,6 +455,17 @@ public class Game {
 
     public int getTotal_players() {
         return total_players;
+    }
+
+    public int getActivePlayers() {
+        int number = 0;
+        Player.Player_id[] player_ids = Player.Player_id.values();
+        for (Player.Player_id id : player_ids) {
+            Player p = fetchPlayer(id);
+            if (p != null && !p.isBankrupted())
+                number++;
+        }
+        return number;
     }
 
     public Player.Player_id getCurPlayer() {

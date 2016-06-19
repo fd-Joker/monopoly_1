@@ -17,6 +17,8 @@ import java.io.IOException;
  * they just remain what they were.
  */
 public class Lottery extends Spot {
+    public final Object lock = new Object();
+
     public static final int PRICE_OF_A_NUMBER = 1000;
     public static final int NUMBER_RANGE = 20;
     private static int total_reward_amount;
@@ -111,8 +113,20 @@ public class Lottery extends Spot {
         if (p.getCapital().getCash() < PRICE_OF_A_NUMBER)
             JOptionPane.showMessageDialog(gameFrame, "Your cash is not enough to buy a number!");
         else {
-            gui_components.LotteryPanel panel = new gui_components.LotteryPanel(gameFrame, this);
-            panel.setVisible(true);
+            Lottery context = this;
+            new Thread() {
+                public void run() {
+                    gui_components.LotteryPanel panel = new gui_components.LotteryPanel(gameFrame, context);
+                    panel.setVisible(true);
+                }
+            }.start();
+            synchronized (lock) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }

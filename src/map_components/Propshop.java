@@ -19,6 +19,8 @@ import java.io.IOException;
  * they just remain what they were.
  */
 public class Propshop extends Spot {
+    public final Object lock = new Object();
+
     /**
      * this array is used by the item initialize function to randomly assign items
      */
@@ -106,8 +108,20 @@ public class Propshop extends Spot {
 
     @Override
     public String enter_gui(GuiGame gameFrame) {
-        gui_components.PropshopPanel panel = new gui_components.PropshopPanel(gameFrame, this);
-        panel.setVisible(true);
+        Propshop context = this;
+        new Thread() {
+            public void run() {
+                gui_components.PropshopPanel panel = new gui_components.PropshopPanel(gameFrame, context);
+                panel.setVisible(true);
+            }
+        }.start();
+        synchronized (lock) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 

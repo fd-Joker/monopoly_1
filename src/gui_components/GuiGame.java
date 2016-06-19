@@ -1,5 +1,6 @@
 package gui_components;
 
+import card_items.CardType;
 import monopoly.Game;
 import monopoly.Player;
 
@@ -42,6 +43,10 @@ public class GuiGame extends JFrame {
     Container mapPanel;
     JPanel gameInfoPanel;
     JPanel playerInfoPanel;
+    JMenuItem inspectHouse;
+    JMenuItem propList;
+    JMenuItem propUse;
+    JMenuItem stockEnter;
 
     /**
      * constructor of GuiGame frame
@@ -101,19 +106,50 @@ public class GuiGame extends JFrame {
         }
         JMenu menuInspect = new JMenu("Inspect");
         {
-            JMenuItem inspectAll = new JMenuItem("All");
-            menuInspect.add(inspectAll);
+            inspectHouse = new JMenuItem("House");
+            inspectHouse.addActionListener(e -> {
+                Player p = game.fetchPlayer(game.getCurPlayer());
+                String info = p.getCapital().getEstateInfo();
+                JOptionPane.showMessageDialog(this, info);
+            });
+            inspectHouse.setEnabled(false);
+            menuInspect.add(inspectHouse);
         }
         JMenu menuProp = new JMenu("Prop");
         {
-            JMenuItem propList = new JMenuItem("List");
-            JMenuItem propUse = new JMenuItem("Use");
+            propList = new JMenuItem("List");
+            propUse = new JMenuItem("Use");
+            propList.setEnabled(false);
+            propUse.setEnabled(false);
+            propList.addActionListener(e -> {
+                String r = getPropInfo();
+                if (r != null)
+                    JOptionPane.showMessageDialog(this, r);
+                else
+                    JOptionPane.showMessageDialog(this, "Sorry, you have no prop.\n");
+            });
+            propUse.addActionListener(e -> {
+                String r = getPropInfo();
+                System.out.println(r);
+                if (r == null)
+                    JOptionPane.showMessageDialog(this, "Sorry, you have no prop.\n");
+                else {
+                    // TODO:
+                    PropUsePanel panel = new PropUsePanel(this);
+                    panel.setVisible(true);
+                }
+            });
             menuProp.add(propList);
             menuProp.add(propUse);
         }
         JMenu menuStock = new JMenu("Stock");
         {
-            JMenuItem stockEnter = new JMenuItem("Enter");
+            stockEnter = new JMenuItem("Enter");
+            stockEnter.setEnabled(false);
+            stockEnter.addActionListener(e -> {
+                StockMarketPanel panel = new StockMarketPanel(this, game.getStockMarket());
+                panel.setVisible(true);
+            });
             menuStock.add(stockEnter);
         }
         menuBar.add(menuFile);
@@ -183,6 +219,13 @@ public class GuiGame extends JFrame {
         return mapPanel;
     }
 
+    private void initializeMenuBar() {
+        inspectHouse.setEnabled(true);
+        propList.setEnabled(true);
+        propUse.setEnabled(true);
+        stockEnter.setEnabled(true);
+    }
+
     private void initializeMapContent(Container mapPanel) {
         Collection<JPanel> map = game.getMap().toGui();
         for (JPanel block : map)
@@ -236,7 +279,6 @@ public class GuiGame extends JFrame {
         detailInfoPanel.setLayout(new GridLayout(5, 0));
         detailInfoPanel.add(new JLabel("Cash: " + cur_player.getCapital().getCash()));
         detailInfoPanel.add(new JLabel("Deposit: " + cur_player.getCapital().getDeposit()));
-        // FIXME: get total stock
         detailInfoPanel.add(new JLabel("Stock: " + cur_player.getCapital().totalStockValue(game)));
         detailInfoPanel.add(new JLabel("Tickets: " + cur_player.getCapital().getTicket()));
         detailInfoPanel.add(new JLabel("Capital: " + cur_player.getCapital().total()));
@@ -245,6 +287,7 @@ public class GuiGame extends JFrame {
 
     public void createNewGame(Game game) {
         this.game = game;
+        initializeMenuBar();
         initializeMapContent(mapPanel);
         updateGameInfo();
         updatePlayerInfo();
@@ -260,6 +303,22 @@ public class GuiGame extends JFrame {
         updateMapContent();
         updatePlayerInfo();
         updateGameInfo();
+    }
+
+    public String getPropInfo() {
+        String r = "";
+        Player cur_player = game.fetchPlayer(game.getCurPlayer());
+        CardType[] types = CardType.values();
+        long[] count = cur_player.listCard();
+        if (count == null) {
+            r = null;
+        } else {
+            for (int i = 0; i < count.length; i++) {
+                if (count[i] > 0)
+                    r += (i + " - " + types[i] + ": " + count[i] + "\n");
+            }
+        }
+        return r;
     }
 
     /**

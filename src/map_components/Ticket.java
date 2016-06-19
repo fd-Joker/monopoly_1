@@ -61,8 +61,21 @@ public class Ticket extends Spot {
         return null;
     }
 
+    // FIXME: debug...
+    @Override
+    public boolean pass_gui(GuiGame gameFrame) {
+        boolean b = super.pass_gui(gameFrame);
+        enter_gui(gameFrame);
+        return b;
+    }
+
     @Override
     public String enter_gui(GuiGame gameFrame) {
+        Game game = gameFrame.game;
+        Player p = game.fetchPlayer(game.getCurPlayer());
+        int amount = (int) (Math.random()*TICKET_RANGE);
+        JOptionPane.showMessageDialog(gameFrame, p.getId() + " get " + amount + " tickets.\n");
+        p.getCapital().receiveTicket(amount);
         return null;
     }
 }

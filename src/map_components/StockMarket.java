@@ -23,12 +23,6 @@ public class StockMarket extends Spot {
     private static final double INITIAL_PRICE_RANGE = 100;
 
     /**
-     * GUI version
-     * corresponding panel
-     */
-    JFrame panel;
-
-    /**
      * this spot is not shown on the map, so the return value is null
      * @return
      */
@@ -84,6 +78,13 @@ public class StockMarket extends Spot {
         for (int i = 0; i < stockTypes.length; i++)
             if (stockTypes[i] == type)
                 return todayPrice[i];
+        return -1;
+    }
+
+    public double getTodayRateOf(StockType type) {
+        for (int i = 0; i < stockTypes.length; i++)
+            if (stockTypes[i] == type)
+                return todayRate[i];
         return -1;
     }
 
