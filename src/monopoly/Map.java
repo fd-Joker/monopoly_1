@@ -1,6 +1,7 @@
 package monopoly;
 
 import map_components.Cell;
+import map_components.Hospital;
 import map_components.House;
 
 import javax.swing.*;
@@ -81,6 +82,15 @@ public class Map {
         if (c == null)
             c = createCell(x, y);
         return c;
+    }
+
+    /**
+     * return hospital cell if exist
+     * or return the first cell if does not exist
+     * @return
+     */
+    public Cell getHospitalCell() {
+        return cells.stream().filter(cell -> cell.getSpot() instanceof Hospital).findFirst().orElse(getCell(0, 0));
     }
 
     /**

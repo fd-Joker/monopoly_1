@@ -55,7 +55,7 @@ public class StockTransactionPanel extends JFrame {
         numberPanel.setLayout(new FlowLayout());
         Player cur_player = context.game.fetchPlayer(context.game.getCurPlayer());
         int ownedShare = cur_player.getCapital().getSharesOf(type);
-        int restShare = stockMarket.countMaxBuy(cur_player, type) - ownedShare;
+        int restShare = stockMarket.countMaxBuy(cur_player, type);
         ownedField = new JTextField(ownedShare + "", 10);
         ownedField.addFocusListener(new FocusAdapter() {
             @Override
@@ -103,7 +103,7 @@ public class StockTransactionPanel extends JFrame {
         Game game = context.game;
         Player cur_player = game.fetchPlayer(game.getCurPlayer());
         int ownedShare = cur_player.getCapital().getSharesOf(type);
-        int restShare = stockMarket.countMaxBuy(cur_player, type) - ownedShare;
+        int restShare = stockMarket.countMaxBuy(cur_player, type);
         JPanel sliderPanel = new JPanel();
         slider = new JSlider(JSlider.HORIZONTAL, 0, ownedShare + restShare, ownedShare);
         slider.addChangeListener(e -> {
@@ -137,6 +137,11 @@ public class StockTransactionPanel extends JFrame {
             }
             context.updatePlayerInfo();
             // TODO: update parent frame...
+            parent.updateTableContent();
+            parent.setSize(parent.getWidth() + 1, parent.getHeight() + 1);
+            parent.setSize(parent.getWidth() - 1, parent.getHeight() - 1);
+            context.setSize(context.getWidth() + 1, context.getHeight() + 1);
+            context.setSize(context.getWidth() - 1, context.getHeight() - 1);
             this.dispose();
         });
         buttonPanel.add(confirmBtn);
@@ -144,7 +149,7 @@ public class StockTransactionPanel extends JFrame {
         JButton resetBtn = new JButton("Reset");
         resetBtn.addActionListener(e1 -> {
             int ownedShare = cur_player.getCapital().getSharesOf(type);
-            int restShare = stockMarket.countMaxBuy(cur_player, type) - ownedShare;
+            int restShare = stockMarket.countMaxBuy(cur_player, type);
             ownedField.setText(ownedShare + "");
             restField.setText("" + restShare);
             slider.setValue(ownedShare);

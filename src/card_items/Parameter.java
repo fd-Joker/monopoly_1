@@ -1,6 +1,7 @@
 package card_items;
 
 import gui_components.GuiGame;
+import gui_components.PropUsePanel;
 import map_components.StockMarket;
 import monopoly.Game;
 import monopoly.Player;
@@ -25,11 +26,11 @@ public interface Parameter {
         private boolean valid;
         private int position;
 
-        public BarricadeParameter(GuiGame gameFrame) {
+        public BarricadeParameter(PropUsePanel panel) {
             valid = false;
             while (!valid) {
                 valid = true;
-                String input = JOptionPane.showInputDialog("Please input where you want to put the Barricade(-8~8): ");
+                String input = JOptionPane.showInputDialog(panel, "Please input where you want to put the Barricade(-8~8): ");
                 if (input.contains("-")) {
                     position = -Game.parsePosInt(input.substring(1));
                     if (position == 1) {
@@ -53,12 +54,12 @@ public interface Parameter {
     class StockCardParameter implements Parameter {
         private int stockNumber;
 
-        public StockCardParameter(GuiGame gameFrame) {
+        public StockCardParameter(PropUsePanel panel) {
             StockMarket.StockType[] stockTypes = StockMarket.StockType.values();
             int index;
             String instruction;
             do {
-                instruction = JOptionPane.showInputDialog(gameFrame,
+                instruction = JOptionPane.showInputDialog(panel,
                         "Please type index to choose: ");
                 index = Game.parsePosInt(instruction);
             } while (!"x".equals(instruction) && (index < 0 || index >= stockTypes.length));
@@ -74,10 +75,10 @@ public interface Parameter {
     class ControlDiceParameter implements Parameter {
         private int diceNumber;
 
-        public ControlDiceParameter(GuiGame gameFrame) {
+        public ControlDiceParameter(PropUsePanel panel) {
             int number;
             do {
-                String input = JOptionPane.showInputDialog(gameFrame, "Please choose a number from 1~6: ");
+                String input = JOptionPane.showInputDialog(panel, "Please choose a number from 1~6: ");
                 number = Game.parsePosInt(input);
             } while (number <= 0 || number > 6);
             this.diceNumber = number;
@@ -100,12 +101,12 @@ public interface Parameter {
     class TurnAroundParameter implements Parameter {
         private int playerIndex;
 
-        public TurnAroundParameter(GuiGame gameFrame) {
+        public TurnAroundParameter(GuiGame gameFrame, PropUsePanel panel) {
             Player[] targets = TurnAround.getAvailablePlayers(gameFrame.game);
             String s = TurnAround.targetsToTexture(targets);
             int index;
             do {
-                String r = JOptionPane.showInputDialog(gameFrame, s + "\nType a number to choose a target: ");
+                String r = JOptionPane.showInputDialog(panel, s + "\nType a number to choose a target: ");
                 index = Game.parsePosInt(r);
             } while (index <= 0 || index >= targets.length);
             this.playerIndex = index;

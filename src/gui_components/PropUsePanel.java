@@ -50,13 +50,31 @@ public class PropUsePanel extends JFrame {
     }
 
     private JPanel createItemPanel() {
-        JPanel itemPanel = new JPanel();
+        itemPanel = new JPanel();
+        updateItemPanel();
+        return itemPanel;
+    }
+
+    private JPanel createButtonPanel() {
+        JPanel buttonPanel = new JPanel();
+        JButton cancelBtn = new JButton("Cancel");
+        buttonPanel.setBounds(0, getHeight() - BUTTON_PANEL_H, DEFAULT_W, BUTTON_PANEL_H);
+        cancelBtn.addActionListener(e -> {
+            this.dispose();
+        });
+        buttonPanel.add(cancelBtn);
+        return buttonPanel;
+    }
+
+    public void updateItemPanel() {
         long[] propCount = parent.game.fetchPlayer(parent.game.getCurPlayer()).listCard();
         CardType[] types = CardType.values();
         int totalPropNumber = 0;
-        for (int i = 0; i < propCount.length; i++)
-            if (propCount[i] > 0)
+        for (long aPropCount : propCount)
+            if (aPropCount > 0)
                 totalPropNumber++;
+
+        itemPanel.removeAll();
         itemPanel.setLayout(new GridLayout(totalPropNumber, 0));
         itemPanel.setBounds(0, 0, DEFAULT_W, getHeight() - BUTTON_PANEL_H - 10);
         for (int i = 0; i < propCount.length; i++) {
@@ -77,45 +95,39 @@ public class PropUsePanel extends JFrame {
                                 parameter = new Parameter.AverageCardParameter();
                                 break;
                             case Barricade:
-                                parameter = new Parameter.BarricadeParameter(parent);
+                                parameter = new Parameter.BarricadeParameter(this);
                                 break;
                             case BlackCard:
-                                parameter = new Parameter.StockCardParameter(parent);
+                                parameter = new Parameter.StockCardParameter(this);
                                 break;
                             case ControlDice:
-                                parameter = new Parameter.ControlDiceParameter(parent);
+                                parameter = new Parameter.ControlDiceParameter(this);
                                 break;
                             case RedCard:
-                                parameter = new Parameter.StockCardParameter(parent);
+                                parameter = new Parameter.StockCardParameter(this);
                                 break;
                             case StopOver:
                                 parameter = new Parameter.StopOverParameter();
                                 break;
                             case TurnAround:
-                                parameter = new Parameter.TurnAroundParameter(parent);
+                                parameter = new Parameter.TurnAroundParameter(parent, this);
                                 break;
                         }
                         String result = entity.function_gui(parent.game, parameter);
                         parent.game.fetchPlayer(parent.game.getCurPlayer()).removeCard(item);
-                        JOptionPane.showMessageDialog(parent, result);
+                        JOptionPane.showMessageDialog(this, result);
+                        this.updateItemPanel();
                         parent.updatePlayerInfo();
+                        // FIXME: update JFrame?
+                        this.setSize(this.getWidth() + 1, this.getHeight() + 1);
+                        this.setSize(this.getWidth() - 1, this.getHeight() - 1);
+                        parent.setSize(parent.getWidth() + 1, parent.getHeight() + 1);
+                        parent.setSize(parent.getWidth() - 1, parent.getHeight() - 1);
                     }
                 });
                 singleItem.add(useBtn);
                 itemPanel.add(singleItem);
             }
         }
-        return itemPanel;
-    }
-
-    private JPanel createButtonPanel() {
-        JPanel buttonPanel = new JPanel();
-        JButton cancelBtn = new JButton("Cancel");
-        buttonPanel.setBounds(0, getHeight() - BUTTON_PANEL_H, DEFAULT_W, BUTTON_PANEL_H);
-        cancelBtn.addActionListener(e -> {
-            this.dispose();
-        });
-        buttonPanel.add(cancelBtn);
-        return buttonPanel;
     }
 }

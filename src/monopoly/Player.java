@@ -30,6 +30,8 @@ public class Player extends Thing {
 
     private PlayerHead head;
 
+    private PlayerStatus status;
+
     /**
      * every single player owns a dice
      * the result of a single throw is stored in dice
@@ -48,6 +50,7 @@ public class Player extends Thing {
         this.direction = Cell.Direction.clockwise;
         if (headIndex != null)
             this.head = new PlayerHead(headIndex);
+        status = new PlayerStatus(null, 0);
     }
 
     public Player(Player_id id, Cell cell) {
@@ -170,6 +173,10 @@ public class Player extends Thing {
         return head.getHeadSmallImage();
     }
 
+    public PlayerStatus getStatus() {
+        return this.status;
+    }
+
     public void buyCard(CardType item, int cost) {
         capital.consumeTicket(cost);
         cards.add(item);
@@ -184,6 +191,18 @@ public class Player extends Thing {
         this.capital.clearAll();
         this.bankrupted = true;
         this.cell.removeThing(this);
+    }
+
+    public void setStatus(GuiGame gameFrame, PlayerStatus.Status status) {
+        switch (status) {
+            case IN_HOSPITAL:
+                this.status.setStatus(status, 2);
+                this.cell.removeThing(this);
+                this.cell = gameFrame.game.getHospitalCell();
+                this.cell.addThing(this);
+                gameFrame.updateMapContent();
+                break;
+        }
     }
 
     public void reverseDirection() {

@@ -4,12 +4,10 @@ import card_items.CardType;
 import gui_components.GuiGame;
 import gui_components.NewGameInitializeData;
 import map_components.*;
+import org.jfree.data.time.Day;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -37,6 +35,9 @@ public class Game {
 
     // current round information
     private GregorianCalendar calendar;
+
+    // this variable is for drawing stock chart
+    private Day day;
 
     /**
      * initialize those attributes that are not dependent on user choices
@@ -285,7 +286,7 @@ public class Game {
         //FIXME: debugging
         int day_passed = 1;
         for (int i = 0; i < day_passed; i++)
-            stockMarket.openMarket();
+            stockMarket.openMarket(this);
         calendar.add(Calendar.DAY_OF_MONTH, day_passed);
         lasting_days -= day_passed;
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
@@ -304,8 +305,12 @@ public class Game {
     private void tomorrow_gui(GuiGame gameFrame) {
         //FIXME: debugging
         int day_passed = 1;
-        for (int i = 0; i < day_passed; i++)
-            stockMarket.openMarket();
+        for (int i = 0; i < day_passed; i++) {
+            this.day = new Day(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
+            // the stock market only opens on weekdays
+            if (calendar.get(Calendar.DAY_OF_WEEK) < 6)
+                stockMarket.openMarket(this);
+        }
         calendar.add(Calendar.DAY_OF_MONTH, day_passed);
         lasting_days -= day_passed;
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
@@ -316,6 +321,17 @@ public class Game {
             getDividend_gui(gameFrame);
         }
         calendar.add(Calendar.DAY_OF_MONTH, -1);
+        updatePlayerStatus();
+    }
+
+    private void updatePlayerStatus() {
+        Player.Player_id[] player_ids = Player.Player_id.values();
+        for (Player.Player_id id : player_ids) {
+            Player p = fetchPlayer(id);
+            if (p != null && !p.isBankrupted()) {
+                p.getStatus().updateStatus();
+            }
+        }
     }
 
     /**
@@ -335,6 +351,10 @@ public class Game {
      */
     public Date getCurrentDate() {
         return calendar.getTime();
+    }
+
+    public Day getDayOfCalendar() {
+        return this.day;
     }
 
     public boolean isEnd() {
@@ -382,7 +402,7 @@ public class Game {
      */
     public Map build_map(int index) throws IOException {
         Map map = new Map();
-        BufferedReader reader = new BufferedReader(new FileReader("map.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("map" + index + ".txt"));
         String buf;
         int cell_index = 0;
         Type type = Type.House;
@@ -443,6 +463,11 @@ public class Game {
                     curCell.setSpot(l);
                     curCell.addThing(l);
                     break;
+                case Hospital:
+                    Hospital hos = new Hospital(curCell, name);
+                    curCell.setSpot(hos);
+                    curCell.addThing(hos);
+                    break;
             }
         }
         return map;
@@ -457,7 +482,7 @@ public class Game {
         return total_players;
     }
 
-    public int getActivePlayers() {
+    public int getNumberOfActivePlayers() {
         int number = 0;
         Player.Player_id[] player_ids = Player.Player_id.values();
         for (Player.Player_id id : player_ids) {
@@ -466,6 +491,21 @@ public class Game {
                 number++;
         }
         return number;
+    }
+
+    public Player.Player_id getRandomActivePlayer() {
+        int select = (int) (Math.random() * getNumberOfActivePlayers());
+        int number = 0;
+        Player.Player_id[] player_ids = Player.Player_id.values();
+        for (Player.Player_id id : player_ids) {
+            Player p = fetchPlayer(id);
+            if (p != null && !p.isBankrupted()) {
+                if (number == select)
+                    return id;
+                number++;
+            }
+        }
+        return null;
     }
 
     public Player.Player_id getCurPlayer() {
@@ -480,20 +520,31 @@ public class Game {
      * GUI version
      */
     public void nextPlayer(GuiGame gameFrame) {
-        int prev_player = curPlayer.ordinal();
         int ndx = (curPlayer.ordinal() + 1) % total_players;
         Player.Player_id[] ids = Player.Player_id.values();
         while (fetchPlayer(ids[ndx]).isBankrupted())
             ndx = (ndx + 1) % total_players;
-        if (ndx == prev_player)
-            gameOver(gameFrame, ids[ndx]);
         if (ndx == 0)
             tomorrow_gui(gameFrame);
         curPlayer = Player.Player_id.values()[ndx];
+        // judge current player status
+        PlayerStatus status = fetchPlayer(curPlayer).getStatus();
+        if (status.getStatus() != null) {
+            switch (status.getStatus()) {
+                case IN_HOSPITAL:
+                    JOptionPane.showMessageDialog(gameFrame, "Sorry " + curPlayer + " is in hospital " +
+                            status.getRound() + " rounds remaining.");
+                    nextPlayer(gameFrame);
+                    break;
+            }
+        }
     }
 
     public void gameOver(GuiGame gameFrame, Player.Player_id winner) {
         JOptionPane.showMessageDialog(gameFrame, "Congratulations! Winner is " + winner);
+        gameFrame.dispose();
+        GuiGame g = new GuiGame(null);
+        g.setVisible(true);
     }
 
     public StockMarket getStockMarket() {
@@ -526,5 +577,14 @@ public class Game {
             p.getCapital().addCash(dividend);
             p.getCapital().saveMoney(dividend);
         }
+    }
+
+    /**
+     * return hospital cell if exist
+     * or return the first cell if does not exist
+     * @return
+     */
+    public Cell getHospitalCell() {
+        return map.getHospitalCell();
     }
 }

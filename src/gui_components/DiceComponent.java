@@ -33,6 +33,10 @@ public class DiceComponent extends JButton {
         this.gameFrame = gameFrame;
         addActionListener(e -> {
             Game game = gameFrame.game;
+            if (game.getNumberOfActivePlayers() == 1) {
+                game.gameOver(gameFrame, game.getCurPlayer());
+                return;
+            }
             int dice = game.fetchPlayer(game.getCurPlayer()).throw_dice();
             if (dice == 0)
                 JOptionPane.showMessageDialog(this, "You should stay where you are in this round.");

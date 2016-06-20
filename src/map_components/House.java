@@ -62,7 +62,15 @@ public class House extends Spot {
      * this is the block panel to be shown on the map
      */
     class HousePanel extends JPanel {
-        ImageIcon bg = new ImageIcon("./images/house.jpg");
+        ImageIcon bg;
+        public HousePanel() {
+            String filename = "./images/";
+            if (estate.getState() == Estate.EstateState.unowned)
+                filename += "noowner" + estate.getLevel() + ".jpg";
+            else if (estate.getState() == Estate.EstateState.owned)
+                filename += estate.getOwner().toString() + estate.getLevel() + ".jpg";
+            bg = new ImageIcon(filename);
+        }
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);

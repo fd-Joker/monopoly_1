@@ -4,6 +4,7 @@ import card_items.CardType;
 import gui_components.GuiGame;
 import monopoly.Game;
 import monopoly.Player;
+import monopoly.PlayerStatus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ import java.util.Collection;
  * they just remain what they were.
  */
 public class News extends Spot {
-    private static final int NUMBER_NEWS_TYPE = 5;
+    private static final int NUMBER_NEWS_TYPE = 6;
 
     public News(Cell cell, String name) {
         super(cell);
@@ -111,16 +112,17 @@ public class News extends Spot {
     }
 
     // FIXME: debug...
-    @Override
-    public boolean pass_gui(GuiGame gameFrame) {
-        boolean b = super.pass_gui(gameFrame);
-        enter_gui(gameFrame);
-        return b;
-    }
+//    @Override
+//    public boolean pass_gui(GuiGame gameFrame) {
+//        boolean b = super.pass_gui(gameFrame);
+//        enter_gui(gameFrame);
+//        return b;
+//    }
 
     @Override
     public String enter_gui(GuiGame gameFrame) {
-        int what_news = (int) (Math.random()*NUMBER_NEWS_TYPE);
+        // FIXME: debug...
+        int what_news = 5;//(int) (Math.random()*NUMBER_NEWS_TYPE);
         doNews(gameFrame, what_news);
         return null;
     }
@@ -148,7 +150,7 @@ public class News extends Spot {
                 break;
             case 2:
                 JOptionPane.showMessageDialog(gameFrame, "银行加发储金红利每个人得到存款10%\n");
-                game.getDividend();
+                game.getDividend_gui(gameFrame);
                 break;
             case 3:
                 JOptionPane.showMessageDialog(gameFrame, "所有人缴纳财产税10%\n");
@@ -174,7 +176,11 @@ public class News extends Spot {
                     JOptionPane.showMessageDialog(gameFrame, p.getId() + " has got " + all[get] + "\n");
                 }
                 break;
-
+            case 5:
+                Player.Player_id id = game.getRandomActivePlayer();
+                game.fetchPlayer(id).setStatus(gameFrame, PlayerStatus.Status.IN_HOSPITAL);
+                JOptionPane.showMessageDialog(gameFrame, "Sorry, " + id + " is sent to hospital");
+                break;
         }
     }
 }

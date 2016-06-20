@@ -1,9 +1,11 @@
 package map_components;
 
+import drawChart.ChartSeriesData;
 import gui_components.GuiGame;
 import monopoly.Game;
 import monopoly.Player;
 import monopoly.Stock;
+import org.jfree.data.time.Day;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -43,6 +45,15 @@ public class StockMarket extends Spot {
     private Collection<StockType> redStock;
     private Collection<StockType> blackStock;
 
+    /**
+     * the following codes are used to record data for drawing a diagram
+     */
+    private ChartSeriesData[] stockData;
+
+    public ChartSeriesData[] getStockData() {
+        return stockData;
+    }
+
     public StockMarket() {
         // the cell is null because StockMarket is not shown on the map
         super(null);
@@ -58,17 +69,29 @@ public class StockMarket extends Spot {
         }
         yesterdayPrice = initialPrice.clone();
         resetRedBlack();
+        stockData = new ChartSeriesData[StockType.values().length];
+        for (int i = 0; i < stockData.length; i++) {
+            stockData[i] = new ChartSeriesData(StockType.values()[i].toString());
+        }
     }
 
-    public void openMarket() {
+    public void openMarket(Game game) {
         yesterdayPrice = todayPrice.clone();
+        // get chart data
+        Day day = game.getDayOfCalendar();
+        for (int i = 0; i < stockData.length; i++) {
+            stockData[i].addPoint(day, todayPrice[i]);
+        }
+
         for (int i = 0; i < todayPrice.length; i++) {
             double rate = Math.random() / 5 - 0.1;
             todayRate[i] = rate;
-            if (redStock.contains(stockTypes[i]))
+            if (redStock.contains(stockTypes[i])) {
                 todayRate[i] = 0.1;
-            else if (blackStock.contains(stockTypes[i]))
+            }
+            else if (blackStock.contains(stockTypes[i])) {
                 todayRate[i] = -0.1;
+            }
             todayPrice[i] *= (1 + todayRate[i]);
         }
         resetRedBlack();

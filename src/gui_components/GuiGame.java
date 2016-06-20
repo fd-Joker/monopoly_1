@@ -27,7 +27,7 @@ public class GuiGame extends JFrame {
     /**
      * the default width and height of GuiGame frame
      */
-    private static final int DEFAULT_W = 800, DEFAULT_H = 400;
+    private static final int DEFAULT_W = 1200, DEFAULT_H = 500;
     private static final int DEFAULT_GAME_INFO_H = 100;
     public static final int DEFAULT_BLOCK = 40;
     /**
@@ -166,7 +166,7 @@ public class GuiGame extends JFrame {
         return toolBar;
     }
 
-    private void resetGamePanel() {
+    public void resetGamePanel() {
         this.remove(body);
         body = createBody();
         this.add(body, BorderLayout.CENTER);
