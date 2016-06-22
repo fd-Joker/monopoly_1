@@ -40,12 +40,13 @@
 
 package org.jfree.chart.axis;
 
-import java.text.DecimalFormat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.jfree.chart.TestUtilities;
 import org.junit.Test;
+
+import java.text.DecimalFormat;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the {@link TickUnits} class.

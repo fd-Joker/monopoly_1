@@ -65,6 +65,14 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.*;
+import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.Series;
+import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PublicCloneable;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
@@ -72,18 +80,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import org.jfree.chart.HashUtilities;
-import org.jfree.chart.util.ParamChecks;
-import org.jfree.data.DomainInfo;
-import org.jfree.data.DomainOrder;
-import org.jfree.data.Range;
-import org.jfree.data.RangeInfo;
-import org.jfree.data.UnknownKeyException;
-import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.Series;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * Represents a collection of {@link XYSeries} objects that can be used as a

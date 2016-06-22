@@ -40,8 +40,9 @@
 
 package org.jfree.data.category;
 
-import java.util.List;
 import org.jfree.data.Range;
+
+import java.util.List;
 
 /**
  * An interface that can (optionally) be implemented by a dataset to assist in

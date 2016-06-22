@@ -40,8 +40,6 @@
 
 package org.jfree.chart.fx.interaction;
 
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 import org.jfree.chart.fx.ChartCanvas;
 import org.jfree.chart.fx.ChartViewer;
@@ -49,6 +47,9 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
 import org.jfree.util.ShapeUtilities;
+
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  * Handles drag zooming of charts on a {@link ChartCanvas}.  This 

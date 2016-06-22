@@ -40,18 +40,13 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.GradientPaint;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.ui.RectangleInsets;
 import org.junit.Test;
+
+import java.awt.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link LineBorder} class.

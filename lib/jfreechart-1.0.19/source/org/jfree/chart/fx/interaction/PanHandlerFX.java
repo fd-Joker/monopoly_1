@@ -40,14 +40,15 @@
 
 package org.jfree.chart.fx.interaction;
 
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.fx.ChartCanvas;
 import org.jfree.chart.plot.Pannable;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  * Handles panning of charts on a {@link ChartCanvas}.  This handler

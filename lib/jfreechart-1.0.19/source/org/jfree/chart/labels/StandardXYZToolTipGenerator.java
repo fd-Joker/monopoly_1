@@ -42,15 +42,15 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYZDataset;
+import org.jfree.util.ObjectUtilities;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYZDataset;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A standard item label generator for use with {@link XYZDataset} data.  Each

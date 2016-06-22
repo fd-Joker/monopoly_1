@@ -44,12 +44,12 @@
 
 package org.jfree.data;
 
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.util.PublicCloneable;
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of (key, object) pairs.

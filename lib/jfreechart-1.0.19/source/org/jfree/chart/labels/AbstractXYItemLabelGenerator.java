@@ -55,16 +55,16 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.util.ObjectUtilities;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Date;
-
-import org.jfree.chart.HashUtilities;
-import org.jfree.chart.util.ParamChecks;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A base class for creating item label generators.

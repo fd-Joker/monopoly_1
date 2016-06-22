@@ -40,21 +40,16 @@
 
 package org.jfree.chart.util;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import org.jfree.ui.Drawable;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import javax.imageio.ImageIO;
-import org.jfree.ui.Drawable;
 
 /**
  * Utility functions for exporting charts to SVG and PDF format.

@@ -41,16 +41,14 @@
 
 package org.jfree.chart.title;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.ui.Size2D;
 import org.junit.Test;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link ImageTitle} class.

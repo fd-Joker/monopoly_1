@@ -43,20 +43,14 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.text.DecimalFormat;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.ui.RectangleInsets;
 import org.junit.Test;
+
+import java.awt.*;
+import java.text.DecimalFormat;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link ThermometerPlot} class.

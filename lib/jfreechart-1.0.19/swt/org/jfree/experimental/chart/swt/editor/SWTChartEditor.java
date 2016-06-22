@@ -42,23 +42,18 @@
 
 package org.jfree.experimental.chart.swt.editor;
 
-import java.util.ResourceBundle;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.*;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.editor.ChartEditor;
 import org.jfree.chart.util.ResourceBundleWrapper;
+
+import java.util.ResourceBundle;
 
 /**
  * An editor for chart properties.

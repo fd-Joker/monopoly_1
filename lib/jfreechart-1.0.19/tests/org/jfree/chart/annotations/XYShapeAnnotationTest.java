@@ -42,19 +42,14 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.geom.Rectangle2D;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.util.PublicCloneable;
 import org.junit.Test;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
+import static org.junit.Assert.*;
 
 /**
  * Some tests for the {@link XYShapeAnnotation} class.

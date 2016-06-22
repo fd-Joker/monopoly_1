@@ -41,16 +41,15 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import java.awt.geom.Rectangle2D;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.ui.RectangleEdge;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.awt.geom.Rectangle2D;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Tests for the {@link LogarithmicAxis} class.

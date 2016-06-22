@@ -42,12 +42,12 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.data.xy.XYDataset;
+import org.jfree.util.PublicCloneable;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
-
-import org.jfree.data.xy.XYDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard tool tip generator for use with an

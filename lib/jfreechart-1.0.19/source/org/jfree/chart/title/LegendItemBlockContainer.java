@@ -42,19 +42,14 @@
 
 package org.jfree.chart.title;
 
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.Rectangle2D;
-
-import org.jfree.chart.block.Arrangement;
-import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.block.BlockResult;
-import org.jfree.chart.block.EntityBlockParams;
-import org.jfree.chart.block.EntityBlockResult;
+import org.jfree.chart.block.*;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.LegendItemEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.data.general.Dataset;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 /**
  * A container that holds all the pieces of a single legend item.

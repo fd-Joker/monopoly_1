@@ -42,12 +42,12 @@
 
 package org.jfree.chart.util;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import org.jfree.chart.HashUtilities;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.Serializable;
-import org.jfree.chart.HashUtilities;
 
 /**
  * A default implementation of the {@link ShadowGenerator} interface, based on

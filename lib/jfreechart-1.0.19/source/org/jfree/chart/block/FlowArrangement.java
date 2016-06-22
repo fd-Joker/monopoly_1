@@ -42,15 +42,15 @@
 
 package org.jfree.chart.block;
 
-import java.awt.Graphics2D;
+import org.jfree.ui.HorizontalAlignment;
+import org.jfree.ui.Size2D;
+import org.jfree.ui.VerticalAlignment;
+
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.jfree.ui.HorizontalAlignment;
-import org.jfree.ui.Size2D;
-import org.jfree.ui.VerticalAlignment;
 
 /**
  * Arranges blocks in a flow layout.  This class is immutable.

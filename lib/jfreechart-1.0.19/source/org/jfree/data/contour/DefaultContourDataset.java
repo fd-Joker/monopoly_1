@@ -46,15 +46,15 @@
 
 package org.jfree.data.contour;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Vector;
-
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
 import org.jfree.data.Range;
 import org.jfree.data.xy.AbstractXYZDataset;
 import org.jfree.data.xy.XYDataset;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Vector;
 
 /**
  * A convenience class that provides a default implementation of the

@@ -43,11 +43,11 @@
 
 package org.jfree.chart.axis;
 
-import java.util.Date;
-
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
+
+import java.util.Date;
 
 /**
  * A tick used by the {@link DateAxis} class.

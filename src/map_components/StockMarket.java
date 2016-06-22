@@ -54,7 +54,7 @@ public class StockMarket extends Spot {
         return stockData;
     }
 
-    public StockMarket() {
+    public StockMarket(Game game) {
         // the cell is null because StockMarket is not shown on the map
         super(null);
         stockTypes = StockType.values();
@@ -73,16 +73,16 @@ public class StockMarket extends Spot {
         for (int i = 0; i < stockData.length; i++) {
             stockData[i] = new ChartSeriesData(StockType.values()[i].toString());
         }
-    }
-
-    public void openMarket(Game game) {
-        yesterdayPrice = todayPrice.clone();
         // get chart data
         Day day = game.getDayOfCalendar();
         for (int i = 0; i < stockData.length; i++) {
             stockData[i].addPoint(day, todayPrice[i]);
         }
 
+    }
+
+    public void openMarket(Game game) {
+        yesterdayPrice = todayPrice.clone();
         for (int i = 0; i < todayPrice.length; i++) {
             double rate = Math.random() / 5 - 0.1;
             todayRate[i] = rate;
@@ -94,6 +94,12 @@ public class StockMarket extends Spot {
             }
             todayPrice[i] *= (1 + todayRate[i]);
         }
+        // get chart data
+        Day day = game.getDayOfCalendar();
+        for (int i = 0; i < stockData.length; i++) {
+            stockData[i].addPoint(day, todayPrice[i]);
+        }
+
         resetRedBlack();
     }
 

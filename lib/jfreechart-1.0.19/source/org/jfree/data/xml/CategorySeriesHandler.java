@@ -40,12 +40,12 @@
 
 package org.jfree.data.xml;
 
-import java.util.Iterator;
-
 import org.jfree.data.DefaultKeyedValues;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.Iterator;
 
 /**
  * A handler for reading a series for a category dataset.

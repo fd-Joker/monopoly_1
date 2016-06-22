@@ -44,10 +44,10 @@
 
 package org.jfree.data.general;
 
-import java.io.Serializable;
-
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
 
 /**
  * A dataset that stores a single value (that is possibly <code>null</code>).

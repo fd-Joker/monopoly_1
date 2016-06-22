@@ -66,14 +66,14 @@
 
 package org.jfree.data.time;
 
+import org.jfree.date.MonthConstants;
+import org.jfree.date.SerialDate;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import org.jfree.date.MonthConstants;
-import org.jfree.date.SerialDate;
 
 /**
  * Represents a single month.  This class is immutable, which is a requirement

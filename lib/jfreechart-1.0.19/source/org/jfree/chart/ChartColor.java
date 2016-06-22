@@ -45,8 +45,7 @@
 
 package org.jfree.chart;
 
-import java.awt.Color;
-import java.awt.Paint;
+import java.awt.*;
 
 /**
  * Class to extend the number of Colors available to the charts. This

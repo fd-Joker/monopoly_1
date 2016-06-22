@@ -42,19 +42,16 @@
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import java.util.Date;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.date.MonthConstants;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Date;
+
+import static org.junit.Assert.*;
 
 /**
  * A collection of test cases for the {@link TimePeriodValues} class.

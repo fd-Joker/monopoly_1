@@ -49,14 +49,7 @@
 
 package org.jfree.chart.block;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.Range;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.RectangleInsets;
@@ -64,6 +57,13 @@ import org.jfree.ui.Size2D;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * A convenience class for creating new classes that implement

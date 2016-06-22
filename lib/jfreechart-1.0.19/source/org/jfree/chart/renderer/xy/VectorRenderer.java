@@ -47,12 +47,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.Graphics2D;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
-
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.plot.CrosshairState;
@@ -64,6 +58,12 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.VectorXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.PublicCloneable;
+
+import java.awt.*;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 /**
  * A renderer that represents data from an {@link VectorXYDataset} by drawing a

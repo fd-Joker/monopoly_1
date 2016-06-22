@@ -48,12 +48,12 @@
 
  package org.jfree.chart.plot;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Paint;
-import java.awt.Polygon;
-import java.awt.Shape;
-import java.awt.Stroke;
+import org.jfree.chart.ChartColor;
+import org.jfree.io.SerialUtilities;
+import org.jfree.util.PublicCloneable;
+import org.jfree.util.ShapeUtilities;
+
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -61,11 +61,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
-
-import org.jfree.chart.ChartColor;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A default implementation of the {@link DrawingSupplier} interface.  All

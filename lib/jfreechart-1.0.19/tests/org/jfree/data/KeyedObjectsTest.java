@@ -42,15 +42,13 @@
 
 package org.jfree.data;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import java.util.ArrayList;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link KeyedObjects} class.

@@ -44,15 +44,15 @@
 
 package org.jfree.data.gantt;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.time.SimpleTimePeriod;
 import org.jfree.data.time.TimePeriod;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple representation of a task.  The task has a description and a

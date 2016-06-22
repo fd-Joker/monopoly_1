@@ -41,13 +41,13 @@
 
 package org.jfree.experimental.chart.plot;
 
-import java.util.Iterator;
-
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.CombinedDomainCategoryPlot;
 import org.jfree.data.Range;
+
+import java.util.Iterator;
 
 /**
  * A specialised form of {@link CombinedDomainCategoryPlot} where the

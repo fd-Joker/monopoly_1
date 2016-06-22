@@ -43,8 +43,9 @@
 
 package org.jfree.data.time;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
+
+import java.io.Serializable;
 
 /**
  * Represents a time period and an associated value.

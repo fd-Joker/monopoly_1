@@ -41,13 +41,13 @@
 
 package org.jfree.data.category;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.PublicCloneable;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A {@link CategoryDataset} implementation that presents a subset of the

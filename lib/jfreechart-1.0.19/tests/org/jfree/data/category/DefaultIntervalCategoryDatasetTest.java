@@ -42,16 +42,14 @@
 
 package org.jfree.data.category;
 
-import java.util.List;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.DataUtilities;
 import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link DefaultIntervalCategoryDataset} class.

@@ -46,11 +46,12 @@
 
 package org.jfree.chart.axis;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.Stroke;
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.time.RegularTimePeriod;
+import org.jfree.io.SerialUtilities;
+import org.jfree.ui.RectangleInsets;
+
+import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -60,11 +61,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.data.time.RegularTimePeriod;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
 
 /**
  * A record that contains information for one "band" of date labels in

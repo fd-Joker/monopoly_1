@@ -40,7 +40,7 @@
 
 package org.jfree.chart.plot.dial;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.EventListener;

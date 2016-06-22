@@ -41,10 +41,6 @@
 
 package org.jfree.chart.renderer;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.util.List;
-
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -54,6 +50,10 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.xy.XYDataset;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 /**
  * The interface for a renderer that can be used by the {@link PolarPlot} 

@@ -40,10 +40,11 @@
 
 package org.jfree.chart.axis;
 
+import org.jfree.util.ObjectUtilities;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A tick unit source implementation that returns NumberTickUnit instances 

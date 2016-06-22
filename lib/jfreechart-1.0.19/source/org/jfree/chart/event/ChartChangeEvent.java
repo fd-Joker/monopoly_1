@@ -44,9 +44,9 @@
 
 package org.jfree.chart.event;
 
-import java.util.EventObject;
-
 import org.jfree.chart.JFreeChart;
+
+import java.util.EventObject;
 
 /**
  * A change event that encapsulates information about a change to a chart.

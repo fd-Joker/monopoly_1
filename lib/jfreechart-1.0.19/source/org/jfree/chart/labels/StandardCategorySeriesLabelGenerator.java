@@ -44,13 +44,13 @@
 
 package org.jfree.chart.labels;
 
-import java.io.Serializable;
-import java.text.MessageFormat;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
 
 /**
  * A standard series label generator for plots that use data from

@@ -49,9 +49,10 @@
 
 package org.jfree.chart.axis;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.Serializable;
 import java.text.NumberFormat;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * A numerical tick unit.

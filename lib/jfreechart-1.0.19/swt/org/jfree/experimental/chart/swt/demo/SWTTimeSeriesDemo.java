@@ -39,9 +39,6 @@
  */
 package org.jfree.experimental.chart.swt.demo;
 
-import java.awt.Color;
-import java.text.SimpleDateFormat;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -58,6 +55,9 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.experimental.chart.swt.ChartComposite;
 import org.jfree.ui.RectangleInsets;
+
+import java.awt.*;
+import java.text.SimpleDateFormat;
 
 /**
  * An example of a time series chart.  For the most part, default settings are 

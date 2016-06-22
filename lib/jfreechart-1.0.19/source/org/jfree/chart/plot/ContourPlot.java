@@ -71,26 +71,6 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.Stroke;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RectangularShape;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import org.jfree.chart.ClipPath;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.axis.AxisSpace;
@@ -113,6 +93,15 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.util.ObjectUtilities;
+
+import java.awt.*;
+import java.awt.geom.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * A class for creating shaded contours.

@@ -41,21 +41,10 @@
 
 package org.jfree.chart.axis;
 
-import java.text.DateFormat;
-import java.text.DateFormatSymbols;
-import java.text.FieldPosition;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
 import org.jfree.chart.util.ParamChecks;
 
-import org.jfree.data.time.Month;
+import java.text.*;
+import java.util.*;
 
 /**
  * A formatter that formats dates to show the initial letter(s) of the month

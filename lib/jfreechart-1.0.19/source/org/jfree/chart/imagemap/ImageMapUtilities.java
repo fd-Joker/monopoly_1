@@ -51,14 +51,14 @@
 
 package org.jfree.chart.imagemap;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.util.StringUtils;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Collection of utility methods related to producing image maps.

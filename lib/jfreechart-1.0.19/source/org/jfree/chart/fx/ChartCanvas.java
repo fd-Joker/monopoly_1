@@ -41,12 +41,6 @@
 
 package org.jfree.chart.fx;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Tooltip;
@@ -58,16 +52,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
-import org.jfree.chart.fx.interaction.AnchorHandlerFX;
-import org.jfree.chart.fx.interaction.DispatchHandlerFX;
-import org.jfree.chart.fx.interaction.ChartMouseEventFX;
-import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
-import org.jfree.chart.fx.interaction.TooltipHandlerFX;
-import org.jfree.chart.fx.interaction.ScrollHandlerFX;
-import org.jfree.chart.fx.interaction.PanHandlerFX;
-import org.jfree.chart.fx.interaction.MouseHandlerFX;
+import org.jfree.chart.fx.interaction.*;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.util.ParamChecks;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A canvas for displaying a {@link JFreeChart} in JavaFX.  You can use the

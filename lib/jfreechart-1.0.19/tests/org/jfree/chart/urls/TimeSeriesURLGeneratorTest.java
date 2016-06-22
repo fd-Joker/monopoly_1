@@ -41,17 +41,14 @@
 
 package org.jfree.chart.urls;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.text.SimpleDateFormat;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.util.PublicCloneable;
 import org.junit.Test;
+
+import java.text.SimpleDateFormat;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link TimeSeriesURLGenerator} class.

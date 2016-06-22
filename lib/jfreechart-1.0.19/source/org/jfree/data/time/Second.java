@@ -62,12 +62,13 @@
 
 package org.jfree.data.time;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents a second in a particular day.  This class is immutable, which is

@@ -40,9 +40,9 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.geom.Point2D;
-
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
+
+import java.awt.geom.Point2D;
 
 /**
  * Represents state information for the crosshairs in a {@link CategoryPlot}.

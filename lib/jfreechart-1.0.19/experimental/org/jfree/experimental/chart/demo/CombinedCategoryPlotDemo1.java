@@ -40,10 +40,6 @@
 
 package org.jfree.experimental.chart.demo;
 
-import java.awt.Font;
-
-import javax.swing.JPanel;
-
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -57,6 +53,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.experimental.chart.plot.CombinedCategoryPlot;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A demo for the {@link CombinedCategoryPlot} class.

@@ -40,10 +40,11 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.chart.plot.Crosshair;
+
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
-import org.jfree.chart.plot.Crosshair;
 
 /**
  * A default label generator.

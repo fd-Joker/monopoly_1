@@ -41,12 +41,9 @@
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtilities;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Somes tests for the {@link DefaultHeatMapDataset} class.

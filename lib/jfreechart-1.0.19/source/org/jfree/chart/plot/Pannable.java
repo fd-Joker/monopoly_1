@@ -41,9 +41,9 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.geom.Point2D;
-
 import org.jfree.chart.ChartPanel;
+
+import java.awt.geom.Point2D;
 
 /**
  * An interface that the {@link ChartPanel} class uses to communicate with

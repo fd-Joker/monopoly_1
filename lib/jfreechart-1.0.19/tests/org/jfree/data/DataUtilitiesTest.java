@@ -43,10 +43,9 @@
 
 package org.jfree.data;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Some tests for the {@link DataUtilities} class.

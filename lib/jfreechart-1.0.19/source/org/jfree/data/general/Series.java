@@ -56,17 +56,12 @@
 
 package org.jfree.data.general;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
-import java.beans.VetoableChangeSupport;
-import java.io.Serializable;
-
-import javax.swing.event.EventListenerList;
-
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.util.ObjectUtilities;
+
+import javax.swing.event.EventListenerList;
+import java.beans.*;
+import java.io.Serializable;
 
 /**
  * Base class representing a data series.  Subclasses are left to implement the

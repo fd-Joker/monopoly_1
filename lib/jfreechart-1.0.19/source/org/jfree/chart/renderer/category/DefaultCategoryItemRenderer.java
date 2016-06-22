@@ -40,9 +40,9 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.io.Serializable;
-
 import org.jfree.chart.plot.CategoryPlot;
+
+import java.io.Serializable;
 
 /**
  * A default renderer for the {@link CategoryPlot} class.  This is simply an

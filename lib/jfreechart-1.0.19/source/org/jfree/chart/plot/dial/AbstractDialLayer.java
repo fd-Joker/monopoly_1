@@ -42,15 +42,14 @@
 
 package org.jfree.chart.plot.dial;
 
+import org.jfree.chart.HashUtilities;
+
+import javax.swing.event.EventListenerList;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
-
-import javax.swing.event.EventListenerList;
-
-import org.jfree.chart.HashUtilities;
 
 /**
  * A base class that can be used to implement a {@link DialLayer}.  It includes

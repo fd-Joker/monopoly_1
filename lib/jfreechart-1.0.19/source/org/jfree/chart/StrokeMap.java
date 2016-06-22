@@ -41,7 +41,11 @@
 
 package org.jfree.chart;
 
-import java.awt.Stroke;
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.io.SerialUtilities;
+import org.jfree.util.ObjectUtilities;
+
+import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -50,10 +54,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A storage structure that maps <code>Comparable</code> instances with

@@ -51,14 +51,14 @@
 
 package org.jfree.chart.urls;
 
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.xy.XYDataset;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
-
-import org.jfree.chart.util.ParamChecks;
-import org.jfree.data.xy.XYDataset;
 
 /**
  * A URL generator for time series charts.

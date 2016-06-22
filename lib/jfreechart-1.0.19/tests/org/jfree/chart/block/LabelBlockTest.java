@@ -42,19 +42,14 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.text.TextBlockAnchor;
 import org.jfree.ui.RectangleAnchor;
 import org.junit.Test;
+
+import java.awt.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Some tests for the {@link LabelBlock} class.

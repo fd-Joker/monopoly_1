@@ -1,5 +1,6 @@
 package test;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,13 +10,14 @@ import java.util.GregorianCalendar;
  */
 public class CalendarTest {
     public static void main(String[] args) {
-        long sd = 86400000L * 3;
+        long sd = 86400000L;
         Date dat = new Date(sd);
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(dat);
-        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        String sb=format.format(gc.getTime());
-        System.out.println(sb);
-        System.out.println(gc.get(Calendar.MONTH));
+        gc.add(Calendar.DAY_OF_WEEK, 7);
+        dat = gc.getTime();
+        String s = DateFormat.getDateInstance(DateFormat.FULL).format(dat);
+        System.out.println(s);
+        System.out.println(gc.get(Calendar.DAY_OF_WEEK));
     }
 }

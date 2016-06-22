@@ -42,17 +42,13 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Stroke;
+import org.jfree.chart.HashUtilities;
+import org.jfree.ui.RectangleEdge;
+
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.io.Serializable;
-
-import org.jfree.chart.HashUtilities;
-import org.jfree.ui.RectangleEdge;
 
 /**
  * An implementation of the {@link BarPainter} interface that uses several

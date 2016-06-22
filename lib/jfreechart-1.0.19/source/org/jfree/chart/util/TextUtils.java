@@ -40,13 +40,12 @@
 
 package org.jfree.chart.util;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
+import org.jfree.ui.TextAnchor;
+
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
-import org.jfree.ui.TextAnchor;
 
 /**
  * Text utility functions.

@@ -40,20 +40,14 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-
-import java.awt.Color;
-import java.awt.GradientPaint;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.junit.Test;
+
+import java.awt.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link DialPlot} class.

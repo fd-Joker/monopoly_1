@@ -40,10 +40,11 @@
 
 package org.jfree.chart.fx.interaction;
 
-import java.awt.geom.Point2D;
 import javafx.scene.input.MouseEvent;
 import org.jfree.chart.fx.ChartCanvas;
 import org.jfree.chart.fx.ChartViewer;
+
+import java.awt.geom.Point2D;
 
 /**
  * Handles mouse move and click events on the {@link ChartCanvas} by 

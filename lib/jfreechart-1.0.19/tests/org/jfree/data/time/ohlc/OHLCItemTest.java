@@ -41,14 +41,11 @@
 
 package org.jfree.data.time.ohlc;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.time.Year;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link OHLCItem} class.

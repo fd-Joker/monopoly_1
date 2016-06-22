@@ -46,12 +46,12 @@
 
 package org.jfree.data.gantt;
 
-import java.util.Collections;
-import java.util.List;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.general.Series;
 import org.jfree.util.ObjectUtilities;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A series that contains zero, one or many {@link Task} objects.

@@ -39,7 +39,6 @@ public class BankPanel extends JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
-                // FIXME: can not pass compilation
                 synchronized (bank.lock) {
                     bank.lock.notify();
                 }

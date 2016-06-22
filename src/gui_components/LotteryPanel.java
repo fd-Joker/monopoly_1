@@ -35,7 +35,6 @@ public class LotteryPanel extends JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 super.windowClosed(e);
-                // FIXME: can not pass compilation
                 synchronized (lottery.lock) {
                     lottery.lock.notify();
                 }

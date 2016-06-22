@@ -43,13 +43,13 @@
 
 package org.jfree.data.xy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.PublicCloneable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A default implementation of the {@link XYDataset} interface that stores

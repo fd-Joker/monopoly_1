@@ -45,11 +45,12 @@
 
 package org.jfree.data;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * A data structure that stores zero, one or many objects, where each object is

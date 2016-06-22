@@ -43,19 +43,15 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.ui.Drawable;
 import org.jfree.util.PublicCloneable;
 import org.junit.Test;
+
+import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link XYDrawableAnnotation} class.

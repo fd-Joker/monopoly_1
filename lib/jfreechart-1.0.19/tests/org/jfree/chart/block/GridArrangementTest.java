@@ -41,15 +41,12 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.data.Range;
 import org.jfree.ui.Size2D;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link GridArrangement} class.

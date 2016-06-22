@@ -41,15 +41,13 @@
 
 package org.jfree.chart.editor;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-
 import org.jfree.chart.plot.ColorPalette;
 import org.jfree.chart.plot.RainbowPalette;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A component for choosing a palette from a list of available palettes.

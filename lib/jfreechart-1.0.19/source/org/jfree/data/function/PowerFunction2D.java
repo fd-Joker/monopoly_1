@@ -42,8 +42,9 @@
 
 package org.jfree.data.function;
 
-import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
+
+import java.io.Serializable;
 
 /**
  * A function of the form y = a * x ^ b.

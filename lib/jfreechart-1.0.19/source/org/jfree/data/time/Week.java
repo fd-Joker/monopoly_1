@@ -74,12 +74,13 @@
 
 package org.jfree.data.time;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * A calendar week.  All years are considered to have 53 weeks, numbered from 1

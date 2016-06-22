@@ -159,11 +159,23 @@ public class GuiGame extends JFrame {
         return menuBar;
     }
 
+    public void disableStockEnter() {
+        stockEnter.setEnabled(false);
+    }
+
+    public void enableStockEnter() {
+        stockEnter.setEnabled(true);
+    }
+
     private JToolBar createStatusBar() {
         JToolBar toolBar = new JToolBar();
-        statusLabel = new JLabel("empty status");
+        statusLabel = new JLabel("safe");
         toolBar.add(statusLabel);
         return toolBar;
+    }
+
+    public void updateStatusBar(String message) {
+        statusLabel.setText(message);
     }
 
     public void resetGamePanel() {

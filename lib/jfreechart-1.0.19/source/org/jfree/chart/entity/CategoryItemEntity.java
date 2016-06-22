@@ -53,12 +53,12 @@
 
 package org.jfree.chart.entity;
 
-import java.awt.Shape;
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.ObjectUtilities;
+
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  * A chart entity that represents one item within a category plot.

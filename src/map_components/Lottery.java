@@ -99,14 +99,6 @@ public class Lottery extends Spot {
         return null;
     }
 
-    // FIXME: debug...
-    @Override
-    public boolean pass_gui(GuiGame gameFrame) {
-        boolean b = super.pass_gui(gameFrame);
-        enter_gui(gameFrame);
-        return b;
-    }
-
     @Override
     public String enter_gui(GuiGame gameFrame) {
         Player p = gameFrame.game.fetchPlayer(gameFrame.game.getCurPlayer());

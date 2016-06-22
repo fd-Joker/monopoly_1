@@ -49,9 +49,10 @@
 
 package org.jfree.data.time;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
 
 /**
  * Represents one data item in a time series.

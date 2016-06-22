@@ -51,13 +51,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
-
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -69,6 +62,11 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.renderer.xy.XYStepRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.PublicCloneable;
+
+import java.awt.*;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 /**
  * A "step" renderer similar to {@link XYStepRenderer} but

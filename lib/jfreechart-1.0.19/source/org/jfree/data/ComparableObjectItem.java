@@ -41,10 +41,10 @@
 
 package org.jfree.data;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
 
 /**
  * Represents one (Comparable, Object) data item for use in a

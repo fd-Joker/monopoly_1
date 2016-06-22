@@ -40,14 +40,6 @@
 
 package org.jfree.experimental.chart.demo;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Paint;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-
-import javax.swing.JPanel;
-
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -67,6 +59,11 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.experimental.chart.plot.CombinedXYPlot;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+
+import javax.swing.*;
+import java.awt.*;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * A demonstration application showing a {@link CombinedXYPlot} with

@@ -46,14 +46,13 @@
 
 package org.jfree.data;
 
-import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import org.jfree.chart.TestUtilities;
 import org.jfree.util.SortOrder;
 import org.junit.Test;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link DefaultKeyedValues} class.

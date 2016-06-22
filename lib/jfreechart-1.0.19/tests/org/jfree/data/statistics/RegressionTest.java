@@ -41,12 +41,12 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link Regression} class.

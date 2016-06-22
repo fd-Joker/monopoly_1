@@ -42,9 +42,10 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.jfree.chart.TestUtilities;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.text.Format;
 import java.text.NumberFormat;
@@ -55,10 +56,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import org.jfree.chart.TestUtilities;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * JUnit Tests for the {@link SegmentedTimeline} class.

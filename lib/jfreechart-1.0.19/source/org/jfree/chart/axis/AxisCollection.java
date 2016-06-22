@@ -41,10 +41,10 @@
 
 package org.jfree.chart.axis;
 
-import java.util.List;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.ui.RectangleEdge;
+
+import java.util.List;
 
 /**
  * A collection of axes that have been assigned to the TOP, BOTTOM, LEFT or

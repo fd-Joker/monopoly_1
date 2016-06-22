@@ -40,16 +40,8 @@
 
 package org.jfree.chart.fx;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Control;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Skinnable;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.WindowEvent;
 import org.jfree.chart.ChartMouseEvent;
@@ -59,6 +51,11 @@ import org.jfree.chart.fx.interaction.ChartMouseEventFX;
 import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
 import org.jfree.chart.util.ExportUtils;
 import org.jfree.chart.util.ParamChecks;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A control for displaying a {@link JFreeChart} in JavaFX (embeds a 

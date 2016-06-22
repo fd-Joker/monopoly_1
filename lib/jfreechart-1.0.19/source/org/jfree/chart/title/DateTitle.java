@@ -47,18 +47,16 @@
 
 package org.jfree.chart.title;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.VerticalAlignment;
+
+import java.awt.*;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A chart title that displays the date.

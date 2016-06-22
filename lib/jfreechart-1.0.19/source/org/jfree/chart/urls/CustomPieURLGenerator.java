@@ -42,16 +42,12 @@
 
 package org.jfree.chart.urls;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import org.jfree.chart.plot.MultiplePiePlot;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * A custom URL generator for pie charts.

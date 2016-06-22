@@ -40,10 +40,10 @@
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-
 import org.jfree.chart.TestUtilities;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the {@link TimePeriodAnchor} class.

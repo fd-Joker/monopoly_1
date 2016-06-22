@@ -40,10 +40,6 @@
 
 package org.jfree.experimental.chart.swt.demo;
 
-import java.awt.Color;
-
-import javax.swing.JPanel;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -65,6 +61,9 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.experimental.chart.swt.ChartComposite;
 import org.jfree.ui.RectangleInsets;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * This demo shows a time series chart that has multiple range axes.

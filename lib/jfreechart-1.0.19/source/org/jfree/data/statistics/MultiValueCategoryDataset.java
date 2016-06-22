@@ -40,9 +40,9 @@
 
 package org.jfree.data.statistics;
 
-import java.util.List;
-
 import org.jfree.data.category.CategoryDataset;
+
+import java.util.List;
 
 /**
  * A category dataset that defines multiple values for each item.

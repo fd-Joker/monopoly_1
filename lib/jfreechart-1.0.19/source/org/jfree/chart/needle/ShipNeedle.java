@@ -45,7 +45,7 @@
 
 package org.jfree.chart.needle;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Arc2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;

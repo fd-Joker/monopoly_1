@@ -64,12 +64,12 @@
 
 package org.jfree.chart;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.Stroke;
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.data.general.Dataset;
+import org.jfree.io.SerialUtilities;
+import org.jfree.ui.GradientPaintTransformer;
+import org.jfree.ui.StandardGradientPaintTransformer;
+
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -78,17 +78,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.data.general.Dataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.AttributedStringUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A temporary storage object for recording the properties of a legend item,

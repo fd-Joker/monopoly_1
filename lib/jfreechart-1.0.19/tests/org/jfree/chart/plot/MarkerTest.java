@@ -40,17 +40,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.util.Arrays;
-import java.util.EventListener;
-
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.ui.LengthAdjustmentType;
@@ -58,6 +47,12 @@ import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.TextAnchor;
 import org.junit.Test;
+
+import java.awt.*;
+import java.util.Arrays;
+import java.util.EventListener;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link Marker} class.

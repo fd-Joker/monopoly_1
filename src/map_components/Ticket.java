@@ -61,14 +61,6 @@ public class Ticket extends Spot {
         return null;
     }
 
-    // FIXME: debug...
-    @Override
-    public boolean pass_gui(GuiGame gameFrame) {
-        boolean b = super.pass_gui(gameFrame);
-        enter_gui(gameFrame);
-        return b;
-    }
-
     @Override
     public String enter_gui(GuiGame gameFrame) {
         Game game = gameFrame.game;

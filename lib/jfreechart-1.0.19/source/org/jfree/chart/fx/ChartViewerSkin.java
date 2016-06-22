@@ -40,7 +40,6 @@
 
 package org.jfree.chart.fx;
 
-import org.jfree.chart.fx.interaction.ZoomHandlerFX;
 import javafx.scene.control.SkinBase;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -51,6 +50,7 @@ import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
+import org.jfree.chart.fx.interaction.ZoomHandlerFX;
 import org.jfree.chart.util.ParamChecks;
 
 /**

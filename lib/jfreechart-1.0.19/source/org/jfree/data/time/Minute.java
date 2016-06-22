@@ -67,12 +67,13 @@
 
 package org.jfree.data.time;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents a minute.  This class is immutable, which is a requirement for

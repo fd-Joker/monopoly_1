@@ -42,13 +42,13 @@
 
 package org.jfree.chart.encoders;
 
+import org.jfree.chart.util.ParamChecks;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
-import javax.imageio.ImageIO;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Adapter class for the Sun PNG Encoder.  The ImageEncoderFactory will only

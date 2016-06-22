@@ -42,12 +42,8 @@ package org.jfree.data;
 
 import org.jfree.chart.TestUtilities;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.fail;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link ComparableObjectItem} class.

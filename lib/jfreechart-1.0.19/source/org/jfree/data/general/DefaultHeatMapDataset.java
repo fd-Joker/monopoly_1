@@ -40,9 +40,10 @@
 
 package org.jfree.data.general;
 
-import java.io.Serializable;
 import org.jfree.data.DataUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
 
 /**
  * A default implementation of the {@link HeatMapDataset} interface.

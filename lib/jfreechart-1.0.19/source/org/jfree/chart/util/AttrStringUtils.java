@@ -41,12 +41,13 @@
 
 package org.jfree.chart.util;
 
-import java.awt.Graphics2D;
+import org.jfree.ui.TextAnchor;
+
+import java.awt.*;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
-import org.jfree.ui.TextAnchor;
 
 /**
  * Some <code>AttributedString</code> utilities.

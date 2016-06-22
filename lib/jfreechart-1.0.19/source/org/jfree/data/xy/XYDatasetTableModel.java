@@ -44,11 +44,11 @@
 
 package org.jfree.data.xy;
 
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
+
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * A READ-ONLY wrapper around a {@link TableXYDataset} to convert it to a

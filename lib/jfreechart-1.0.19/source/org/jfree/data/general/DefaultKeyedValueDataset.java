@@ -41,11 +41,11 @@
 
 package org.jfree.data.general;
 
-import java.io.Serializable;
-
 import org.jfree.data.DefaultKeyedValue;
 import org.jfree.data.KeyedValue;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
 
 /**
  * A default implementation of the {@link KeyedValueDataset} interface.

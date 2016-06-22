@@ -97,26 +97,6 @@
 
 package org.jfree.chart.renderer;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.Stroke;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.EventListener;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.event.EventListenerList;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
@@ -129,13 +109,17 @@ import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
 import org.jfree.ui.TextAnchor;
-import org.jfree.util.BooleanList;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintList;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.ShapeList;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.StrokeList;
+import org.jfree.util.*;
+
+import javax.swing.event.EventListenerList;
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * Base class providing common services for renderers.  Most methods that update

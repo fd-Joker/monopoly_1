@@ -40,7 +40,7 @@
 
 package org.jfree.chart.entity;
 
-import java.awt.Shape;
+import java.awt.*;
 import java.io.Serializable;
 
 /**

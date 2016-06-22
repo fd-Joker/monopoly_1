@@ -49,10 +49,10 @@
 
 package org.jfree.data;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
 
 /**
  * A (key, value) pair.  This class provides a default implementation

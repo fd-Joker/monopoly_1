@@ -46,11 +46,11 @@
 
 package org.jfree.chart.axis;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.ui.TextAnchor;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
 
 /**
  * The base class used to represent labeled ticks along an axis.

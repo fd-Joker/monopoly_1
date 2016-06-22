@@ -67,13 +67,19 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Polygon;
-import java.awt.Stroke;
+import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.needle.*;
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.data.general.DefaultValueDataset;
+import org.jfree.data.general.ValueDataset;
+import org.jfree.io.SerialUtilities;
+import org.jfree.ui.RectangleInsets;
+import org.jfree.util.ObjectUtilities;
+import org.jfree.util.PaintUtilities;
+
+import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
@@ -84,27 +90,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
-import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.needle.ArrowNeedle;
-import org.jfree.chart.needle.LineNeedle;
-import org.jfree.chart.needle.LongNeedle;
-import org.jfree.chart.needle.MeterNeedle;
-import org.jfree.chart.needle.MiddlePinNeedle;
-import org.jfree.chart.needle.PinNeedle;
-import org.jfree.chart.needle.PlumNeedle;
-import org.jfree.chart.needle.PointerNeedle;
-import org.jfree.chart.needle.ShipNeedle;
-import org.jfree.chart.needle.WindNeedle;
-import org.jfree.chart.util.ParamChecks;
-import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.data.general.DefaultValueDataset;
-import org.jfree.data.general.ValueDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
 
 /**
  * A specialised plot that draws a compass to indicate a direction based on the

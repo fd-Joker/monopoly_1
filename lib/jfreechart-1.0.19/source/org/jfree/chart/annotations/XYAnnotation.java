@@ -47,12 +47,12 @@
 
 package org.jfree.chart.annotations;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 /**
  * The interface that must be supported by annotations that are to be added to

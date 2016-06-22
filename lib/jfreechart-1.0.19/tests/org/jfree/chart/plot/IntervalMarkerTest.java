@@ -41,18 +41,15 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.jfree.chart.TestUtilities;
-
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link IntervalMarker} class.

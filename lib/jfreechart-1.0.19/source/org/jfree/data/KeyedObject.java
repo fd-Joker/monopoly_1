@@ -42,10 +42,10 @@
 
 package org.jfree.data;
 
-import java.io.Serializable;
-
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
 
 /**
  * A (key, object) pair.

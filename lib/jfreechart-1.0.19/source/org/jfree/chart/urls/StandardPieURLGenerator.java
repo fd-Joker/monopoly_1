@@ -51,13 +51,13 @@
 
 package org.jfree.chart.urls;
 
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * A URL generator for pie charts.  Instances of this class are immutable.

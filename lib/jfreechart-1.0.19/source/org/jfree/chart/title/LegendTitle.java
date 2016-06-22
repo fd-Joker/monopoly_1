@@ -62,31 +62,10 @@
 
 package org.jfree.chart.title;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.LegendItemSource;
-import org.jfree.chart.block.Arrangement;
-import org.jfree.chart.block.Block;
-import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.block.BlockFrame;
-import org.jfree.chart.block.BlockResult;
-import org.jfree.chart.block.BorderArrangement;
-import org.jfree.chart.block.CenterArrangement;
-import org.jfree.chart.block.ColumnArrangement;
-import org.jfree.chart.block.EntityBlockParams;
-import org.jfree.chart.block.FlowArrangement;
-import org.jfree.chart.block.LabelBlock;
-import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.block.*;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.entity.TitleEntity;
@@ -100,6 +79,13 @@ import org.jfree.ui.Size2D;
 import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.SortOrder;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * A chart title that displays a legend for the data in the chart.

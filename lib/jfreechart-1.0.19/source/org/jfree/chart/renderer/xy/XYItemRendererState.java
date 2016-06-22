@@ -48,12 +48,12 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.geom.Line2D;
-
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.RendererState;
 import org.jfree.data.xy.XYDataset;
+
+import java.awt.geom.Line2D;
 
 /**
  * The state for an {@link XYItemRenderer}.

@@ -41,14 +41,12 @@
 
 package org.jfree.chart.title;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.VerticalAlignment;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the abstract {@link Title} class.

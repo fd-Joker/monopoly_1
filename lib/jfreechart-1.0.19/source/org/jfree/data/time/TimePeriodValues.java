@@ -48,15 +48,15 @@
 
 package org.jfree.data.time;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A structure containing zero, one or many {@link TimePeriodValue} instances.  

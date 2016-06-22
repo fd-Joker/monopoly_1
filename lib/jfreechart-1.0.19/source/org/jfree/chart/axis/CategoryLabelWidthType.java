@@ -41,9 +41,10 @@
 
 package org.jfree.chart.axis;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents the width types for a category label.

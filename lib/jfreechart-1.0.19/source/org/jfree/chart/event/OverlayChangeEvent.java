@@ -40,8 +40,9 @@
 
 package org.jfree.chart.event;
 
-import java.util.EventObject;
 import org.jfree.chart.panel.Overlay;
+
+import java.util.EventObject;
 
 /**
  * A change event for an {@link Overlay}.

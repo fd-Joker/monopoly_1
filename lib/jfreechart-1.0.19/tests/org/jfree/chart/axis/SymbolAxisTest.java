@@ -41,14 +41,12 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
-import java.awt.Color;
-
 import org.jfree.chart.TestUtilities;
 import org.junit.Test;
+
+import java.awt.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link SymbolAxis} class.

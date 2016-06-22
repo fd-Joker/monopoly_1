@@ -44,11 +44,11 @@
 
 package org.jfree.data.statistics;
 
+import org.jfree.util.ObjectUtilities;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-
-import org.jfree.util.ObjectUtilities;
 
 /**
  * Represents one data item within a box-and-whisker dataset.  Instances of

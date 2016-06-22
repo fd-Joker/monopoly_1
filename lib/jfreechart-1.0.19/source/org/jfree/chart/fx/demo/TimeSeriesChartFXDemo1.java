@@ -33,11 +33,6 @@
 
 package org.jfree.chart.fx.demo;
 
-import static javafx.application.Application.launch;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -54,6 +49,10 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.HorizontalAlignment;
+
+import java.awt.*;
+
+import static javafx.application.Application.launch;
 
 /**
  * A demo showing the display of JFreeChart within a JavaFX application.

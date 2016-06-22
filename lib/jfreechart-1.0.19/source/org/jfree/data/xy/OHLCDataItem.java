@@ -42,9 +42,10 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.Serializable;
 import java.util.Date;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Represents a single (open-high-low-close) data item in

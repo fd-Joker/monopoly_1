@@ -55,25 +55,21 @@
 
 package org.jfree.data.time;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
 import org.jfree.chart.TestUtilities;
 import org.jfree.data.Range;
-
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.jfree.data.general.SeriesException;
 import org.jfree.date.MonthConstants;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import static org.junit.Assert.*;
 
 /**
  * A collection of test cases for the {@link TimeSeries} class.

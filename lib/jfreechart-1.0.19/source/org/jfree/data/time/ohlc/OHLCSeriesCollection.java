@@ -44,9 +44,6 @@
 
 package org.jfree.data.time.ohlc;
 
-import java.io.Serializable;
-import java.util.List;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -56,6 +53,9 @@ import org.jfree.data.xy.AbstractXYDataset;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * A collection of {@link OHLCSeries} objects.

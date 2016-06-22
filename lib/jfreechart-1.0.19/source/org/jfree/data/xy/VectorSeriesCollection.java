@@ -45,13 +45,13 @@
 
 package org.jfree.data.xy;
 
-import java.io.Serializable;
-import java.util.List;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * A collection of {@link VectorSeries} objects.

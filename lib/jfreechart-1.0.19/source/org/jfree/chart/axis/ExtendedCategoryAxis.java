@@ -45,16 +45,6 @@
 
 package org.jfree.chart.axis;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.io.SerialUtilities;
@@ -63,6 +53,13 @@ import org.jfree.text.TextFragment;
 import org.jfree.text.TextLine;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.PaintUtilities;
+
+import java.awt.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An extended version of the {@link CategoryAxis} class that supports

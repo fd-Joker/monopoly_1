@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="monopoly:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/monopoly_jar</output-path>
+    <root id="archive" name="monopoly.jar">
+      <element id="module-output" name="monopoly" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfreechart-1.0.19/lib/jcommon-1.0.23.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

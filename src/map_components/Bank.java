@@ -144,7 +144,6 @@ public class Bank extends Spot {
                 panel.setVisible(true);
             }
         }.start();
-//        // FIXME: can not pass compilation
         synchronized (lock) {
             try {
                 lock.wait();

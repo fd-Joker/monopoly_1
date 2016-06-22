@@ -44,18 +44,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-
-import org.junit.Test;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.labels.IntervalCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
@@ -65,6 +53,12 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.junit.Test;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link AbstractCategoryItemRenderer} class.

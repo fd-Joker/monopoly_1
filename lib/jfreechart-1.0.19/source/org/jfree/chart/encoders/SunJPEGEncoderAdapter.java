@@ -47,18 +47,18 @@
 
 package org.jfree.chart.encoders;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Iterator;
+import org.jfree.chart.util.ParamChecks;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
-import org.jfree.chart.util.ParamChecks;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Iterator;
 
 /**
  * Adapter class for the Sun JPEG Encoder.  The {@link ImageEncoderFactory}

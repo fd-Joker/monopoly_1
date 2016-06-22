@@ -40,16 +40,13 @@
 
 package org.jfree.chart.editor;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusEvent;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberTickUnit;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
 
 /**
  * A panel for editing properties of a {@link LogAxis}.

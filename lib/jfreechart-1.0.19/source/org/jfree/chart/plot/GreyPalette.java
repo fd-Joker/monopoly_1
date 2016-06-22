@@ -43,9 +43,9 @@
 
 package org.jfree.chart.plot;
 
-import java.io.Serializable;
-
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
+
+import java.io.Serializable;
 
 
 /**

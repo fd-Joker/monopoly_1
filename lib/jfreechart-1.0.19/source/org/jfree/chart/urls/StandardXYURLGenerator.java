@@ -49,11 +49,11 @@
 
 package org.jfree.chart.urls;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.xy.XYDataset;
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
 
 /**
  * A URL generator.

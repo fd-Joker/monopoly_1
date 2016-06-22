@@ -111,18 +111,10 @@ public class News extends Spot {
         return null;
     }
 
-    // FIXME: debug...
-//    @Override
-//    public boolean pass_gui(GuiGame gameFrame) {
-//        boolean b = super.pass_gui(gameFrame);
-//        enter_gui(gameFrame);
-//        return b;
-//    }
-
     @Override
     public String enter_gui(GuiGame gameFrame) {
         // FIXME: debug...
-        int what_news = 5;//(int) (Math.random()*NUMBER_NEWS_TYPE);
+        int what_news = (int) (Math.random()*NUMBER_NEWS_TYPE);
         doNews(gameFrame, what_news);
         return null;
     }

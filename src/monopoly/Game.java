@@ -7,7 +7,10 @@ import map_components.*;
 import org.jfree.data.time.Day;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -47,9 +50,10 @@ public class Game {
         players = new ArrayList<>();
         menu = new Menu();
         curPlayer = Player.Player_id.Player1;
-        game.stockMarket = new StockMarket();
         game.calendar = new GregorianCalendar();
         calendar.setTime(new Date(START_TIME));
+        this.day = new Day(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
+        game.stockMarket = new StockMarket(game);
     }
 
     public void guiInitialization(NewGameInitializeData data) {
@@ -306,12 +310,16 @@ public class Game {
         //FIXME: debugging
         int day_passed = 1;
         for (int i = 0; i < day_passed; i++) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
             this.day = new Day(calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
             // the stock market only opens on weekdays
-            if (calendar.get(Calendar.DAY_OF_WEEK) < 6)
+            if (calendar.get(Calendar.DAY_OF_WEEK) <= 6 && calendar.get(Calendar.DAY_OF_WEEK) >= 2) {
+                gameFrame.enableStockEnter();
                 stockMarket.openMarket(this);
+            }
+            else
+                gameFrame.disableStockEnter();
         }
-        calendar.add(Calendar.DAY_OF_MONTH, day_passed);
         lasting_days -= day_passed;
         if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
             Lottery.lottery_gui(gameFrame);

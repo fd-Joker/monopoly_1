@@ -43,12 +43,11 @@
 
 package org.jfree.chart.renderer;
 
-import java.awt.Color;
-import java.awt.Paint;
-import java.io.Serializable;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  * A paint scale that returns shades of gray.

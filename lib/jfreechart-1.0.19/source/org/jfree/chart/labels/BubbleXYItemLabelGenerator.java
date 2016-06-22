@@ -45,11 +45,6 @@
 
 package org.jfree.chart.labels;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.text.NumberFormat;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.util.ParamChecks;
@@ -57,6 +52,11 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.NumberFormat;
 
 /**
  * An item label generator defined for use with the {@link XYBubbleRenderer}

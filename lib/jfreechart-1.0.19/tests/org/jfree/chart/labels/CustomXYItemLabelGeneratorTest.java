@@ -42,15 +42,14 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.jfree.chart.TestUtilities;
+import org.jfree.util.PublicCloneable;
+import org.junit.Test;
 
 import java.util.List;
 
-import org.jfree.chart.TestUtilities;
-
-import org.jfree.util.PublicCloneable;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the {@link CustomXYToolTipGenerator} class.

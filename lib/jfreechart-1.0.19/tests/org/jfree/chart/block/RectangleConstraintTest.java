@@ -40,11 +40,11 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jfree.data.Range;
 import org.jfree.ui.Size2D;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link RectangleConstraint} class.

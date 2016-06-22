@@ -45,14 +45,14 @@
 
 package org.jfree.chart.labels;
 
-import java.io.Serializable;
-import java.text.MessageFormat;
-import java.text.NumberFormat;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
+import java.text.NumberFormat;
 
 /**
  * A base class used for generating pie chart item labels.

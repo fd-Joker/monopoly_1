@@ -40,8 +40,6 @@
 
 package org.jfree.experimental.chart.swt.demo;
 
-import java.awt.Font;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -52,6 +50,8 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.experimental.chart.swt.ChartComposite;
+
+import java.awt.*;
 
 /**
  * This demo shows a time series chart that has multiple range axes.

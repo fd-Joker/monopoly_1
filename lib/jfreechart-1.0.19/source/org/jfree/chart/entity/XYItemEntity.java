@@ -50,9 +50,9 @@
 
 package org.jfree.chart.entity;
 
-import java.awt.Shape;
-
 import org.jfree.data.xy.XYDataset;
+
+import java.awt.*;
 
 /**
  * A chart entity that represents one item within an

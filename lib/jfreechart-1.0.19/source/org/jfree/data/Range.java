@@ -63,8 +63,9 @@
 
 package org.jfree.data;
 
-import java.io.Serializable;
 import org.jfree.chart.util.ParamChecks;
+
+import java.io.Serializable;
 
 /**
  * Represents an immutable range of values.

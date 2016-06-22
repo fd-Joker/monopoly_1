@@ -45,10 +45,9 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.Paint;
-import java.awt.Stroke;
-
 import org.jfree.chart.event.MarkerChangeEvent;
+
+import java.awt.*;
 
 /**
  * A marker that represents a single value.  Markers can be added to plots to

@@ -44,13 +44,12 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.Color;
-import java.awt.Paint;
-import java.io.Serializable;
-import java.util.Arrays;
-
 import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
+
+import java.awt.*;
+import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Defines palette used by {@link ContourPlot}.

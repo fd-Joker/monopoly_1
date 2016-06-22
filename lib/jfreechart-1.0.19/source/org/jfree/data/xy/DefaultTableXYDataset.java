@@ -63,12 +63,7 @@
 
 package org.jfree.data.xy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import org.jfree.chart.util.ParamChecks;
-
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -76,6 +71,11 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * An {@link XYDataset} where every series shares the same x-values (required

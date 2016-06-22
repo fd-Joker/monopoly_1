@@ -46,17 +46,17 @@
 
 package org.jfree.chart.labels;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.MessageFormat;
-import java.text.NumberFormat;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
+
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.NumberFormat;
 
 /**
  * A base class that can be used to create a label or tooltip generator that

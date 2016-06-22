@@ -46,16 +46,6 @@
 
 package org.jfree.chart.plot.dial;
 
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Iterator;
-import java.util.List;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -66,6 +56,15 @@ import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;
 import org.jfree.util.ObjectList;
 import org.jfree.util.ObjectUtilities;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * A dial plot composed of user-definable layers.

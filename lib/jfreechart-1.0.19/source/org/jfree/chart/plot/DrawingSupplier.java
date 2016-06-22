@@ -43,9 +43,7 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.Stroke;
+import java.awt.*;
 
 /**
  * A supplier of <code>Paint</code>, <code>Stroke</code> and <code>Shape</code>

@@ -85,20 +85,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.BasicStroke;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.Stroke;
-import java.awt.geom.Area;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -118,6 +104,15 @@ import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.StandardGradientPaintTransformer;
 import org.jfree.util.PublicCloneable;
 import org.jfree.util.ShapeUtilities;
+
+import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Area item renderer for an {@link XYPlot}.  This class can draw (a) shapes at

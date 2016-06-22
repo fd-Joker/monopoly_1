@@ -42,20 +42,13 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import org.jfree.chart.TestUtilities;
 import org.junit.Test;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Stroke;
+import java.awt.*;
 import java.text.DecimalFormat;
 
-import org.jfree.chart.TestUtilities;
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link RingPlot} class.

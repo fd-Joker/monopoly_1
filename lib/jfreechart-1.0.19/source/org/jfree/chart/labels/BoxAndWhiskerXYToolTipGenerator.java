@@ -49,14 +49,14 @@
 
 package org.jfree.chart.labels;
 
+import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
+import org.jfree.data.xy.XYDataset;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Date;
-
-import org.jfree.data.statistics.BoxAndWhiskerXYDataset;
-import org.jfree.data.xy.XYDataset;
 
 /**
  * An item label generator for plots that use data from a

@@ -42,7 +42,7 @@
 
 package org.jfree.chart;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;

@@ -4,6 +4,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickUnit;
+import org.jfree.chart.axis.DateTickUnitType;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.time.Day;
@@ -11,8 +13,8 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
+import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 /**
  * Created by Joker on 6/20/16.
@@ -20,39 +22,32 @@ import java.util.ArrayList;
  */
 public class TimeSeriesChart {
     private ChartPanel frame1;
+    public TimeSeriesChart(String title, String xName, String yName, ChartSeriesData[] chartSeriesDatas){
+        XYDataset xydataset = createDataset(chartSeriesDatas);
+        JFreeChart jfreechart = ChartFactory.createTimeSeriesChart(title, xName, yName, xydataset, true, true, true);
+        XYPlot xyplot = (XYPlot) jfreechart.getPlot();
+        DateAxis dateaxis = (DateAxis) xyplot.getDomainAxis();
+        dateaxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1, new SimpleDateFormat("MM-dd")));
+        dateaxis.setDateFormatOverride(new SimpleDateFormat("MM-dd"));
+        frame1=new ChartPanel(jfreechart,true);
+        dateaxis.setLabelFont(new Font("黑体",Font.BOLD,14));         //水平底部标题
+        dateaxis.setTickLabelFont(new Font("宋体",Font.BOLD,12));  //垂直标题
+        ValueAxis rangeAxis=xyplot.getRangeAxis();//获取柱状
+        rangeAxis.setLabelFont(new Font("黑体",Font.BOLD,15));
+        jfreechart.getLegend().setItemFont(new Font("黑体", Font.BOLD, 15));
+        jfreechart.getTitle().setFont(new Font("宋体",Font.BOLD,20));//设置标题字体
 
-    public TimeSeriesChart(String title, String xName, String yName, ChartSeriesData[] chartSeryDatas) {
-        XYDataset xyDataset = createDataset(chartSeryDatas);
-        JFreeChart jFreeChart = ChartFactory.createTimeSeriesChart(title, xName, yName, xyDataset, true, true, true);
-        XYPlot xyPlot = (XYPlot) jFreeChart.getPlot();
-        DateAxis dateAxis = (DateAxis) xyPlot.getDomainAxis();
-        dateAxis.setDateFormatOverride(new SimpleDateFormat("DD-MM-YYYY"));
-        dateAxis.setAutoTickUnitSelection(true);
-        frame1 = new ChartPanel(jFreeChart, true);
-//        dateAxis.setLabelFont(new Font());
-//        dateAxis.setTickLabelFont(new Font());
-        ValueAxis rangeAxis = xyPlot.getRangeAxis();
-//        rangeAxis.setLabelFont(new Font());
-//        jFreeChart.getLegend().setItemFont(new Font());
-//        jFreeChart.getTitle().setFont(new Font());
     }
-
-    private static XYDataset createDataset(ChartSeriesData[] dataItems) {
-        TimeSeriesCollection timeSeriesCollection = new TimeSeriesCollection();
-        for (ChartSeriesData dataItem : dataItems) {
-            TimeSeries timeSeries = new TimeSeries(dataItem.seriesTitle, org.jfree.data.time.Day.class);
-            ArrayList<Day> days = dataItem.getDays();
-            ArrayList<Double> values = dataItem.getValues();
-            // FIXME: delete it
-            System.out.println("Size: " + days.size());
-            for (int j = 0; j < days.size(); j++) {
-                System.out.println("" + days.get(j) + values.get(j));
-                System.out.println(days.get(j));
-                timeSeries.add(days.get(j), values.get(j));
-            }
-            timeSeriesCollection.addSeries(timeSeries);
+    private static XYDataset createDataset(ChartSeriesData[] chartSeriesDatas) {  //这个数据集有点多，但都不难理解
+        TimeSeriesCollection timeseriescollection = new TimeSeriesCollection();
+        for (ChartSeriesData chartSeriesData : chartSeriesDatas) {
+            TimeSeries timeseries = new TimeSeries(chartSeriesData.seriesTitle,
+                    Day.class);
+            for (int i = 0; i < chartSeriesData.getDays().size(); i++)
+                timeseries.add(chartSeriesData.getDays().get(i), chartSeriesData.getValues().get(i));
+            timeseriescollection.addSeries(timeseries);
         }
-        return timeSeriesCollection;
+        return timeseriescollection;
     }
 
     public ChartPanel getChartPanel() {

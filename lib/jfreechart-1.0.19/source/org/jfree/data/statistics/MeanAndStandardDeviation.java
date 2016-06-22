@@ -43,9 +43,9 @@
 
 package org.jfree.data.statistics;
 
-import java.io.Serializable;
-
 import org.jfree.util.ObjectUtilities;
+
+import java.io.Serializable;
 
 /**
  * A simple data structure that holds a mean value and a standard deviation

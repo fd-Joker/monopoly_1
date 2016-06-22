@@ -41,11 +41,11 @@
 
 package org.jfree.chart.labels;
 
-import java.text.DateFormat;
-import java.text.NumberFormat;
-
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
+
+import java.text.DateFormat;
+import java.text.NumberFormat;
 
 /**
  * A tooltip generator for plots that use data from an

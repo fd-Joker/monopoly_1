@@ -65,6 +65,9 @@
 
 package org.jfree.data.time;
 
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.date.SerialDate;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -73,9 +76,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.date.SerialDate;
 
 /**
  * Represents a single day in the range 1-Jan-1900 to 31-Dec-9999.  This class

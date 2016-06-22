@@ -40,9 +40,6 @@
 
 package org.jfree.experimental.chart.swt.editor;
 
-import java.awt.BasicStroke;
-import java.awt.Stroke;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -51,6 +48,8 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+
+import java.awt.*;
 
 /**
  * A control for displaying a <code>Stroke</code> sample.

@@ -47,14 +47,14 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.chart.util.ParamChecks;
+import org.jfree.util.PublicCloneable;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.PublicCloneable;
 
 /**
  * A default implementation of the {@link WindDataset} interface.

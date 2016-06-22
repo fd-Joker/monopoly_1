@@ -41,13 +41,13 @@
 
 package org.jfree.chart.renderer;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jfree.data.DomainOrder;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Some checks for the {@link RendererUtilities} class.

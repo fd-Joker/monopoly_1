@@ -46,9 +46,10 @@
 
 package org.jfree.chart.axis;
 
+import org.jfree.chart.util.ParamChecks;
+
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Used to indicate the location of an axis on a 2D plot, prior to knowing the

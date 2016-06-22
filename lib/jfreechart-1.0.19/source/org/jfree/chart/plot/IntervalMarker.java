@@ -45,16 +45,13 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Paint;
-import java.awt.Stroke;
-import java.io.Serializable;
-
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.ui.GradientPaintTransformer;
 import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.util.ObjectUtilities;
+
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Represents an interval to be highlighted in some way.

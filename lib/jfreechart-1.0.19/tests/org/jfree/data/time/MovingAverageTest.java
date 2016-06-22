@@ -41,10 +41,10 @@
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jfree.date.MonthConstants;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for the {@link MovingAverage} class.

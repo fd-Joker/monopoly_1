@@ -40,9 +40,9 @@
 
 package org.jfree.chart.editor;
 
-import javax.swing.JComponent;
-
 import org.jfree.chart.JFreeChart;
+
+import javax.swing.*;
 
 /**
  * A chart editor is typically a {@link JComponent} containing a user interface

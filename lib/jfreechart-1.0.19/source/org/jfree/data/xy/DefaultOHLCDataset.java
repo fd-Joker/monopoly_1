@@ -45,10 +45,10 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.util.PublicCloneable;
+
 import java.util.Arrays;
 import java.util.Date;
-
-import org.jfree.util.PublicCloneable;
 
 /**
  * A simple implementation of the {@link OHLCDataset} interface.  This

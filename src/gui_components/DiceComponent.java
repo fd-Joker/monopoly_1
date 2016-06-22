@@ -1,6 +1,9 @@
 package gui_components;
 
+import map_components.Cell;
+import map_components.Spot;
 import monopoly.Game;
+import monopoly.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,6 +47,23 @@ public class DiceComponent extends JButton {
                 System.out.println("dice: " + dice);
                 this.setIcon(diceNumberImage[dice-1]);
             }
+            // set status bar
+            Player cur_player = game.fetchPlayer(game.getCurPlayer());
+            Spot spot = cur_player.getSpot();
+            Cell.Direction direction = cur_player.getDirection();
+            String r = "";
+            boolean flag = true;
+            for (int i = 0; i < 10; i++) {
+                spot = spot.getSpot(direction);
+                if (spot.hasBarricade()) {
+                    r = ("There is a barricade " + (i + 1) + " steps away.\n");
+                    flag = false;
+                }
+            }
+            if (flag)
+                r = ("safe\n");
+            gameFrame.updateStatusBar(r);
+            // end of set status bar
             new Thread() {
                 public void run() {
                     gameFrame.executePlayerWalk();

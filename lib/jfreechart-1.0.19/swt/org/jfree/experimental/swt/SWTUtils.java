@@ -52,8 +52,12 @@
 
 package org.jfree.experimental.swt;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.*;
+import org.jfree.chart.util.ParamChecks;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -62,21 +66,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
-
-import javax.swing.JPanel;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.PaletteData;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.graphics.Rectangle;
-import org.jfree.chart.util.ParamChecks;
 
 /**
  * Utility class gathering some useful and general method.

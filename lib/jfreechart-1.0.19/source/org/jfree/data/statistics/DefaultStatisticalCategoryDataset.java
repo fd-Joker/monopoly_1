@@ -57,14 +57,14 @@
 
 package org.jfree.data.statistics;
 
-import java.util.List;
-
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.util.PublicCloneable;
+
+import java.util.List;
 
 /**
  * A convenience class that provides a default implementation of the

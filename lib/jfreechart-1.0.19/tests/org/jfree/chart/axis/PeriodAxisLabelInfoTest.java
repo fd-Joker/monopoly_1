@@ -41,28 +41,21 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.jfree.chart.TestUtilities;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.Year;
+import org.jfree.ui.RectangleInsets;
+import org.junit.Test;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Paint;
-import java.awt.Stroke;
+import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
-
-import org.jfree.data.time.Day;
-import org.jfree.data.time.Month;
-import org.jfree.data.time.Year;
-import org.jfree.ui.RectangleInsets;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Tests for the {@link PeriodAxisLabelInfo} class.

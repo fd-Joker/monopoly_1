@@ -42,6 +42,7 @@ package org.jfree.data.function;
 
 import org.jfree.chart.TestUtilities;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
